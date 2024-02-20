@@ -6,7 +6,7 @@ function Sidebar() {
   return (
     <Container fluid className="vh-100">
       <Row className="h-100">
-        <Col sm={3} md={2} className="bg-secondary sidebar d-flex flex-column justify-content-between">
+        <Col className="bg-secondary sidebar d-flex flex-column justify-content-between">
           <div>
             <Form className="text-white">
               <Form.Group controlId="selectState">
