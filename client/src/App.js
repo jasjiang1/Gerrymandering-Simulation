@@ -2,17 +2,22 @@ import logo from './logo.svg';
 import { MapContainer, TileLayer } from "react-leaflet";
 import MyNavbar from './components/NavbarHeader';
 import Sidebar from './components/Sidebar';
+import Map from "./components/Map.js";
+import './App.css'
 function App() {
   return (
     <>
     <div classname="navbar-container" id="navbar">
       <MyNavbar/>
     </div>
-    <div classname="sidebar-container" id="sidebar">
+    <div classname="float" id="sidebar">
       <Sidebar/>
+      <Map/>
     </div>
-      <MapContainer center = {[50.0000, 2.0000]} zoom = {13}>
-      </MapContainer>
+
+    
+
+   
     </>
   );
 }
