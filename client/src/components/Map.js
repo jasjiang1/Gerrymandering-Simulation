@@ -46,9 +46,7 @@ var geojson = L.geoJson(statesData, {
 
   }
 }).addTo(map);
-    return;
   };
-
 
     render(){
       return (
