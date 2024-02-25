@@ -9,7 +9,6 @@ import Modal from 'react-bootstrap/Modal';
 import Chart from 'chart.js/auto';
 
 function App() {
-
   const [showmodal, setModal] = useState(false);
   const [formsubmit, setSubmit] = useState(false);
   function submitted(){
@@ -37,7 +36,6 @@ function App() {
     selectedEthnicityTwo: ""
   });
 useEffect(() => {
-  
     if(document.getElementById("barchart") !== null){
       var canvas = document.getElementById("barchart");
     if(chartSelection.selectedChartType ==="Bar Chart" && showmodal ){
@@ -149,17 +147,6 @@ useEffect(() => {
       var barchart = new Chart(canvas,config );
     }
   }}, [showmodal]);
-
-
-
-
-
-
-
-
-
-
-  
   return (
     <>
     <div className="navbar-container" id="navbar">
@@ -171,7 +158,7 @@ useEffect(() => {
             <Sidebar  mapSelection={mapSelection} setMapSelection={setMapSelection} chartSelection={chartSelection} setChartSelection={setChartSelection} setModal = {showmodalc} submitted = {submitted}/>
           </Col>
           <Col sm={9} md={10} className="main-content">
-            <Map state = {mapSelection} />
+            <Map mapSelection={mapSelection} />
           </Col>
        </Row>
       </Container>
