@@ -50,6 +50,13 @@ function Sidebar({  mapSelection, setMapSelection, chartSelection, setChartSelec
         layer.on({
           click: function(e){
             map.fitBounds(e.target.getBounds());
+            /*if(feature.id === 13){
+              this.props.state({selectedState:"Georgia"});
+            }
+            else if(feature.id === 34){
+              this.props.state({selectedState:"New Jersey"});
+            }*/
+            
           }
       });
       console.log(layer._leaflet_id);
