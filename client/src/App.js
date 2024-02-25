@@ -38,13 +38,9 @@ function App() {
     selectedEthnicityTwo: ""
   });
 useEffect(() => {
-<<<<<<< HEAD
-    if(document.getElementById("barchart") !== null){
-=======
    var dataentries;
    Chart.register(BoxPlotController, BoxAndWiskers, LinearScale, CategoryScale);
     if(document.getElementById("barchart") !== null && (mapSelection.selectedState != '')){
->>>>>>> e8dbc0acd95b99102a5b0051bddb487c7d22dcd7
       var canvas = document.getElementById("barchart");
     if(chartSelection.selectedChartType ==="Bar Chart" && showmodal ){
       if(mapSelection.selectedState === "Georgia"){
