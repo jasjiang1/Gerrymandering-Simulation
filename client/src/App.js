@@ -4,12 +4,13 @@ import Map from "./components/Map.js";
 import WelcomePage from "./components/WelcomePage.js"
 import { Container, Row, Col} from 'react-bootstrap';
 import './App.css'
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Chart from 'chart.js/auto';
-import {  LinearScale, CategoryScale } from 'chart.js/auto';
+import { LinearScale, CategoryScale } from 'chart.js/auto';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+import regression from 'regression';
 import { BoxPlotController, BoxAndWiskers } from '@sgratzl/chartjs-chart-boxplot';
 function App() {
   const [showmodal, setModal] = useState(false);
@@ -18,14 +19,14 @@ function App() {
   function submitted(){
     setSubmit(true);
   }
- function notsubmitted(){
-  setSubmit(false);
+  function notsubmitted() {
+    setSubmit(false);
   }
-  function showmodalc(){
+  function showmodalc() {
     setModal(true);
   }
- function hidemodal(){
-  notsubmitted();
+  function hidemodal() {
+    notsubmitted();
     setModal(false);
   }
 
@@ -58,168 +59,277 @@ function App() {
     selectedEthnicityOne: "",
     selectedEthnicityTwo: ""
   });
-useEffect(() => {
-   var dataentries;
-   Chart.register(BoxPlotController, BoxAndWiskers, LinearScale, CategoryScale);
-    if(document.getElementById("barchart") !== null && (mapSelection.selectedState != '')){
+  useEffect(() => {
+    var dataentries;
+    Chart.register(BoxPlotController, BoxAndWiskers, LinearScale, CategoryScale);
+    if (document.getElementById("barchart") !== null && (mapSelection.selectedState !== '')) {
       var canvas = document.getElementById("barchart");
-    if(chartSelection.selectedChartType ==="Bar Chart" && showmodal ){
-      if(mapSelection.selectedState === "Georgia"){
-       dataentries = [115,54,7,2];
-      }
-      else if(mapSelection.selectedState === "New Jersey"){
-        dataentries = [55, 14,3,8];
-      }
-      var config= {
-        type: "bar",
-        data :{
-          labels: ['White', 'African American', 'Asian American', 'Latino'],
-          datasets: [{
-            label:'Number of District Representatives', 
-            data:dataentries,
-            backgroundColor:['lightblue',
-            'pink',
-            'violet',
-            'lightgreen'],
-            borderColor:[
-              'blue',
-              'red',
-              'purple',
-              'green'
-            ],
-             borderWidth:1
-            }],
+      if (chartSelection.selectedChartType === "Bar Chart" && showmodal) {
+        if (mapSelection.selectedState === "Georgia") {
+          dataentries = [115, 54, 7, 2];
         }
-      }
-      document.getElementById("contained-modal-title-vcenter").innerHTML = "Ethnicity of District Representatives";
-      var barchart = new Chart(canvas,config );
-      
-    }
-    else if(chartSelection.selectedChartType ==="Pie Chart"){
-
-      var dataentries;
-      if(mapSelection.selectedState === "Georgia"){
-       dataentries = [5555483,3320513,50618,479028,1123457,7299,555059];
-      }
-      else{
-        dataentries = [5112280,1219770, 51186,950000,2002575,3533,1048641];
-      }
-      var config= {
-        type: "pie",
-        data :{
-          labels: ['White', 'African American', 'American Indian','Asian American', 'Latino', 'Native Hawaiin', 'Other'],
-          datasets: [{
-            label:'Population By Race', 
-            data:dataentries,
-            backgroundColor:[
-            'lightblue',
-            'pink',
-            'violet',
-            'lightgreen',
-            "yellow",
-            "lightred", 
-            "orange"
-             ],
-            borderColor: 'red',
-            borderWidth:2
+        else if (mapSelection.selectedState === "New Jersey") {
+          dataentries = [55, 14, 3, 8];
+        }
+        var config = {
+          type: "bar",
+          data: {
+            labels: ['White', 'African American', 'Asian American', 'Latino'],
+            datasets: [{
+              label: 'Number of District Representatives',
+              data: dataentries,
+              backgroundColor: ['lightblue',
+                'pink',
+                'violet',
+                'lightgreen'],
+              borderColor: [
+                'blue',
+                'red',
+                'purple',
+                'green'
+              ],
+              borderWidth: 1
             }],
-        },
-        options:{
-          scales:{
+          }
+        }
+        document.getElementById("contained-modal-title-vcenter").innerHTML = "Ethnicity of District Representatives";
+        var barchart = new Chart(canvas, config);
+
+      }
+      else if (chartSelection.selectedChartType === "Pie Chart") {
+
+        var dataentries;
+        if (mapSelection.selectedState === "Georgia") {
+          dataentries = [5555483, 3320513, 50618, 479028, 1123457, 7299, 555059];
+        }
+        else {
+          dataentries = [5112280, 1219770, 51186, 950000, 2002575, 3533, 1048641];
+        }
+        var config = {
+          type: "pie",
+          data: {
+            labels: ['White', 'African American', 'American Indian', 'Asian American', 'Latino', 'Native Hawaiin', 'Other'],
+            datasets: [{
+              label: 'Population By Race',
+              data: dataentries,
+              backgroundColor: [
+                'lightblue',
+                'pink',
+                'violet',
+                'lightgreen',
+                "yellow",
+                "lightred",
+                "orange"
+              ],
+              borderColor: 'red',
+              borderWidth: 2
+            }],
           },
-          plugins:{
-            tooltip:{
+          options: {
+            scales: {
             },
-            datalabels:{
-              textAlign: 'center',
-              backgroundColor: "lightblue",
-              borderRadius: 5,
-              borderColor:'red',
-              borderWidth:1,
-              font: {
-                weight: 'bold',
-                size: 13,
+            plugins: {
+              tooltip: {
               },
-              color: 'black',
-              formatter:(value,cxt )=>{
-               var data =  cxt.chart.data.datasets[0].data;
-               var index = 0;
-               var sum = 0;
-               while(data[index] != null){
-                sum += data[index];
-                index++;
-               }
-               var percent = value/sum *100;
-                return (percent.toFixed(2) + "%");
+              datalabels: {
+                textAlign: 'center',
+                backgroundColor: "lightblue",
+                borderRadius: 5,
+                borderColor: 'red',
+                borderWidth: 1,
+                font: {
+                  weight: 'bold',
+                  size: 13,
+                },
+                color: 'black',
+                formatter: (value, cxt) => {
+                  var data = cxt.chart.data.datasets[0].data;
+                  var index = 0;
+                  var sum = 0;
+                  while (data[index] != null) {
+                    sum += data[index];
+                    index++;
+                  }
+                  var percent = value / sum * 100;
+                  return (percent.toFixed(2) + "%");
+                }
               }
             }
-          }
 
-        }, 
-        plugins:[ChartDataLabels]
-       
-        
+          },
+          plugins: [ChartDataLabels]
+
+
+        }
+        document.getElementById("contained-modal-title-vcenter").innerHTML = "Population By Race";
+        var piechart = new Chart(canvas, config);
       }
-     document.getElementById("contained-modal-title-vcenter").innerHTML = "Population By Race";
-      var piechart = new Chart(canvas,config );
-    }
-    else if(chartSelection.selectedChartType ==="Box and Whiskers"){
-      var dataentries;
-      if(mapSelection.selectedState === "Georgia"){
-       dataentries = [5555483,3320513,50618,479028,1123457,7299,555059];
-      }
-      else{
-        dataentries = [5112280,1219770, 51186,950000,2002575,3533,1048641];
-      }
-      var config= {
-        type: "boxplot",
-        data :{
-          labels: ['District 1', 'District 2', 'District 3','District 4', 'District 5', 'District 6', 'District 7'],
-          datasets: [{
-            label:'% of Minority', 
-            backgroundColor:[
-              'lightblue',
-              '#b2eee6',
-              '#8ad6cc',
-              '#66beb2',
-              "#f97171",
-              "#f99192", 
-              "pink"
-               ],
-               borderColor:[
+      else if (chartSelection.selectedChartType === "Box and Whiskers") {
+        var dataentries;
+        if (mapSelection.selectedState === "Georgia") {
+          dataentries = [5555483, 3320513, 50618, 479028, 1123457, 7299, 555059];
+        }
+        else {
+          dataentries = [5112280, 1219770, 51186, 950000, 2002575, 3533, 1048641];
+        }
+        var config = {
+          type: "boxplot",
+          data: {
+            labels: ['District 1', 'District 2', 'District 3', 'District 4', 'District 5', 'District 6', 'District 7'],
+            datasets: [{
+              label: '% of Minority',
+              backgroundColor: [
+                'lightblue',
+                '#b2eee6',
+                '#8ad6cc',
+                '#66beb2',
+                "#f97171",
+                "#f99192",
+                "pink"
+              ],
+              borderColor: [
                 'red',
                 'blue',
                 'red',
-                'green', 
-                "green", 
+                'green',
+                "green",
                 "purple",
                 "blue"
-  
+
               ],
-    borderWidth: 1,
-    padding: 10,
-    itemRadius: 0,
-    itemStyle: 'circle',
-    outlierRadius:3,
-    outlierBackgroundColor: 'red',
-            data:[
-             [.5,.6,.33,.40,.20],
-             [.16,.20,.3,.46,.10],
-             [.10,.28,.33,.40,.10],
-             [.30,.25,.3,.42,.15],
-             [.10,.42,.35,.45,.10],
-             [.15,.22,.3,.46,.10],
-             [.15,.29,.34,.41,.10]
-    ]
-  }]
+              borderWidth: 1,
+              padding: 10,
+              itemRadius: 0,
+              itemStyle: 'circle',
+              outlierRadius: 3,
+              outlierBackgroundColor: 'red',
+              data: [
+                [.5, .6, .33, .40, .20],
+                [.16, .20, .3, .46, .10],
+                [.10, .28, .33, .40, .10],
+                [.30, .25, .3, .42, .15],
+                [.10, .42, .35, .45, .10],
+                [.15, .22, .3, .46, .10],
+                [.15, .29, .34, .41, .10]
+              ]
+            }]
+          }
         }
+        document.getElementById("contained-modal-title-vcenter").innerHTML = "%Vote Share of Minority ";
+        var boxplot = new Chart(canvas, config);
       }
-     document.getElementById("contained-modal-title-vcenter").innerHTML = "MCMC Analysis";
-      var boxplot = new Chart(canvas,config );
+      else if (chartSelection.selectedChartType === "Scatter Plot") {
+        var Dregdata;
+        var Rregdata;
+        var regression_D;
+        var regression_R;
+        var dataentriesD;
+        var dataentriesR;
+
+        if (mapSelection.selectedState === "Georgia") {
+          dataentriesD =[
+            [2,20],
+            [4,15],
+           [ 6,7],
+           [8,10],
+           [9,3],
+           [10,2]
+         ];
+         dataentriesR = [[1, 1],
+         [2, 4],
+         [3, 9],
+         [4, 6],
+         [5, 15],
+         [6, 16]
+        ];
+          const dataD = dataentriesD;
+         const  dataR = dataentriesR;
+          regression_D = regression.polynomial(dataD);
+          regression_R = regression.polynomial(dataR);
+          Dregdata = regression_D.points.map(([x, y]) => {return {x,y};});
+          Rregdata = regression_R.points.map(([x, y]) => { return {x,y};});
+          console.log(regression_D);
+          console.log(regression_R);
+        }
+        else {
+          dataentriesD =[
+            [1, 10],
+            [2, 8],
+            [10, 6],
+            [6, 5],
+            [5, 4],
+            [16, 3],
+          ]
+           ;
+         dataentriesR =  [[1, 20],
+         [3, 16],
+            [5, 4],
+            [6, 10],
+            [7, 11],
+            [8, 4],
+            [9, 3]];
+          const dataD =dataentriesD;
+          const  dataR = dataentriesR;
+          regression_D = regression.polynomial(dataD);
+          regression_R = regression.polynomial(dataR);
+          Dregdata = regression_D.points.map(([x, y]) => {return {x,y};})
+          Rregdata = regression_R.points.map(([x, y]) => { return {x,y};})
+
+          console.log(dataD);
+          console.log(dataR);
+        }
+        var config = {
+          type: "scatter",
+          data: {
+            datasets: 
+            [{
+              label: 'Democratic',
+              backgroundColor: 'blue',
+              data: dataentriesD,
+              type: 'scatter',
+            }, {
+              label: 'Republican',
+              backgroundColor: 'red',
+              data: dataentriesR,
+              type: 'scatter'
+            },
+            {
+              data: Dregdata,
+              type: 'line',
+              borderWidth:1,
+              borderColor: 'lightblue'
+            }, {
+              data: Rregdata,
+              type: 'line',
+              borderWidth:1,
+              borderColor: 'pink',
+            }
+          ]
+          },
+          options: {
+            scales: {
+              y: {
+                title: {
+                  display: true,
+                  text: '% Vote Share'
+                }
+              },
+              x: {
+                title: {
+                  display: true,
+                  text: '% Minority Population'
+                }
+              }
+            }     
+          }
+          
+        }
+        document.getElementById("contained-modal-title-vcenter").innerHTML = "Precinct Analysis";
+        var boxplot = new Chart(canvas, config);
+      }
+
     }
-
-
-  }}, [showmodal]);
+  }, [showmodal]);
   return (
     <>
     {isWelcomePageVisible ? (
