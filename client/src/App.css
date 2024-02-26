@@ -2,8 +2,42 @@
 .leaflet-container {
   height: 100vh;
   width: 100%;
-  border-radius: 2rem;
+  border-radius: 0;
+  margin-top: 28px;
+}
+.navbar {
+  border-radius: 0;
 }
 .float{
   float: left;
+}
+.navbar-container {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+.navbar-brand, .sidebar .nav-link {
+  font-family: Arial, sans-serif;
+  font-size: 1rem;
+}
+.sidebar {
+  position: fixed;
+  top: 81px;
+  left: 0;
+  width: 200px;
+  height: calc(100% - 56px);
+  overflow-y: auto;
+  z-index: 500;
+}
+.main-content {
+  margin-left: 192px;
+  margin-top: 56px;
+  height: calc(100vh - 56px);
+  overflow-y: auto; 
+}
+.custom-text {
+  font-weight: bold; 
+  font-size: 18px;
+  color: #f0ad4e;
 }

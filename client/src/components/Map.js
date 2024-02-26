@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import * as L from 'leaflet';
 import '../App.css';
 import NewJerseyCounties from '../mocks/NewJerseyCounties.json';
@@ -9,82 +9,70 @@ import GeorgiaApproved from '../mocks/GeorgiaApproved.json';
 import NewJerseyApproved from '../mocks/NewJerseyApproved.json';
 
 function Map({ mapSelection }) {
-  const [map, setMap] = useState(null);
-  const [selectedState, setSelectedState] = useState([])
-  const [statesData, setStatesData] = useState({
-    "type": "FeatureCollection",
-    "features": []
-  });
-  const color = () => {
-    return {
-      fillColor: '#C4A484',
-      weight: 2,
-      opacity: 1,
-      color: 'white',
-      dashArray: '2',
-      fillOpacity: 0.7,
-    };
-  };
+  const mapRef = useRef(null);
+  const mapContainerRef = useRef(null);
 
   useEffect(() => {
-    if (mapSelection.selectedMapType === "State" || mapSelection.selectedMapType === "") {
-      setStatesData({"type": "FeatureCollection", "features": [...NewJerseyState.features, ...GeorgiaState.features]});
-    } else if (mapSelection.selectedMapType === "Counties") {
-      setStatesData({"type": "FeatureCollection", "features": [...NewJerseyCounties.features, ...GeorgiaCounties.features]});
-    } else {
-      setStatesData({"type": "FeatureCollection", "features": [...NewJerseyApproved.features, ...GeorgiaApproved.features]});
+    if (!mapRef.current) {
+      mapRef.current = L.map(mapContainerRef.current, {
+        center: [37.8, -95],
+        zoom: 4,
+      });
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 19,
+      }).addTo(mapRef.current);
     }
-    if (mapSelection.selectedState === "Georgia") {
-      setSelectedState([32.7, -83.4])
-    } else if (mapSelection.selectedState === "New Jersey") {
-      setSelectedState([40.1, -74.7])
-    } else {
-      setSelectedState([37.8, -95])
+
+    // Update map based on state selection
+    if (mapSelection.selectedState) {
+      const { center, zoom } = mapSelection;
+      mapRef.current.setView(center, zoom);
     }
+
+    // Cleanup function to remove map instance
+    return () => {
+      if (mapRef.current) {
+        mapRef.current.remove();
+        mapRef.current = null;
+      }
+    };
   }, [mapSelection]);
 
+  // To dynamically add GeoJSON layers based on mapSelection
   useEffect(() => {
-    if (!statesData.features.length) return;
-    var mapInstance = map || L.map('map').setView(selectedState, 4);
-    if (!map) {
-      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-      }).addTo(mapInstance);
-      setMap(mapInstance);
+    let statesData;
+    switch (mapSelection.selectedMapType) {
+      case "State":
+        statesData = [...NewJerseyState.features, ...GeorgiaState.features];
+        break;
+      case "Counties":
+        statesData = [...NewJerseyCounties.features, ...GeorgiaCounties.features];
+        break;
+      default:
+        statesData = [...NewJerseyApproved.features, ...GeorgiaApproved.features];
+        break;
     }
-    L.geoJson(statesData, {
-      style: color(),
-      onEachFeature: function (feature, layer) {
-        layer.on({
-          click: function (e) {
-            mapInstance.fitBounds(e.target.getBounds());
-          }
-        });
-      }
-    }).addTo(mapInstance);
+
+    const geoJsonLayer = L.geoJson(statesData, {
+      style: () => ({
+        fillColor: '#C4A484',
+        weight: 2,
+        opacity: 1,
+        color: 'white',
+        dashArray: '3',
+        fillOpacity: 0.7,
+      }),
+    }).addTo(mapRef.current);
+
     return () => {
-      if (mapInstance) {
-        mapInstance.eachLayer((layer) => {
-          if (layer instanceof L.GeoJSON) {
-            mapInstance.removeLayer(layer);
-          }
-        });
-      }
+      geoJsonLayer.remove();
     };
-  }, [statesData]);  
+  }, [mapSelection]);
 
-  useEffect(() => {
-    if (map) {
-      if(mapSelection.selectedState === "Georgia" || mapSelection.selectedState === "New Jersey") {
-        map.setView(selectedState, 7);
-      } else {
-        map.setView([37.8, -95], 4);
-      }
-    }
-  }, [selectedState]);
-
-  return <div className="vh-100" id="map"></div>;
+  return <div ref={mapContainerRef} className="vh-100" id="map"></div>;
 }
 
 export default Map;
+
+

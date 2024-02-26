@@ -1,6 +1,7 @@
 import MyNavbar from './components/NavbarHeader';
 import Sidebar from './components/Sidebar';
 import Map from "./components/Map.js";
+import WelcomePage from "./components/WelcomePage.js"
 import { Container, Row, Col} from 'react-bootstrap';
 import './App.css'
 import React, {useState, useEffect} from 'react';
@@ -13,6 +14,7 @@ import { BoxPlotController, BoxAndWiskers } from '@sgratzl/chartjs-chart-boxplot
 function App() {
   const [showmodal, setModal] = useState(false);
   const [formsubmit, setSubmit] = useState(false);
+  const [isWelcomePageVisible, setIsWelcomePageVisible] = useState(true);
   function submitted(){
     setSubmit(true);
   }
@@ -26,6 +28,25 @@ function App() {
   notsubmitted();
     setModal(false);
   }
+
+  const handleSelectState = (state) => {
+    const stateSettings = {
+      Georgia: { center: [32.7, -83.4], zoom: 7 },
+      'New Jersey': { center: [40.1, -74.7], zoom: 7 },
+    };
+
+    const selectedStateSettings = stateSettings[state];
+
+    setMapSelection({
+      ...mapSelection,
+      selectedState: state,
+      center: selectedStateSettings.center,
+      zoom: selectedStateSettings.zoom,
+    });
+  
+    setIsWelcomePageVisible(false);
+  };
+
   const [mapSelection, setMapSelection] = useState({
     selectedState: "",
     selectedMapType: "",
@@ -201,36 +222,41 @@ useEffect(() => {
   }}, [showmodal]);
   return (
     <>
-    <div className="navbar-container" id="navbar">
-        <MyNavbar />
-      </div>
-      <Container fluid>
-        <Row>
-          <Col sm={3} md={2} className="bg-secondary sidebar">
-            <Sidebar  mapSelection={mapSelection} setMapSelection={setMapSelection} chartSelection={chartSelection} setChartSelection={setChartSelection} setModal = {showmodalc} submitted = {submitted}/>
-          </Col>
-          <Col sm={9} md={10} className="main-content">
-            <Map mapSelection={mapSelection} />
-          </Col>
-       </Row>
-      </Container>
-      
-     {showmodal && formsubmit &&
-     <Modal  size="lg" aria-labelledby="contained-modal-title-vcenter" centered
-      animation={false}  show={showmodalc} onHide= {hidemodal}>
-        <Modal.Header closeButton>
-          <Modal.Title  id="contained-modal-title-vcenter"></Modal.Title>
-        </Modal.Header>
-        {console.log(mapSelection.selectedState)}
-        {console.log(chartSelection.selectedChartType)}
-        <Modal.Body><canvas id ="barchart" width ="250" height = "200"></canvas></Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={hidemodal}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>}
-      
+    {isWelcomePageVisible ? (
+        <WelcomePage onStateSelected={handleSelectState} />
+      ) : (
+        <>
+      <div className="navbar-container" id="navbar">
+          <MyNavbar />
+        </div>
+        <Container fluid>
+          <Row>
+            <Col sm={3} md={2} className="bg-secondary sidebar">
+              <Sidebar  mapSelection={mapSelection} setMapSelection={setMapSelection} chartSelection={chartSelection} setChartSelection={setChartSelection} setModal = {showmodalc} submitted = {submitted}/>
+            </Col>
+            <Col sm={9} md={10} className="main-content">
+              <Map mapSelection={mapSelection} />
+            </Col>
+        </Row>
+        </Container>
+        
+      {showmodal && formsubmit &&
+      <Modal  size="lg" aria-labelledby="contained-modal-title-vcenter" centered
+        animation={false}  show={showmodalc} onHide= {hidemodal}>
+          <Modal.Header closeButton>
+            <Modal.Title  id="contained-modal-title-vcenter"></Modal.Title>
+          </Modal.Header>
+          {console.log(mapSelection.selectedState)}
+          {console.log(chartSelection.selectedChartType)}
+          <Modal.Body><canvas id ="barchart" width ="250" height = "200"></canvas></Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={hidemodal}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>}
+      </>
+     )}
     </>
   );
 }
