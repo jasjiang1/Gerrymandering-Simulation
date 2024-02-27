@@ -6,10 +6,29 @@ function Sidebar({  mapSelection, setMapSelection, chartSelection, setChartSelec
   const handleChange = (event) => {
     const {name, value} = event.target;
     if (name in mapSelection) {
-      setMapSelection(prevState => ({
-        ...prevState,
-        [name]: value
-      }));
+      console.log(name);
+      if(name == "selectedState"){
+        const stateSettings = {
+          'Georgia': { center: [32.7, -83.4], zoom: 7 },
+          'New Jersey': { center: [40.1, -74.7], zoom: 7 },
+        };
+    
+        const selectedStateSettings = stateSettings[value];
+        setMapSelection({
+          ...mapSelection,
+          selectedState: value,
+          center: selectedStateSettings.center,
+          zoom: selectedStateSettings.zoom,
+        });
+      }
+      else{
+        setMapSelection(prevState => ({
+          ...prevState,
+          [name]: value
+        }));
+      }
+
+      
     } else if (name in chartSelection) {
       setChartSelection(prevState => ({
         ...prevState,
