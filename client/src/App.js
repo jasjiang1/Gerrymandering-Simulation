@@ -32,7 +32,7 @@ function App() {
 
   const handleSelectState = (state) => {
     const stateSettings = {
-      Georgia: { center: [32.7, -83.4], zoom: 7 },
+      'Georgia': { center: [32.7, -83.4], zoom: 7 },
       'New Jersey': { center: [40.1, -74.7], zoom: 7 },
     };
 
@@ -59,6 +59,7 @@ function App() {
     selectedEthnicityOne: "",
     selectedEthnicityTwo: ""
   });
+  console.log(mapSelection.selectedState)
   useEffect(() => {
     var dataentries;
     Chart.register(BoxPlotController, BoxAndWiskers, LinearScale, CategoryScale);

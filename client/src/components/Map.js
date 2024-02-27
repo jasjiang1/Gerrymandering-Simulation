@@ -11,7 +11,7 @@ import NewJerseyApproved from '../mocks/NewJerseyApproved.json';
 function Map({ mapSelection }) {
   const mapRef = useRef(null);
   const mapContainerRef = useRef(null);
-
+  console.log(mapSelection)
   useEffect(() => {
     if (!mapRef.current) {
       mapRef.current = L.map(mapContainerRef.current, {
@@ -27,6 +27,7 @@ function Map({ mapSelection }) {
     // Update map based on state selection
     if (mapSelection.selectedState) {
       const { center, zoom } = mapSelection;
+      console.log(mapSelection)
       mapRef.current.setView(center, zoom);
     }
 
