@@ -244,7 +244,7 @@ function App() {
          [6, 16]
         ];
           const dataD = dataentriesD;
-         const  dataR = dataentriesR;
+          const  dataR = dataentriesR;
           regression_D = regression.polynomial(dataD);
           regression_R = regression.polynomial(dataR);
           Dregdata = regression_D.points.map(([x, y]) => {return {x,y};});

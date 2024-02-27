@@ -46,7 +46,7 @@ function Sidebar({  mapSelection, setMapSelection, chartSelection, setChartSelec
                   <option>Approved Districting Plan</option>
                 </Form.Control>
               </Form.Group>
-              <Form.Group controlId="selectEthnicity">
+              {/* <Form.Group controlId="selectEthnicity">
                 <Form.Label>Select Ethnicity</Form.Label>
                 <Form.Control as="select" custom name="selectedEthnicity" value={mapSelection.selectedEthnicity} onChange={handleChange}>
                     <option>Choose...</option>
@@ -55,7 +55,7 @@ function Sidebar({  mapSelection, setMapSelection, chartSelection, setChartSelec
                     <option>Hispanic</option>
                     <option>White</option>
                 </Form.Control>
-              </Form.Group>
+              </Form.Group> */}
               <br/>
               <h2>View Charts</h2>
               <Form.Group controlId="selectChartType">
