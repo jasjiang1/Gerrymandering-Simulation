@@ -18,6 +18,13 @@ function App() {
   const [isWelcomePageVisible, setIsWelcomePageVisible] = useState(true);
   function submitted(){
     setSubmit(true);
+    console.log("Submitted: "+ (chartSelection.selectedChartType ==""));
+    if(chartSelection.selectedChartType =="" || chartSelection.selectedChartType =="Choose..."  ){
+      return;
+    }
+    else{
+      showmodalc();
+    }
   }
   function notsubmitted() {
     setSubmit(false);
@@ -343,7 +350,7 @@ function App() {
         <Container fluid>
           <Row>
             <Col sm={3} md={2} className="bg-secondary sidebar">
-              <Sidebar  mapSelection={mapSelection} setMapSelection={setMapSelection} chartSelection={chartSelection} setChartSelection={setChartSelection} setModal = {showmodalc} submitted = {submitted}/>
+              <Sidebar  mapSelection={mapSelection} setMapSelection={setMapSelection} chartSelection={chartSelection} setChartSelection={setChartSelection} submitted = {submitted}/>
             </Col>
             <Col sm={9} md={10} className="main-content">
               <Map mapSelection={mapSelection} />

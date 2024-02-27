@@ -21,7 +21,6 @@ function Sidebar({  mapSelection, setMapSelection, chartSelection, setChartSelec
     event.preventDefault();
    
     submitted();
-    setModal(); 
   }
   return (
     <Container fluid className="vh-100">
