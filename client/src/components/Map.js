@@ -7,7 +7,7 @@ import GeorgiaState from '../mocks/GeorgiaState.json';
 import NewJerseyState from '../mocks/NewJerseyState.json';
 import GeorgiaApproved from '../mocks/GeorgiaApproved.json';
 import NewJerseyApproved from '../mocks/NewJerseyApproved.json';
-
+import legend from '../mocks/MockLegend.jpg'
 function Map({ mapSelection }) {
   const mapRef = useRef(null);
   const mapContainerRef = useRef(null);
@@ -116,7 +116,12 @@ function Map({ mapSelection }) {
     };
   }, [mapSelection]);
 
-  return <div ref={mapContainerRef} className="vh-100" id="map"></div>;
+  return(
+    <div className="map-and-legend-container">
+      <img src={legend} alt="Legend" className="map-legend" />
+      <div ref={mapContainerRef} className="map-container"></div>
+   </div>
+  )
 }
 
 export default Map;
