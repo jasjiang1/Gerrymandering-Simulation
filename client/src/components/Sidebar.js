@@ -59,9 +59,9 @@ function Sidebar({  mapSelection, setMapSelection, chartSelection, setChartSelec
               <Form.Group controlId="selectMapType">
                 <Form.Label>Select Map Type</Form.Label>
                 <Form.Control as="select" custom name="selectedMapType" value={mapSelection.selectedMapType} onChange={handleChange}>
-                  <option>State</option>
-                  <option>Counties</option>
                   <option>Approved Districting Plan</option>
+                  <option>Counties</option>
+                  <option>State</option>
                 </Form.Control>
               </Form.Group>
               {/* <Form.Group controlId="selectEthnicity">
