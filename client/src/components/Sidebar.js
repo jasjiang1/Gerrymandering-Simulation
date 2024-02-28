@@ -2,6 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import * as L from "leaflet";
+import legend from '../mocks/MockLegend.jpg'
 function Sidebar({  mapSelection, setMapSelection, chartSelection, setChartSelection,setModal, submitted}) {
   const handleChange = (event) => {
     const {name, value} = event.target;
@@ -63,16 +64,15 @@ function Sidebar({  mapSelection, setMapSelection, chartSelection, setChartSelec
                   <option>State</option>
                 </Form.Control>
               </Form.Group>
-              {/* <Form.Group controlId="selectEthnicity">
+              <Form.Group controlId="selectEthnicity">
                 <Form.Label>Select Ethnicity</Form.Label>
                 <Form.Control as="select" custom name="selectedEthnicity" value={mapSelection.selectedEthnicity} onChange={handleChange}>
-                    <option>Choose...</option>
+                    <option>Hispanic</option>
                     <option>Asian</option>
                     <option>Black</option>
-                    <option>Hispanic</option>
                     <option>White</option>
                 </Form.Control>
-              </Form.Group> */}
+              </Form.Group>
               <br/>
               <h2>View Charts</h2>
               <Form.Group controlId="selectChartType">
@@ -88,7 +88,6 @@ function Sidebar({  mapSelection, setMapSelection, chartSelection, setChartSelec
               <Form.Group controlId="selectSpecificCounty">
                 <Form.Label>Select Specific Area</Form.Label>
                 <Form.Control as="select" custom name="selectedAreaType" value={chartSelection.selectedAreaType} onChange={handleChange}>
-                    <option>Choose...</option>
                     <option>Currently Viewing State</option>
                     <option>State Vs. State</option>
                     <option>County 1</option>
@@ -120,6 +119,7 @@ function Sidebar({  mapSelection, setMapSelection, chartSelection, setChartSelec
               </Form.Group>
             </Form>
           </div>
+          <img src={legend} style={{ maxWidth: '50%', height: 'auto' }} />
         </Col>
       </Row>
     </Container>

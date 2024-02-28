@@ -48,9 +48,14 @@ function App() {
     setMapSelection({
       ...mapSelection,
       selectedState: state,
+      selectedEthnicity: "Hispanic",
       center: selectedStateSettings.center,
       zoom: selectedStateSettings.zoom,
     });
+    setChartSelection({
+      ...chartSelection,
+      selectedAreaType: "Currently Viewing State"
+    })
   
     setIsWelcomePageVisible(false);
   };
@@ -66,7 +71,7 @@ function App() {
     selectedEthnicityOne: "",
     selectedEthnicityTwo: ""
   });
-  console.log(mapSelection.selectedState)
+  console.log(mapSelection)
   useEffect(() => {
     var dataentries;
     Chart.register(BoxPlotController, BoxAndWiskers, LinearScale, CategoryScale);
@@ -105,7 +110,6 @@ function App() {
 
       }
       else if (chartSelection.selectedChartType === "Pie Chart") {
-
         var dataentries;
         if (mapSelection.selectedState === "Georgia") {
           dataentries = [5555483, 3320513, 50618, 479028, 1123457, 7299, 555059];
@@ -166,8 +170,6 @@ function App() {
 
           },
           plugins: [ChartDataLabels]
-
-
         }
         document.getElementById("contained-modal-title-vcenter").innerHTML = "Population By Race";
         var piechart = new Chart(canvas, config);
@@ -238,17 +240,17 @@ function App() {
           dataentriesD =[
             [2,20],
             [4,15],
-           [ 6,7],
-           [8,10],
-           [9,3],
-           [10,2]
+            [ 6,7],
+            [8,10],
+            [9,3],
+            [10,2]
          ];
          dataentriesR = [[1, 1],
-         [2, 4],
-         [3, 9],
-         [4, 6],
-         [5, 15],
-         [6, 16]
+          [2, 4],
+          [3, 9],
+          [4, 6],
+          [5, 15],
+          [6, 16]
         ];
           const dataD = dataentriesD;
           const  dataR = dataentriesR;
@@ -270,7 +272,7 @@ function App() {
           ]
            ;
          dataentriesR =  [[1, 20],
-         [3, 16],
+            [3, 16],
             [5, 4],
             [6, 10],
             [7, 11],

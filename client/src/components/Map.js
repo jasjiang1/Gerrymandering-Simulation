@@ -11,7 +11,16 @@ import NewJerseyApproved from '../mocks/NewJerseyApproved.json';
 function Map({ mapSelection }) {
   const mapRef = useRef(null);
   const mapContainerRef = useRef(null);
-  console.log(mapSelection)
+  const mockHeatMap = {
+    approvedGeorgiaWhite: [0.5,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.7,0.9,0.9,0.7,0.9,0.9,0.9,0.7,0.3,0.5,0.9,0.9,0.9,0.7,0.5,0.7,0.5,0.9,0.9,0.7,0.5,0.9,0.5,0.9,0.9,0.7,0.9,0.7,0.7,0.9,0.7,0.9,0.7,0.9,0.9,0.9,0.7,0.9,0.9,0.7,0.3,0.9,0.9,0.9,0.5,0.9,0.9,0.9,0.9,0.5,0.9,0.9,0.3,0.9,0.3,0.9,0.9,0.9,0.5,0.9,0.5,0.9,0.7,0.9,0.5,0.9,0.5,0.7,0.5,0.9,0.5,0.7,0.5,0.3,0.3,0.9,0.7,0.5,0.9,0.5,0.9,0.9,0.5,0.7,0.7,0.5,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.5,0.7,0.5,0.9,0.7,0.9,0.3,0.5,0.9,0.9,0.5,0.9,0.9,0.7,0.9,0.9,0.9,0.5,0.3,0.9,0.9,0.9,0.7,0.3,0.9,0.5,0.9,0.9,0.7,0.9,0.9,0.5,0.5,0.9,0.7,0.5,0.9,0.9,0.7,0.9,0.5,0.7,0.9,0.5,0.7,0.9,0.7,0.7,0.5,0.9,0.9,0.3,0.9,0.9,0.3,0.5,0.9,0.9,0.9,0.7,0.3,0.9,0.9,0.9,0.7,0.5,0.7,0.9,0.9,0.5,0.9,0.7,0.9,0.9,0.9,0.9,0.9,0.9],
+    approvedGeorgiaBlack: [0.7,0.5,0.3,0.3,0.9,0.9,0.3,0.3,0.3,0.9,0.5,0.9,0.9,0.5,0.3,0.5,0.3,0.9,0.9,0.9,0.3,0.3,0.3,0.9,0.9,0.5,0.3,0.3,0.3,0.5,0.3,0.5,0.9,0.3,0.9,0.7,0.5,0.7,0.3,0.9,0.3,0.9,0.5,0.9,0.3,0.3,0.9,0.3,0.3,0.7,0.7,0.7,0.7,0.9,0.9,0.5,0.3,0.3,0.7,0.9,0.7,0.7,0.7,0.3,0.3,0.7,0.7,0.9,0.7,0.3,0.9,0.7,0.3,0.3,0.3,0.3,0.9,0.3,0.3,0.9,0.7,0.9,0.3,0.5,0.9,0.7,0.3,0.9,0.3,0.7,0.3,0.9,0.3,0.9,0.5,0.9,0.3,0.7,0.9,0.9,0.3,0.3,0.3,0.3,0.5,0.7,0.9,0.7,0.3,0.9,0.7,0.9,0.3,0.9,0.9,0.9,0.9,0.3,0.9,0.3,0.5,0.3,0.9,0.3,0.3,0.9,0.5,0.9,0.3,0.3,0.9,0.5,0.9,0.7,0.9,0.7,0.7,0.3,0.5,0.9,0.5,0.5,0.5,0.5,0.9,0.3,0.9,0.5,0.9,0.9,0.3,0.9,0.9,0.9,0.5,0.3,0.9,0.3,0.9,0.9,0.3,0.5,0.9,0.5,0.5,0.5,0.7,0.5,0.5,0.9,0.7,0.7,0.3,0.9,0.3,0.7,0.9,0.5,0.7,0.3],
+    approvedGeorgiaAsian: [0.3,0.3,0.3,0.3,0.5,0.3,0.9,0.7,0.3,0.3,0.3,0.3,0.5,0.3,0.3,0.5,0.5,0.3,0.3,0.3,0.3,0.5,0.3,0.9,0.5,0.5,0.3,0.3,0.3,0.9,0.7,0.3,0.3,0.5,0.7,0.5,0.7,0.5,0.7,0.7,0.3,0.5,0.3,0.3,0.3,0.9,0.3,0.3,0.3,0.7,0.7,0.3,0.3,0.3,0.9,0.5,0.3,0.5,0.3,0.3,0.3,0.7,0.3,0.3,0.3,0.7,0.3,0.9,0.3,0.5,0.9,0.3,0.7,0.3,0.3,0.5,0.7,0.5,0.3,0.7,0.5,0.3,0.5,0.5,0.3,0.3,0.3,0.5,0.5,0.3,0.3,0.3,0.3,0.3,0.5,0.7,0.3,0.5,0.3,0.3,0.5,0.3,0.3,0.3,0.5,0.3,0.3,0.3,0.3,0.3,0.5,0.5,0.3,0.7,0.9,0.9,0.7,0.3,0.7,0.5,0.5,0.7,0.3,0.5,0.3,0.3,0.3,0.3,0.5,0.3,0.3,0.3,0.9,0.3,0.7,0.7,0.5,0.5,0.3,0.3,0.3,0.3,0.7,0.3,0.3,0.5,0.7,0.3,0.3,0.3,0.5,0.3,0.7,0.5,0.5,0.3,0.3,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.7,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.7,0.3,0.3,0.3,0.3,0.3,0.5,0.3],
+    approvedGeorgiaHispanic: [0.3,0.9,0.7,0.5,0.9,0.3,0.7,0.9,0.3,0.5,0.7,0.7,0.7,0.9,0.9,0.3,0.7,0.3,0.3,0.7,0.3,0.3,0.3,0.3,0.3,0.5,0.9,0.9,0.3,0.3,0.7,0.3,0.7,0.9,0.9,0.3,0.9,0.5,0.9,0.7,0.3,0.9,0.9,0.5,0.3,0.3,0.3,0.9,0.9,0.7,0.7,0.3,0.9,0.7,0.7,0.7,0.5,0.5,0.3,0.7,0.3,0.9,0.9,0.3,0.9,0.3,0.9,0.3,0.5,0.9,0.7,0.3,0.9,0.9,0.3,0.3,0.3,0.7,0.9,0.9,0.3,0.3,0.3,0.5,0.9,0.9,0.3,0.9,0.9,0.9,0.7,0.3,0.9,0.9,0.7,0.3,0.9,0.3,0.5,0.9,0.7,0.3,0.9,0.3,0.3,0.3,0.3,0.9,0.7,0.3,0.3,0.3,0.5,0.3,0.7,0.9,0.5,0.3,0.7,0.7,0.7,0.3,0.3,0.3,0.3,0.3,0.9,0.9,0.7,0.3,0.9,0.3,0.5,0.5,0.5,0.9,0.7,0.3,0.3,0.3,0.9,0.7,0.3,0.3,0.5,0.3,0.9,0.7,0.5,0.7,0.9,0.3,0.3,0.7,0.7,0.3,0.9,0.3,0.7,0.9,0.3,0.5,0.9,0.3,0.3,0.9,0.3,0.3,0.9,0.3,0.7,0.3,0.5,0.7,0.9,0.7,0.5,0.7,0.7,0.7],
+    approvedNewJerseyWhite: [0.7,0.9,0.7,0.7,0.9,0.5,0.9,0.5,0.9,0.9,0.3,0.9,0.7,0.9,0.5,0.9,0.5,0.9,0.9,0.9,0.7,0.9,0.3,0.7,0.9,0.7,0.9,0.9,0.9,0.7,0.5,0.7,0.5,0.7,0.9,0.9,0.5,0.5,0.9,0.9],
+    approvedNewJerseyBlack: [0.9,0.3,0.9,0.5,0.3,0.9,0.7,0.7,0.9,0.7,0.3,0.7,0.7,0.9,0.7,0.5,0.5,0.7,0.3,0.9,0.9,0.9,0.5,0.9,0.5,0.5,0.7,0.5,0.9,0.7,0.3,0.9,0.3,0.5,0.3,0.3,0.9,0.7,0.5,0.5],
+    approvedNewJerseyAsian: [0.7,0.3,0.7,0.3,0.5,0.5,0.7,0.7,0.9,0.3,0.7,0.5,0.3,0.9,0.9,0.3,0.5,0.7,0.3,0.3,0.7,0.9,0.5,0.3,0.5,0.9,0.7,0.9,0.7,0.9,0.5,0.5,0.9,0.9,0.9,0.7,0.5,0.3,0.3,0.5],
+    approvedNewJerseyHispanic: [0.7,0.5,0.9,0.3,0.9,0.9,0.5,0.9,0.3,0.9,0.9,0.9,0.5,0.5,0.9,0.5,0.9,0.7,0.7,0.7,0.5,0.9,0.7,0.7,0.5,0.9,0.7,0.5,0.9,0.7,0.7,0.7,0.7,0.5,0.9,0.7,0.9,0.3,0.5,0.9]
+  }
   useEffect(() => {
     if (!mapRef.current) {
       mapRef.current = L.map(mapContainerRef.current, {
@@ -42,7 +51,9 @@ function Map({ mapSelection }) {
 
   // To dynamically add GeoJSON layers based on mapSelection
   useEffect(() => {
+    const opacites = [0.6, 0.7, 0.8, 0.9]
     let statesData;
+    let ethnicities;
     switch (mapSelection.selectedMapType) {
       case "State":
         statesData = [...NewJerseyState.features, ...GeorgiaState.features];
@@ -54,16 +65,40 @@ function Map({ mapSelection }) {
         statesData = [...NewJerseyApproved.features, ...GeorgiaApproved.features];
         break;
     }
-
+    let opacityData;
+    if (mapSelection.selectedState === "Georgia") {
+      if (mapSelection.selectedEthnicity === "White") {
+        opacityData = mockHeatMap.approvedGeorgiaWhite.concat(mockHeatMap.approvedNewJerseyWhite);
+      } else if (mapSelection.selectedEthnicity === "Black") {
+        opacityData = mockHeatMap.approvedGeorgiaBlack.concat(mockHeatMap.approvedNewJerseyBlack);
+      } else if (mapSelection.selectedEthnicity === "Asian") {
+        opacityData = mockHeatMap.approvedGeorgiaAsian.concat(mockHeatMap.approvedNewJerseyAsian);
+      } else if (mapSelection.selectedEthnicity === "Hispanic") {
+        opacityData = mockHeatMap.approvedGeorgiaHispanic.concat(mockHeatMap.approvedNewJerseyHispanic);
+      }
+    } else if (mapSelection.selectedState === "New Jersey") {
+      if (mapSelection.selectedEthnicity === "White") {
+        opacityData = mockHeatMap.approvedNewJerseyWhite.concat(mockHeatMap.approvedGeorgiaWhite);
+      } else if (mapSelection.selectedEthnicity === "Black") {
+        opacityData = mockHeatMap.approvedNewJerseyBlack.concat(mockHeatMap.approvedGeorgiaBlack);
+      } else if (mapSelection.selectedEthnicity === "Asian") {
+        opacityData = mockHeatMap.approvedNewJerseyAsian.concat(mockHeatMap.approvedGeorgiaAsian);
+      } else if (mapSelection.selectedEthnicity === "Hispanic") {
+        opacityData = mockHeatMap.approvedNewJerseyHispanic.concat(mockHeatMap.approvedGeorgiaHispanic);
+      }
+    }
+    let test = 0
     const geoJsonLayer = L.geoJson(statesData, {
-      style: () => ({
-        fillColor: '#C4A484',
-        weight: 2,
-        opacity: 1,
-        color: 'white',
-        dashArray: '3',
-        fillOpacity: 0.7,
-      }),
+      style: () => {
+        return {
+          fillColor: '#00AEF3',
+          weight: 2,
+          opacity: 1,
+          color: 'white',
+          dashArray: '3',
+          fillOpacity: opacityData[test++],
+        };
+      },
       onEachFeature: function(feature, layer) {
         if (feature.properties && feature.properties.name) {
           //Creating leaflet tooltip to highlight state name (not working)
