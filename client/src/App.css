@@ -3,7 +3,7 @@
   height: calc(100vh);
   width: calc(100%-200px);
   border-radius: 0;
-  margin-top: 81px;
+  margin-top: 62px;
   margin-left: 192px;
   width: 102.5%;
   position: fixed;
@@ -26,7 +26,7 @@
 }
 .sidebar {
   position: fixed;
-  top: 81px;
+  top: 62px;
   left: 0;
   width: 200px;
   height: calc(100% - 56px);
@@ -41,6 +41,8 @@
   overflow-y: auto;
 } */
 .custom-text {
+  margin-top: -2px;
+  margin-right: -75px;
   font-weight: bold; 
   font-size: 18px;
   color: #f0ad4e;
@@ -74,4 +76,11 @@
 .welcome-modal button:hover {
   background-color: black;
   color:white;
+}
+.state-name-tooltip {
+  background-color: white;
+  color: black;
+  font-weight: bold;
+  padding: 6px;
+  border-radius: 3px;
 }

@@ -64,6 +64,16 @@ function Map({ mapSelection }) {
         dashArray: '3',
         fillOpacity: 0.7,
       }),
+      onEachFeature: function(feature, layer) {
+        if (feature.properties && feature.properties.name) {
+          //Creating leaflet tooltip to highlight state name (not working)
+          layer.bindTooltip(feature.properties.name, {
+            permanent: true,
+            direction: 'center',
+            className: 'state-name-tooltip'
+          });
+        }
+      }
     }).addTo(mapRef.current);
 
     return () => {

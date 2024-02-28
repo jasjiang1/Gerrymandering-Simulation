@@ -39,8 +39,8 @@ function App() {
 
   const handleSelectState = (state) => {
     const stateSettings = {
-      'Georgia': { center: [32.7, -83.4], zoom: 7 },
-      'New Jersey': { center: [40.1, -74.7], zoom: 7 },
+      'Georgia': { center: [32.5, -82.3], zoom: 6.5 }, //32.7, -83.4
+      'New Jersey': { center: [40.1, -74.7], zoom: 7.5 },
     };
 
     const selectedStateSettings = stateSettings[state];
