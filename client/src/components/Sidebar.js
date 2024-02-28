@@ -51,7 +51,6 @@ function Sidebar({  mapSelection, setMapSelection, chartSelection, setChartSelec
               <Form.Group controlId="selectState">
                 <Form.Label>Select State</Form.Label>
                 <Form.Control as="select" custom name="selectedState" value={mapSelection.selectedState} onChange={handleChange}>
-                  <option>Choose...</option>
                   <option>Georgia</option>
                   <option>New Jersey</option>
                 </Form.Control>
