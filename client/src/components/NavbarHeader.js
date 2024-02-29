@@ -1,23 +1,121 @@
-import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar';
-import logo from './grizzliestransparent.png'
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container, Navbar, Form, Row, Col, Button } from 'react-bootstrap';
+import logo from './grizzliestransparent.png';
 
-function NavbarHeader() {
+function Header({ mapSelection, setMapSelection, chartSelection, setChartSelection, submitted }){
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    if (name in mapSelection) {
+      console.log(name);
+      if(name == "selectedState"){
+        const stateSettings = {
+          'Georgia': { center: [32.7, -83.4], zoom: 7 },
+          'New Jersey': { center: [40.1, -74.7], zoom: 7 },
+        };
+    
+        const selectedStateSettings = stateSettings[value];
+        setMapSelection({
+          ...mapSelection,
+          selectedState: value,
+          center: selectedStateSettings.center,
+          zoom: selectedStateSettings.zoom,
+        });
+      }
+      else{
+        setMapSelection(prevState => ({
+          ...prevState,
+          [name]: value
+        }));
+      }
+
+      
+    } else if (name in chartSelection) {
+      setChartSelection(prevState => ({
+        ...prevState,
+        [name]: value
+      }));
+    }
+  };
+  const handleSubmit = (event) =>{
+    event.preventDefault();
+   
+    submitted();
+  }
+
   return (
-    <Navbar bg="secondary" data-bs-theme="dark">
-      <Container>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          {/* <Navbar.Brand className="custom-text">Team Grizzles</Navbar.Brand> */}
-          <img src={logo} alt="logo" style={{ maxWidth: '50px', marginTop: '-15px', marginLeft: '-60px' }} />
-        </div>
-        <Navbar.Collapse className="justify-content-end">
-          <Navbar.Text className="custom-text">
-            Gerrymandering Project
-          </Navbar.Text>
-        </Navbar.Collapse>
+    <Navbar bg="secondary" expand="lg" variant="dark" className="py-2">
+      <Container fluid>
+        <Navbar.Brand href="#" className="d-flex align-items-center flex-column me-2">
+          <img src={logo} alt="logo" width="30" height="30" className="d-inline-block align-top mb-1" />
+          <span className="ms-2 custom-text">Gerrymandering Project</span>
+        </Navbar.Brand>
+        <Form onSubmit={handleSubmit} className="d-flex align-items-center w-100 gx-2" style={{ marginLeft: '75px' }}>
+          <Row className="w-100 gx-2 gy-2">
+            <Col xs={6} md={2}>
+              <Form.Group controlId="selectState">
+                <Form.Label>Select State</Form.Label>
+                <Form.Control as="select" name="selectedState" value={mapSelection.selectedState} onChange={handleChange}>
+                  <option>Georgia</option>
+                  <option>New Jersey</option>
+                </Form.Control>
+              </Form.Group>
+            </Col>
+            <Col xs={6} md={2}>
+              <Form.Group controlId="selectMapType">
+                <Form.Label>Map Type</Form.Label>
+                <Form.Control as="select" name="selectedMapType" value={mapSelection.selectedMapType} onChange={handleChange}>
+                  <option>Approved Districting Plan</option>
+                  <option>Counties</option>
+                  <option>State</option>
+                </Form.Control>
+              </Form.Group>
+            </Col>
+            <Col xs={6} md={2}>
+              <Form.Group controlId="selectEthnicity">
+                <Form.Label>Ethnicity</Form.Label>
+                <Form.Control as="select" name="selectedEthnicity" value={mapSelection.selectedEthnicity} onChange={handleChange}>
+                  <option>Hispanic</option>
+                  <option>Asian</option>
+                  <option>Black</option>
+                  <option>White</option>
+                </Form.Control>
+              </Form.Group>
+            </Col>
+            <Col xs={6} md={2}>
+              <Form.Group controlId="selectChartType">
+                <Form.Label>Chart Type</Form.Label>
+                <Form.Control as="select" name="selectedChartType" value={chartSelection.selectedChartType} onChange={handleChange}>
+                  <option>Choose...</option>
+                  <option>Bar Chart</option>
+                  <option>Box and Whiskers</option>
+                  <option>Scatter Plot</option>
+                  <option>Pie Chart</option>
+                </Form.Control>
+              </Form.Group>
+            </Col>
+            <Col xs={6} md={2}>
+              <Form.Group controlId="selectSpecificArea">
+                <Form.Label>Specific Area</Form.Label>
+                <Form.Control as="select" name="selectedAreaType" value={chartSelection.selectedAreaType} onChange={handleChange}>
+                  <option>Currently Viewing State</option>
+                  <option>State Vs. State</option>
+                  <option>County 1</option>
+                  <option>County 2</option>
+                  <option>County 3</option>
+                  <option>County 4</option>
+                  <option>County 5</option>
+                </Form.Control>
+              </Form.Group>
+            </Col>
+            <Col xs={6} md="auto" className="d-flex align-items-end pb-2">
+              <Button type="submit" variant="primary" size="sm">Apply</Button>
+              <Button variant="danger" size="sm" className="ms-2">Reset</Button>
+            </Col>
+          </Row>
+        </Form>
       </Container>
     </Navbar>
   );
 }
-
-export default NavbarHeader;
+export default Header;

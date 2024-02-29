@@ -1,5 +1,4 @@
 import MyNavbar from './components/NavbarHeader';
-import Sidebar from './components/Sidebar';
 import Map from "./components/Map.js";
 import WelcomePage from "./components/WelcomePage.js"
 import { Container, Row, Col} from 'react-bootstrap';
@@ -346,7 +345,17 @@ function App() {
         <WelcomePage onStateSelected={handleSelectState} />
       ) : (
         <>
-      <div className="navbar-container" id="navbar">
+        <div className="navbar-container" id="navbar">
+        <MyNavbar
+            mapSelection={mapSelection} 
+            setMapSelection={setMapSelection} 
+            chartSelection={chartSelection} 
+            setChartSelection={setChartSelection} 
+            submitted={() => submitted()}
+          />
+          <Map mapSelection={mapSelection} />
+          </div>
+      {/* <div className="navbar-container" id="navbar">
           <MyNavbar />
         </div>
         <Container fluid>
@@ -358,7 +367,7 @@ function App() {
               <Map mapSelection={mapSelection} />
             </Col>
         </Row>
-        </Container>
+        </Container> */}
         
       {showmodal && formsubmit &&
       <Modal  size="lg" aria-labelledby="contained-modal-title-vcenter" centered

@@ -2,7 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import * as L from "leaflet";
-import legend from '../mocks/MockLegend.jpg'
+import legend from '../mocks/MockLegend.jpg';
 function Sidebar({  mapSelection, setMapSelection, chartSelection, setChartSelection,setModal, submitted}) {
   const handleChange = (event) => {
     const {name, value} = event.target;
@@ -127,7 +127,7 @@ function Sidebar({  mapSelection, setMapSelection, chartSelection, setChartSelec
             </Form.Group>
           </Col>
           <Col>
-          <Form.Group controlId="compareGroups">
+          {/* <Form.Group controlId="compareGroups">
           <Form.Label>Select Ethnicities To Compare</Form.Label>
           <Form.Control as="select" custom name="selectedEthnicityOne" value={chartSelection.selectedEthnicityOne} onChange={handleChange}>
               <option>Choose...</option>
@@ -144,7 +144,7 @@ function Sidebar({  mapSelection, setMapSelection, chartSelection, setChartSelec
               <option>White</option>
           </Form.Control>
           </Form.Group>
-          <br/>
+          <br/> */}
           <Button type="submit" variant="primary"> Apply </Button>
           <Button variant="danger" color="red"> Reset </Button>
           </Col>
