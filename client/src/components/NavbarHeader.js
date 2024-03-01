@@ -48,7 +48,7 @@ function Header({ mapSelection, setMapSelection, chartSelection, setChartSelecti
       <Container fluid>
         <Navbar.Brand href="#" className="d-flex align-items-center flex-column me-2">
           <img src={logo} alt="logo" width="30" height="30" className="d-inline-block align-top mb-1" />
-          <span className="ms-2 custom-text">Gerrymandering Project</span>
+          <span className="ms-2custom-text">Gerrymandering Project</span>
         </Navbar.Brand>
         <Form onSubmit={handleSubmit} className="d-flex align-items-center w-100 gx-2" style={{ marginLeft: '75px' }}>
           <Row className="w-100 gx-2 gy-2">

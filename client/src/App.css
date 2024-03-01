@@ -106,3 +106,18 @@
   margin-right: 10px;
   margin-left: 25px;
 }
+
+/* Navbar */
+.ms-2custom-text {
+  font-size: 30px;
+  color:orange
+}
+.form-label {
+  font-size: 20px;
+}
+option {
+  font-size: 15px;
+}
+.form-control {
+  font-size: 15px;
+}
