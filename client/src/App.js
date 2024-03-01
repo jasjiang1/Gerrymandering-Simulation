@@ -79,9 +79,11 @@ function App() {
       if (chartSelection.selectedChartType === "Bar Chart" && showmodal) {
         if (mapSelection.selectedState === "Georgia") {
           dataentries = [115, 54, 7, 2];
+          document.getElementById("contained-modal-title-vcenter").innerHTML = "Ethnicity of District Representatives (Total: 180 Respresentatives)";
         }
         else if (mapSelection.selectedState === "New Jersey") {
           dataentries = [55, 14, 3, 8];
+          document.getElementById("contained-modal-title-vcenter").innerHTML = "Ethnicity of District Representatives (Total: 80 Respresentatives)";
         }
         var config = {
           type: "bar",
@@ -104,7 +106,7 @@ function App() {
             }],
           }
         }
-        document.getElementById("contained-modal-title-vcenter").innerHTML = "Ethnicity of District Representatives";
+
         var barchart = new Chart(canvas, config);
 
       }
@@ -183,6 +185,19 @@ function App() {
         }
         var config = {
           type: "boxplot",
+          options: {
+              scales: {
+                y: {
+                  label: "% Minority Group",
+                  max: 100,
+                  title: {
+                    display: true,
+                    text: '% Minority Population'
+                  }
+                },
+              } 
+                  
+            },
           data: {
             labels: ['District 1', 'District 2', 'District 3', 'District 4', 'District 5', 'District 6', 'District 7'],
             datasets: [{
@@ -213,13 +228,13 @@ function App() {
               outlierRadius: 3,
               outlierBackgroundColor: 'red',
               data: [
-                [.5, .6, .33, .40, .20],
-                [.16, .20, .3, .46, .10],
-                [.10, .28, .33, .40, .10],
-                [.30, .25, .3, .42, .15],
-                [.10, .42, .35, .45, .10],
-                [.15, .22, .3, .46, .10],
-                [.15, .29, .34, .41, .10]
+                [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                [2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
+                [3, 6, 9, 12, 15, 18, 21, 24, 27, 30],
+                [4, 8, 12, 16, 20, 24, 28, 32, 36, 40],
+                [5, 10, 15, 20, 25, 30, 35, 40, 45, 50],
+                [6, 12, 18, 24, 30, 36, 42, 48, 54, 60],
+                [7, 14, 21, 28, 35, 42, 49, 56, 63, 70]
               ]
             }]
           }
@@ -236,20 +251,21 @@ function App() {
         var dataentriesR;
 
         if (mapSelection.selectedState === "Georgia") {
-          dataentriesD =[
-            [2,20],
-            [4,15],
-            [ 6,7],
-            [8,10],
-            [9,3],
-            [10,2]
+          dataentriesR=[
+            [10,70],
+            [20,65],
+            [40,55],
+            [60,20],
+            [80,15],
+            [90,10],
+            [95,5]
          ];
-         dataentriesR = [[1, 1],
-          [2, 4],
-          [3, 9],
-          [4, 6],
-          [5, 15],
-          [6, 16]
+         dataentriesD = [[1, 10],
+          [20, 25],
+          [35, 39],
+          [40, 60],
+          [55, 55],
+          [65, 75]
         ];
           const dataD = dataentriesD;
           const  dataR = dataentriesR;
@@ -261,22 +277,22 @@ function App() {
           console.log(regression_R);
         }
         else {
-          dataentriesD =[
-            [1, 10],
-            [2, 8],
-            [10, 6],
-            [6, 5],
-            [5, 4],
-            [16, 3],
-          ]
-           ;
-         dataentriesR =  [[1, 20],
-            [3, 16],
-            [5, 4],
-            [6, 10],
-            [7, 11],
-            [8, 4],
-            [9, 3]];
+          dataentriesR=[
+            [10,70],
+            [20,65],
+            [40,55],
+            [60,20],
+            [80,15],
+            [90,10],
+            [95,5]
+         ];
+         dataentriesD = [[1, 10],
+          [20, 25],
+          [35, 39],
+          [40, 60],
+          [55, 55],
+          [65, 75]
+        ];
           const dataD =dataentriesD;
           const  dataR = dataentriesR;
           regression_D = regression.polynomial(dataD);
@@ -303,11 +319,13 @@ function App() {
               type: 'scatter'
             },
             {
+              label:"line",
               data: Dregdata,
               type: 'line',
               borderWidth:1,
               borderColor: 'lightblue'
             }, {
+              label:"line",
               data: Rregdata,
               type: 'line',
               borderWidth:1,
@@ -316,20 +334,30 @@ function App() {
           ]
           },
           options: {
+            plugins:{
+              legend:{
+                labels:{
+                  filter: label => label.text != "line"
+                }
+              }
+            },
             scales: {
               y: {
+                max: 100,
                 title: {
                   display: true,
                   text: '% Vote Share'
                 }
               },
               x: {
+                max: 100,
                 title: {
                   display: true,
                   text: '% Minority Population'
                 }
               }
-            }     
+            } 
+                
           }
           
         }
