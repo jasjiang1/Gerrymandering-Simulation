@@ -8,6 +8,11 @@ import NewJerseyState from '../mocks/NewJerseyState.json';
 import GeorgiaApproved from '../mocks/GeorgiaApproved.json';
 import NewJerseyApproved from '../mocks/NewJerseyApproved.json';
 import legend from '../mocks/MockLegend.jpg'
+
+import Tooltip from '@mui/material/Tooltip';
+import InfoIcon from '@mui/icons-material/Info';
+import IconButton from '@mui/material/IconButton';
+
 function Map({ mapSelection }) {
   const mapRef = useRef(null);
   const mapContainerRef = useRef(null);
@@ -123,11 +128,44 @@ function Map({ mapSelection }) {
     };
   }, [mapSelection]);
 
+  const NJInfo = (
+    <ul>
+      <li>40 state Assembly Districts</li>
+      <li>80 Representatives</li>
+      <li>Does not require Preclearance</li>
+    </ul>
+  );
+
+  const GAInfo = (
+    <ul>
+      <li>180 State Assembly Districts</li>
+      <li>180 Representatives</li>
+      <li>Requires Preclearance</li>
+    </ul>
+  )
+
+  let stateInfo;
+  if (mapSelection.selectedState === "New Jersey") {
+    stateInfo = NJInfo;
+  } else if (mapSelection.selectedState === "Georgia") {
+    stateInfo = GAInfo;
+  } else {
+    stateInfo = "Select a state to see information.";
+  }
+
   return(
     <div className="map-and-legend-container">
     <div className="legend-container">
       <span className="legend-text">Legend:</span>
       <img src={legend} alt="Legend" className="map-legend" />
+      <div className="tooltip-container">
+        <Tooltip title={<span className="custom-tooltip">{stateInfo}</span>}
+        placement="right">
+          <IconButton>
+          <InfoIcon fontSize="large" />
+          </IconButton>
+        </Tooltip>
+      </div>
     </div>
     <div ref={mapContainerRef} className="map-container"></div>
   </div>

@@ -90,6 +90,9 @@
   text-align: center;
   margin-bottom: 5px;
 }
+.tooltip-container {
+  margin-top: 300px; 
+}
 .legend-text {
   display: block;
   font-weight: bold;
@@ -105,11 +108,10 @@
   height: calc(100vh - 62px);
   overflow:hidden;
 }
-/* .map-container {
+.map-container {
   flex-grow: 1;
   height: 100%;
-} */
-
+}
 .map-legend {
   max-width: 75%;
   height: auto;
@@ -130,4 +132,8 @@ option {
 }
 .form-control {
   font-size: 15px;
+}
+.custom-tooltip {
+  font-size: 1.25rem !important;
+  padding: 10px !important;
 }
