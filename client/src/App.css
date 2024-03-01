@@ -86,6 +86,16 @@
   padding: 6px;
   border-radius: 3px;
 }
+.legend-container {
+  text-align: center;
+  margin-bottom: 5px;
+}
+.legend-text {
+  display: block;
+  font-weight: bold;
+  font-size: 15px;
+  margin-bottom: 5px;
+}
 .map-and-legend-container {
   display: flex;
   align-items: start;
@@ -95,16 +105,16 @@
   height: calc(100vh - 62px);
   overflow:hidden;
 }
-.map-container {
+/* .map-container {
   flex-grow: 1;
   height: 100%;
-}
+} */
 
 .map-legend {
-  max-width: 10%;
+  max-width: 75%;
   height: auto;
   margin-right: 10px;
-  margin-left: 25px;
+  margin-left: 15px;
 }
 
 /* Navbar */

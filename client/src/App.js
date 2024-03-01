@@ -47,6 +47,7 @@ function App() {
     setMapSelection({
       ...mapSelection,
       selectedState: state,
+      selectedMapType: "State",
       selectedEthnicity: "Hispanic",
       center: selectedStateSettings.center,
       zoom: selectedStateSettings.zoom,

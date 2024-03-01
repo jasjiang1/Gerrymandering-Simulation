@@ -101,12 +101,19 @@ function Map({ mapSelection }) {
       },
       onEachFeature: function(feature, layer) {
         if (feature.properties && feature.properties.name) {
-          //Creating leaflet tooltip to highlight state name (not working)
-          layer.bindTooltip(feature.properties.name, {
-            permanent: true,
-            direction: 'center',
-            className: 'state-name-tooltip'
-          });
+          if (mapSelection.selectedMapType === "State") {
+            // Always show state name
+            layer.bindTooltip(feature.properties.name, {
+              permanent: true,
+              direction: 'center',
+              className: 'state-name-tooltip'
+            });
+          } else {
+            //only show on hover
+            layer.bindTooltip(feature.properties.name, {
+              className: 'state-name-tooltip'
+            });
+          }
         }
       }
     }).addTo(mapRef.current);
@@ -118,9 +125,12 @@ function Map({ mapSelection }) {
 
   return(
     <div className="map-and-legend-container">
+    <div className="legend-container">
+      <span className="legend-text">Legend:</span>
       <img src={legend} alt="Legend" className="map-legend" />
-      <div ref={mapContainerRef} className="map-container"></div>
-   </div>
+    </div>
+    <div ref={mapContainerRef} className="map-container"></div>
+  </div>
   )
 }
 

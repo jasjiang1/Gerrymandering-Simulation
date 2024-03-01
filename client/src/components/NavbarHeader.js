@@ -47,7 +47,7 @@ function Header({ mapSelection, setMapSelection, chartSelection, setChartSelecti
     <Navbar bg="secondary" expand="lg" variant="dark" className="py-2">
       <Container fluid>
         <Navbar.Brand href="#" className="d-flex align-items-center flex-column me-2">
-          <img src={logo} alt="logo" width="30" height="30" className="d-inline-block align-top mb-1" />
+          <img src={logo} alt="logo" width="30" height= "30" className="d-inline-block align-top mb-1" />
           <span className="ms-2custom-text">Gerrymandering Project</span>
         </Navbar.Brand>
         <Form onSubmit={handleSubmit} className="d-flex align-items-center w-100 gx-2" style={{ marginLeft: '75px' }}>
@@ -109,8 +109,8 @@ function Header({ mapSelection, setMapSelection, chartSelection, setChartSelecti
               </Form.Group>
             </Col>
             <Col xs={6} md="auto" className="d-flex align-items-end pb-2">
-              <Button type="submit" variant="primary" size="sm">Apply</Button>
-              <Button variant="danger" size="sm" className="ms-2">Reset</Button>
+              <Button type="submit" variant="primary" size="lg">Apply</Button>
+              <Button variant="danger" size="lg" className="ms-2">Reset</Button>
             </Col>
           </Row>
         </Form>
