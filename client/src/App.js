@@ -11,6 +11,7 @@ import { LinearScale, CategoryScale } from 'chart.js/auto';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import regression from 'regression';
 import { BoxPlotController, BoxAndWiskers } from '@sgratzl/chartjs-chart-boxplot';
+import { renderBarCharts } from './mocks/mockChartData.js';
 function App() {
   const [showmodal, setModal] = useState(false);
   const [formsubmit, setSubmit] = useState(false);
@@ -73,11 +74,13 @@ function App() {
   });
   console.log(mapSelection)
   useEffect(() => {
+    console.log(chartSelection.selectedChartType)
+    console.log(chartSelection.selectedAreaType)
     var dataentries;
     Chart.register(BoxPlotController, BoxAndWiskers, LinearScale, CategoryScale);
     if (document.getElementById("barchart") !== null && (mapSelection.selectedState !== '')) {
       var canvas = document.getElementById("barchart");
-      if (chartSelection.selectedChartType === "Bar Chart" && showmodal) {
+      if (chartSelection.selectedChartType === "Bar Chart" && showmodal && chartSelection.selectedAreaType === "Currently Viewing State") {
         if (mapSelection.selectedState === "Georgia") {
           dataentries = [115, 54, 7, 2];
           document.getElementById("contained-modal-title-vcenter").innerHTML = "Ethnicity of District Representatives (Total: 180 Respresentatives)";
@@ -111,7 +114,7 @@ function App() {
         var barchart = new Chart(canvas, config);
 
       }
-      else if (chartSelection.selectedChartType === "Pie Chart") {
+      else if (chartSelection.selectedChartType === "Pie Chart" && chartSelection.selectedAreaType === "Currently Viewing State") {
         var dataentries;
         if (mapSelection.selectedState === "Georgia") {
           dataentries = [5555483, 3320513, 50618, 479028, 1123457, 7299, 555059];
@@ -176,7 +179,7 @@ function App() {
         document.getElementById("contained-modal-title-vcenter").innerHTML = "Population By Race";
         var piechart = new Chart(canvas, config);
       }
-      else if (chartSelection.selectedChartType === "Box and Whiskers") {
+      else if (chartSelection.selectedChartType === "Box and Whiskers" && chartSelection.selectedAreaType === "Currently Viewing State") {
         var dataentries;
         if (mapSelection.selectedState === "Georgia") {
           dataentries = [5555483, 3320513, 50618, 479028, 1123457, 7299, 555059];
@@ -243,7 +246,7 @@ function App() {
         document.getElementById("contained-modal-title-vcenter").innerHTML = "%Vote Share of Minority ";
         var boxplot = new Chart(canvas, config);
       }
-      else if (chartSelection.selectedChartType === "Scatter Plot") {
+      else if (chartSelection.selectedChartType === "Scatter Plot" && chartSelection.selectedAreaType === "Currently Viewing State") {
         var Dregdata;
         var Rregdata;
         var regression_D;
@@ -364,10 +367,15 @@ function App() {
         }
         document.getElementById("contained-modal-title-vcenter").innerHTML = "Precinct Analysis";
         var boxplot = new Chart(canvas, config);
-      }
-
+      } else if (chartSelection.selectedChartType === "Bar Chart" && chartSelection.selectedAreaType === "State Vs. State") {
+        const [barchart, secondBarchart] = renderBarCharts({ mapSelection, chartSelection, showmodal });
+      } else if (chartSelection.selectedChartType === "Pie Chart" && chartSelection.selectedAreaType === "State Vs. State") {
+        const [barchart, secondBarchart] = renderBarCharts({ mapSelection, chartSelection, showmodal });
+      } else if (chartSelection.selectedChartType === "Box and Whiskers" && chartSelection.selectedAreaType === "State Vs. State") {
+        const [barchart, secondBarchart] = renderBarCharts({ mapSelection, chartSelection, showmodal });
+      } 
     }
-  }, [showmodal]);
+  }, [mapSelection, chartSelection, showmodal]);
   return (
     <>
     {isWelcomePageVisible ? (
@@ -406,7 +414,12 @@ function App() {
           </Modal.Header>
           {console.log(mapSelection.selectedState)}
           {console.log(chartSelection.selectedChartType)}
-          <Modal.Body><canvas id ="barchart" width ="250" height = "200"></canvas></Modal.Body>
+            <Modal.Body>
+              <div className="chart-container">
+                <canvas id="barchart" width="250" height="200"></canvas>
+                <canvas id="second-barchart" width="250" height="200"></canvas>
+              </div>
+            </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={hidemodal}>
               Close
