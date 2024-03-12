@@ -8,7 +8,7 @@ function Header({ mapSelection, setMapSelection, chartSelection, setChartSelecti
     const { name, value } = event.target;
     if (name in mapSelection) {
       console.log(name);
-      if(name == "selectedState"){
+      if(name === "selectedState"){
         const stateSettings = {
           'Georgia': { center: [32.7, -83.4], zoom: 7 },
           'New Jersey': { center: [40.1, -74.7], zoom: 7 },
@@ -48,7 +48,6 @@ function Header({ mapSelection, setMapSelection, chartSelection, setChartSelecti
       <Container fluid>
         <Navbar.Brand href="#" className="d-flex align-items-center flex-column me-2">
           <img src={logo} alt="logo" width="30" height= "30" className="d-inline-block align-top mb-1" />
-          <span className="ms-2custom-text">Gerrymandering Project</span>
         </Navbar.Brand>
         <Form onSubmit={handleSubmit} className="d-flex align-items-center w-100 gx-2" style={{ marginLeft: '75px' }}>
           <Row className="w-100 gx-2 gy-2">
