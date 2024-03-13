@@ -1,16 +1,16 @@
-import MyNavbar from './components/NavbarHeader';
 import Map from "./components/Map.js";
+import MyNavbar from './components/NavbarHeader';
 import WelcomePage from "./components/WelcomePage.js"
 import Chart from 'chart.js/auto';
-import { LinearScale, CategoryScale } from 'chart.js/auto';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
-import { BoxPlotController, BoxAndWiskers } from '@sgratzl/chartjs-chart-boxplot';
 import regression from 'regression';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { renderBarCharts } from './mocks/mockChartData.js';
+import { LinearScale, CategoryScale } from 'chart.js/auto';
+import { BoxPlotController, BoxAndWiskers } from '@sgratzl/chartjs-chart-boxplot';
 //import { Container, Row, Col} from 'react-bootstrap';
 import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { renderBarCharts } from './mocks/mockChartData.js';
 import './App.css'
 
 function App() {
@@ -154,6 +154,14 @@ function App() {
         var piechart = new Chart(canvas, config);
       }
       else if (chartSelection.selectedChartType === "Box and Whiskers" && chartSelection.selectedAreaType === "Currently Viewing State") {
+        if (mapSelection.selectedState === "Georgia") {//180 districts - only 40 shown - 180 too much for array
+          var bwData = [[1], [2], [3], [4], [5], [6], [7], [8], [9], [10], [11], [12], [13], [14], [15], [16], [17], [18], [19], [20], [21], [22], [23], [24], [25], [26], [27], [28], [29], [30], [31], [32], [33], [34], [35], [36], [37], [38], [39], [40], [41], [42], [43], [44], [45], [46], [47], [48], [49], [50], [51], [52], [53], [54], [55], [56], [57], [58], [59], [60], [61], [62], [63], [64], [65], [66], [67], [68], [69], [70], [71], [72], [73], [74], [75], [76], [77], [78], [79], [80], [81], [82], [83], [84], [85], [86], [87], [88], [89], [90], [91], [92], [93], [94], [95], [96], [97], [98], [99], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100], [100]];
+          var bwLabel = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", "100", "101", "102", "103", "104", "105", "106", "107", "108", "109", "110", "111", "112", "113", "114", "115", "116", "117", "118", "119", "120", "121", "122", "123", "124", "125", "126", "127", "128", "129", "130", "131", "132", "133", "134", "135", "136", "137", "138", "139", "140", "141", "142", "143", "144", "145", "146", "147", "148", "149", "150", "151", "152", "153", "154", "155", "156", "157", "158", "159", "160", "161", "162", "163", "164", "165", "166", "167", "168", "169", "170", "171", "172", "173", "174", "175", "176", "177", "178", "179", "180"];
+        }
+        else {//40 districts
+          var bwData = [[1,2,3],[2,3,4],[3,4,5],[4,5,6],[5,6,7],[6,7,8],[7,8,9],[8,9,10],[9,10,11],[10,11,12],[11,12,13],[12,13,14],[13,14,15],[14,15,16],[15,16,17],[16,17,18],[17,18,19],[18,19,20],[19,20,21],[20,21,22],[21,22,23],[22,23,24],[23,24,25],[24,25,26],[25,26,27],[26,27,28],[27,28,29],[28,29,30],[29,30,31],[30,31,32],[31,32,33],[32,33,34],[33,34,35],[34,35,36],[35,36,37],[36,37,38],[37,38,39],[38,39,40],[39,40,41],[40,41,42]];
+          var bwLabel = ["1",  "2",  "3",  "4",  "5",  "6",  "7",  "8",  "9",  "10",  "11",  "12",  "13",  "14",  "15",  "16",  "17",  "18",  "19",  "20",  "21",  "22",  "23",  "24",  "25",  "26",  "27",  "28",  "29",  "30",  "31",  "32",  "33",  "34",  "35",  "36",  "37",  "38",  "39",  "40"];
+        }
         var config = {
           type: "boxplot",
           options: {
@@ -163,21 +171,26 @@ function App() {
                 max: 100,
                 title: {display: true, text: '% Minority Population'}
               },
-            }     
+              x: {
+                label: "Indexed Districts",
+                max: bwLabel.length,
+                title: {display: true, text: 'Indexed Districts'}
+              }
+            }   
           },
           data: {
-            labels: ['District 1', 'District 2', 'District 3', 'District 4', 'District 5', 'District 6', 'District 7'],
+            labels: bwLabel/*['District 1', 'District 2', 'District 3', 'District 4', 'District 5', 'District 6', 'District 7']*/,
             datasets: [{
               label: '% of Minority',
-              backgroundColor: ['lightblue','#b2eee6','#8ad6cc','#66beb2',"#f97171","#f99192","pink"],
-              borderColor: ['red','blue','red','green',"green","purple","blue"],
+              //backgroundColor: ['lightblue','#b2eee6','#8ad6cc','#66beb2',"#f97171","#f99192","pink"],
+              //borderColor: ['black','black','red','green',"green","purple","blue"],
               borderWidth: 1,
               padding: 10,
               itemRadius: 0,
               itemStyle: 'circle',
               outlierRadius: 3,
               outlierBackgroundColor: 'red',
-              data: [
+              data: bwData/*[
                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
                 [2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
                 [3, 6, 9, 12, 15, 18, 21, 24, 27, 30],
@@ -185,7 +198,7 @@ function App() {
                 [5, 10, 15, 20, 25, 30, 35, 40, 45, 50],
                 [6, 12, 18, 24, 30, 36, 42, 48, 54, 60],
                 [7, 14, 21, 28, 35, 42, 49, 56, 63, 70]
-              ]
+              ]*/
             }]
           }
         }
@@ -202,7 +215,7 @@ function App() {
 
         if (mapSelection.selectedState === "Georgia") {
           dataentriesR=[[10,70],[20,65],[40,55],[60,20],[80,15],[90,10],[95,5]];
-          dataentriesD = [[1, 10],[20, 25],[35, 39],[40, 60],[55, 55],[65, 75]];
+          dataentriesD = [[1,10],[20,25],[35,39],[40,60],[55,55],[65,75]];
           const dataD = dataentriesD;
           const dataR = dataentriesR;
           regression_D = regression.polynomial(dataD);
@@ -214,7 +227,7 @@ function App() {
         }
         else {
           dataentriesR=[[10,70],[20,65],[40,55],[60,20],[80,15],[90,10],[95,5]];
-          dataentriesD = [[1, 10],[20, 25],[35, 39],[40, 60],[55, 55],[65, 75]];
+          dataentriesD = [[1,10],[20,25],[35,39],[40,60],[55,55],[65,75]];
           const dataD =dataentriesD;
           const dataR = dataentriesR;
           regression_D = regression.polynomial(dataD);

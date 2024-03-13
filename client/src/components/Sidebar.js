@@ -3,18 +3,19 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import * as L from "leaflet";
 import legend from '../mocks/MockLegend.jpg';
+
 function Sidebar({  mapSelection, setMapSelection, chartSelection, setChartSelection,setModal, submitted}) {
   const handleChange = (event) => {
     const {name, value} = event.target;
     if (name in mapSelection) {
-      console.log(name);
+      //console.log(name);
       if(name == "selectedState"){
         const stateSettings = {
           'Georgia': { center: [32.7, -83.4], zoom: 7 },
           'New Jersey': { center: [40.1, -74.7], zoom: 7 },
         };
-    
         const selectedStateSettings = stateSettings[value];
+
         setMapSelection({
           ...mapSelection,
           selectedState: value,
@@ -28,8 +29,6 @@ function Sidebar({  mapSelection, setMapSelection, chartSelection, setChartSelec
           [name]: value
         }));
       }
-
-      
     } else if (name in chartSelection) {
       setChartSelection(prevState => ({
         ...prevState,
@@ -37,11 +36,12 @@ function Sidebar({  mapSelection, setMapSelection, chartSelection, setChartSelec
       }));
     }
   };
+
   const handleSubmit = (event) =>{
     event.preventDefault();
-   
     submitted();
   }
+
   return (
     <div className="sidebar-container" style={{ display: 'flex', flexDirection: 'column', padding: '20px' }}>
       <Form onSubmit={handleSubmit} className="text-white">
@@ -49,13 +49,7 @@ function Sidebar({  mapSelection, setMapSelection, chartSelection, setChartSelec
           <Col>
             <Form.Group controlId="selectState">
               <Form.Label>Select State</Form.Label>
-              <Form.Control
-                as="select"
-                custom
-                name="selectedState"
-                value={mapSelection.selectedState}
-                onChange={handleChange}
-              >
+              <Form.Control as="select" custom name="selectedState" value={mapSelection.selectedState} onChange={handleChange}>
                 <option>Georgia</option>
                 <option>New Jersey</option>
               </Form.Control>
@@ -64,13 +58,7 @@ function Sidebar({  mapSelection, setMapSelection, chartSelection, setChartSelec
           <Col>
             <Form.Group controlId="selectMapType">
               <Form.Label>Select Map Type</Form.Label>
-              <Form.Control
-                as="select"
-                custom
-                name="selectedMapType"
-                value={mapSelection.selectedMapType}
-                onChange={handleChange}
-              >
+              <Form.Control as="select" custom name="selectedMapType" value={mapSelection.selectedMapType} onChange={handleChange}>
                 <option>Approved Districting Plan</option>
                 <option>Counties</option>
                 <option>State</option>
@@ -91,13 +79,7 @@ function Sidebar({  mapSelection, setMapSelection, chartSelection, setChartSelec
           <Col>
             <Form.Group controlId="selectChartType">
               <Form.Label>Select Chart Type</Form.Label>
-              <Form.Control
-                as="select"
-                custom
-                name="selectedChartType"
-                value={chartSelection.selectedChartType}
-                onChange={handleChange}
-              >
+              <Form.Control as="select" custom name="selectedChartType" value={chartSelection.selectedChartType} onChange={handleChange}>
                 <option>Choose...</option>
                 <option>Bar Chart</option>
                 <option>Box and Whiskers</option>
@@ -109,13 +91,7 @@ function Sidebar({  mapSelection, setMapSelection, chartSelection, setChartSelec
           <Col>
             <Form.Group controlId="selectSpecificArea">
               <Form.Label>Select Specific Area</Form.Label>
-              <Form.Control
-                as="select"
-                custom
-                name="selectedAreaType"
-                value={chartSelection.selectedAreaType}
-                onChange={handleChange}
-              >
+              <Form.Control as="select" custom name="selectedAreaType" value={chartSelection.selectedAreaType} onChange={handleChange}>
                 <option>Currently Viewing State</option>
                 <option>State Vs. State</option>
                 <option>County 1</option>
@@ -149,11 +125,9 @@ function Sidebar({  mapSelection, setMapSelection, chartSelection, setChartSelec
           <Button variant="danger" color="red"> Reset </Button>
           </Col>
         </Row>
-        {/* <Button type="submit" variant="primary"> Apply </Button>
-        <Button variant="danger" color="red"> Reset </Button> */}
       </Form>
     </div>
   );
-  }
+}
 
 export default Sidebar;

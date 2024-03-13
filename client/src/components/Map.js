@@ -26,12 +26,10 @@ function Map({ mapSelection }) {
     approvedNewJerseyAsian: [0.7,0.3,0.7,0.3,0.5,0.5,0.7,0.7,0.9,0.3,0.7,0.5,0.3,0.9,0.9,0.3,0.5,0.7,0.3,0.3,0.7,0.9,0.5,0.3,0.5,0.9,0.7,0.9,0.7,0.9,0.5,0.5,0.9,0.9,0.9,0.7,0.5,0.3,0.3,0.5],
     approvedNewJerseyHispanic: [0.7,0.5,0.9,0.3,0.9,0.9,0.5,0.9,0.3,0.9,0.9,0.9,0.5,0.5,0.9,0.5,0.9,0.7,0.7,0.7,0.5,0.9,0.7,0.7,0.5,0.9,0.7,0.5,0.9,0.7,0.7,0.7,0.7,0.5,0.9,0.7,0.9,0.3,0.5,0.9]
   }
+
   useEffect(() => {
     if (!mapRef.current) {
-      mapRef.current = L.map(mapContainerRef.current, {
-        center: [37.8, -95],
-        zoom: 4,
-      });
+      mapRef.current = L.map(mapContainerRef.current, {center: [37.8, -95], zoom: 4,});
       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         maxZoom: 19,
@@ -58,7 +56,9 @@ function Map({ mapSelection }) {
   useEffect(() => {
     const opacites = [0.6, 0.7, 0.8, 0.9]
     let statesData;
-    let ethnicities;
+    let ethnicities;    
+    let opacityData;
+
     switch (mapSelection.selectedMapType) {
       case "State":
         statesData = [...NewJerseyState.features, ...GeorgiaState.features];
@@ -70,7 +70,7 @@ function Map({ mapSelection }) {
         statesData = [...NewJerseyApproved.features, ...GeorgiaApproved.features];
         break;
     }
-    let opacityData;
+
     if (mapSelection.selectedState === "Georgia") {
       if (mapSelection.selectedEthnicity === "White") {
         opacityData = mockHeatMap.approvedGeorgiaWhite.concat(mockHeatMap.approvedNewJerseyWhite);
@@ -92,6 +92,7 @@ function Map({ mapSelection }) {
         opacityData = mockHeatMap.approvedNewJerseyHispanic.concat(mockHeatMap.approvedGeorgiaHispanic);
       }
     }
+    
     let test = 0
     const geoJsonLayer = L.geoJson(statesData, {
       style: () => {
@@ -125,7 +126,7 @@ function Map({ mapSelection }) {
 
     return () => {
       geoJsonLayer.remove();
-    };
+    }
   }, [mapSelection]);
 
   const NJInfo = (
@@ -155,20 +156,19 @@ function Map({ mapSelection }) {
 
   return(
     <div className="map-and-legend-container">
-    <div className="legend-container">
-      <span className="legend-text">Legend:</span>
-      <img src={legend} alt="Legend" className="map-legend" />
-      <div className="tooltip-container">
-        <Tooltip title={<span className="custom-tooltip">{stateInfo}</span>}
-        placement="right">
-          <IconButton>
-          <InfoIcon fontSize="large" />
-          </IconButton>
-        </Tooltip>
+      <div className="legend-container">
+        <span className="legend-text">Legend:</span>
+        <img src={legend} alt="Legend" className="map-legend"/>
+        <div className="tooltip-container">
+          <Tooltip title={<span className="custom-tooltip">{stateInfo}</span>} placement="right">
+            <IconButton>
+              <InfoIcon fontSize="large"/>
+            </IconButton>
+          </Tooltip>
+        </div>
       </div>
+      <div ref={mapContainerRef} className="map-container"></div>
     </div>
-    <div ref={mapContainerRef} className="map-container"></div>
-  </div>
   )
 }
 

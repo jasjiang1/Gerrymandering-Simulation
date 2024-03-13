@@ -1,20 +1,20 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Navbar, Form, Row, Col, Button } from 'react-bootstrap';
 import logo from './grizzliestransparent.png';
+import { Container, Navbar, Form, Row, Col, Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Header({ mapSelection, setMapSelection, chartSelection, setChartSelection, submitted }){
   const handleChange = (event) => {
     const { name, value } = event.target;
     if (name in mapSelection) {
-      console.log(name);
-      if(name === "selectedState"){
+      //console.log(name);
+      if (name === "selectedState"){
         const stateSettings = {
           'Georgia': { center: [32.7, -83.4], zoom: 7 },
           'New Jersey': { center: [40.1, -74.7], zoom: 7 },
         };
-    
         const selectedStateSettings = stateSettings[value];
+
         setMapSelection({
           ...mapSelection,
           selectedState: value,
@@ -28,8 +28,6 @@ function Header({ mapSelection, setMapSelection, chartSelection, setChartSelecti
           [name]: value
         }));
       }
-
-      
     } else if (name in chartSelection) {
       setChartSelection(prevState => ({
         ...prevState,
@@ -37,9 +35,9 @@ function Header({ mapSelection, setMapSelection, chartSelection, setChartSelecti
       }));
     }
   };
+
   const handleSubmit = (event) =>{
     event.preventDefault();
-   
     submitted();
   }
 
@@ -47,7 +45,7 @@ function Header({ mapSelection, setMapSelection, chartSelection, setChartSelecti
     <Navbar bg="secondary" expand="lg" variant="dark" className="py-2">
       <Container fluid>
         <Navbar.Brand href="#" className="d-flex align-items-center flex-column me-2">
-          <img src={logo} alt="logo" width="30" height= "30" className="d-inline-block align-top mb-1" />
+          <img src={logo} alt="logo" width="30" height= "30" className="d-inline-block align-top mb-1"/>
         </Navbar.Brand>
         <Form onSubmit={handleSubmit} className="d-flex align-items-center w-100 gx-2" style={{ marginLeft: '75px' }}>
           <Row className="w-100 gx-2 gy-2">
