@@ -1,12 +1,13 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as L from 'leaflet';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
 import NewJerseyCounties from '../mocks/NewJerseyCounties.json';
 import GeorgiaCounties from '../mocks/GeorgiaCounties.json';
 import GeorgiaState from '../mocks/GeorgiaState.json';
-import NewJerseyState from '../mocks/NewJerseyState.json';
-import GeorgiaApproved from '../mocks/GeorgiaApproved.json';
+import NewJerseyState from '../mocks/NewJerseyState.json';//trying to replace with server
+import GeorgiaApproved from '../mocks/GeorgiaApproved.json'; 
 import NewJerseyApproved from '../mocks/NewJerseyApproved.json';
 import legend from '../mocks/MockLegend.jpg'
 
@@ -27,6 +28,8 @@ function Map({ mapSelection }) {
     approvedNewJerseyAsian: [0.7,0.3,0.7,0.3,0.5,0.5,0.7,0.7,0.9,0.3,0.7,0.5,0.3,0.9,0.9,0.3,0.5,0.7,0.3,0.3,0.7,0.9,0.5,0.3,0.5,0.9,0.7,0.9,0.7,0.9,0.5,0.5,0.9,0.9,0.9,0.7,0.5,0.3,0.3,0.5],
     approvedNewJerseyHispanic: [0.7,0.5,0.9,0.3,0.9,0.9,0.5,0.9,0.3,0.9,0.9,0.9,0.5,0.5,0.9,0.5,0.9,0.7,0.7,0.7,0.5,0.9,0.7,0.7,0.5,0.9,0.7,0.5,0.9,0.7,0.7,0.7,0.7,0.5,0.9,0.7,0.9,0.3,0.5,0.9]
   }
+
+  const [newJerseyGeoJSON, setNewJerseyGeoJSON] = useState(null);
 
   useEffect(() => {
     if (!mapRef.current) {
@@ -53,6 +56,25 @@ function Map({ mapSelection }) {
     };
   }, [mapSelection]);
 
+  //axios call to get NJ State Data
+  useEffect(() => {
+    // Function to fetch New Jersey GeoJSON data
+    const fetchNewJerseyGeoJSON = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/api/geojson/newjersey');
+        const njGeoJSON = response.data;
+        setNewJerseyGeoJSON(njGeoJSON);
+        console.log(njGeoJSON);
+  
+      } catch (error) {
+        console.error('Error fetching New Jersey GeoJSON data:', error);
+      }
+    };
+  
+    fetchNewJerseyGeoJSON();
+  }, [mapSelection]);
+  
+
   // To dynamically add GeoJSON layers based on mapSelection
   useEffect(() => {
     const opacites = [0.6, 0.7, 0.8, 0.9]
@@ -62,7 +84,7 @@ function Map({ mapSelection }) {
 
     switch (mapSelection.selectedMapType) {
       case "State":
-        statesData = [...NewJerseyState.features, ...GeorgiaState.features];
+        statesData = newJerseyGeoJSON.features;//[...NewJerseyState.features, ...GeorgiaState.features];
         break;
       case "Counties":
         statesData = [...NewJerseyCounties.features, ...GeorgiaCounties.features];
