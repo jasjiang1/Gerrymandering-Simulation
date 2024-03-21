@@ -7,8 +7,8 @@ import com.mongodb.client.model.geojson.Geometry;
 public class Feature_NJ_State_Data {
     private String type;
     private String id;
-    private Properties properties;
-    private Geometry geometry;
+    private Properties_NJ_State_Data properties;
+    private Geometry_NJ_State_Data geometry;
 
     public String getType() {
         return type;
@@ -18,11 +18,11 @@ public class Feature_NJ_State_Data {
         return id;
     }
 
-    public Properties getProperties() {
+    public Properties_NJ_State_Data getProperties() {
         return properties;
     }
 
-    public Geometry getGeometry() {
+    public Geometry_NJ_State_Data getGeometry() {
         return geometry;
     }
 }
