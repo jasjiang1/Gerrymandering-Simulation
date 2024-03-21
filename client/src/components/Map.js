@@ -64,9 +64,8 @@ function Map({ mapSelection }) {
       try {
         const response = await axios.get('http://localhost:8080/api/geojson/newjersey');
         const njGeoJSON = response.data;
+        console.log(njGeoJSON)
         setNewJerseyGeoJSON(njGeoJSON[0]);
-        console.log(njGeoJSON);
-        console.log("hello")
       } catch (error) {
         console.error('Error fetching New Jersey GeoJSON data:', error);
       }
@@ -89,6 +88,10 @@ function Map({ mapSelection }) {
 
   // To dynamically add GeoJSON layers based on mapSelection
   useEffect(() => {
+    if (!newJerseyGeoJSON) {
+      return;
+    }
+    console.log(newJerseyGeoJSON)
     const opacites = [0.6, 0.7, 0.8, 0.9]
     let statesData;
     let ethnicities;    
@@ -96,7 +99,7 @@ function Map({ mapSelection }) {
     switch (mapSelection.selectedMapType) {
       case "State":
         //statesData = [newJerseyGeoJSON.features, newJerseyGeoJSON.features];//[...NewJerseyState.features, ...GeorgiaState.features];
-        statesData = [...NewJerseyState.features, ...GeorgiaState.features]
+        statesData = [...newJerseyGeoJSON.features, ...GeorgiaState.features]
         break;
       case "Counties":
         statesData = [...NewJerseyCounties.features, ...GeorgiaCounties.features];
