@@ -97,7 +97,7 @@ function Map({ mapSelection }) {
     switch (mapSelection.selectedMapType) {
       case "State":
         //statesData = [newJerseyGeoJSON.features, newJerseyGeoJSON.features];//[...NewJerseyState.features, ...GeorgiaState.features];
-        statesData = [...NewJerseyState.features, ...GeorgiaState.features]
+        statesData = [...newJerseyGeoJSON[0].features, ...GeorgiaState.features]
         break;
       case "Counties":
         statesData = [...NewJerseyCounties.features, ...GeorgiaCounties.features];
