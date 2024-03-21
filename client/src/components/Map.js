@@ -69,17 +69,17 @@ function Map({ mapSelection }) {
       } catch (error) {
         console.error('Error fetching New Jersey GeoJSON data:', error);
       }
-      try {
-        const response2 = await axios.get('http://localhost:8080/api/geojson/testing');
-        const testing = response2.data;
-        setTest(testing);
-        console.log(test);
-        console.log("hello")
-        console.log(response2);        
-        console.log(testing)
-      } catch (error) {
-        console.error('Error fetching Test:', error);
-      }
+      // try {
+      //   const response2 = await axios.get('http://localhost:8080/api/geojson/testing');
+      //   const testing = response2.data;
+      //   setTest(testing);
+      //   console.log(test);
+      //   console.log("hello")
+      //   console.log(response2);        
+      //   console.log(testing)
+      // } catch (error) {
+      //   console.error('Error fetching Test:', error);
+      // }
     };
   
     fetchNewJerseyGeoJSON();

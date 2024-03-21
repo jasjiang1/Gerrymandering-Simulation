@@ -31,14 +31,14 @@ public class GeojsonController {
         //     return ResponseEntity.notFound().build();
         // }
     }
-    @GetMapping("/testing")
-    public ResponseEntity<String> getTest() {
-        return new ResponseEntity<String>("Hello ajdklsjkasd", HttpStatus.OK);
-        // ResponseEntity<List<FeatureCollection_NJ_State_Data>> featureCollection = geoJsonService.getNewJerseyData();
-        // if (featureCollection != null) {
-        //     return ResponseEntity.ok(featureCollection);
-        // } else {
-        //     return ResponseEntity.notFound().build();
-        // }
-    }
+    // @GetMapping("/testing")
+    // public ResponseEntity<String> getTest() {
+    //     return new ResponseEntity<String>("Hello ajdklsjkasd", HttpStatus.OK);
+    //     // ResponseEntity<List<FeatureCollection_NJ_State_Data>> featureCollection = geoJsonService.getNewJerseyData();
+    //     // if (featureCollection != null) {
+    //     //     return ResponseEntity.ok(featureCollection);
+    //     // } else {
+    //     //     return ResponseEntity.notFound().build();
+    //     // }
+    // }
 }
