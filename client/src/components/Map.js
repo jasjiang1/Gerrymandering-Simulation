@@ -30,6 +30,7 @@ function Map({ mapSelection }) {
   }
 
   const [newJerseyGeoJSON, setNewJerseyGeoJSON] = useState(null);
+  const[georgiaGeoJSON, setGeorigaGeoJSOn] = useState(null);
   const [test, setTest] = useState("");
 
   useEffect(() => {
@@ -60,12 +61,21 @@ function Map({ mapSelection }) {
   //axios call to get NJ State Data
   useEffect(() => {
     // Function to fetch New Jersey GeoJSON data
-    const fetchNewJerseyGeoJSON = async () => {
+    const fetchGeoJSON = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/geojson/newjersey');
-        const njGeoJSON = response.data;
-        console.log(njGeoJSON)
-        setNewJerseyGeoJSON(njGeoJSON[0]);
+        //const response = await axios.get('http://localhost:8080/api/geojson/{`mapSelection`}');
+        const stateParam = mapSelection.selectedState.toLowerCase().replace(/\s/g, '');
+        console.log(stateParam);
+        const url = `http://localhost:8080/api/geojson/${stateParam}`;
+        //const url = `http://localhost:8080/api/geojson/${mapSelection.selectedState}`;
+        const response = await axios.get(url);
+        if(mapSelection.selectedState == 'New Jersey'){
+          const njGeoJSON = response.data;
+          setNewJerseyGeoJSON(njGeoJSON[0]);
+        } else{
+          const gaGeoJSON = response.data;
+          setGeorigaGeoJSOn(gaGeoJSON[0]);
+        }
       } catch (error) {
         console.error('Error fetching New Jersey GeoJSON data:', error);
       }
@@ -82,7 +92,7 @@ function Map({ mapSelection }) {
       // }
     };
   
-    fetchNewJerseyGeoJSON();
+    fetchGeoJSON();
   }, [mapSelection]);
   
 

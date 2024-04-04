@@ -4,7 +4,7 @@ import java.util.Properties;
 
 import com.mongodb.client.model.geojson.Geometry;
 
-public class Feature_NJ_State_Data {
+public class Feature_State_Data {
     private String type;
     private String id;
     private Properties_NJ_State_Data properties;

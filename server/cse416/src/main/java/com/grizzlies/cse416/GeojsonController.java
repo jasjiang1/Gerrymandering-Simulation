@@ -2,6 +2,7 @@ package com.grizzlies.cse416;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +15,7 @@ import java.util.List;
 @RequestMapping("/api/geojson")
 public class GeojsonController {
     @Autowired
-    private  GeojsonServiceImpl geoJsonService;
+    private  GeojsonService geoJsonService;
 
     // @Autowired
     // public GeojsonController(GeojsonService geoJsonService) {
@@ -30,6 +31,10 @@ public class GeojsonController {
         // } else {
         //     return ResponseEntity.notFound().build();
         // }
+    }
+    @GetMapping("/georgia")
+    public ResponseEntity<List<FeatureCollection_GA_State_Data>> getGeorgiaGeoJson() {
+        return new ResponseEntity<List<FeatureCollection_GA_State_Data>>(geoJsonService.getGeorgiaData(), HttpStatus.OK);
     }
     // @GetMapping("/testing")
     // public ResponseEntity<String> getTest() {

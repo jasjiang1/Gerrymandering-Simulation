@@ -5,8 +5,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
-@Document(collection = "NJ-state-data")
-public class FeatureCollection_NJ_State_Data {
+@Document(collection = "GA-state-data")
+public class FeatureCollection_GA_State_Data {
     @Id
     private String id;
     private String type;
