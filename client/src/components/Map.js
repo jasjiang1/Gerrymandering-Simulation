@@ -15,7 +15,7 @@ import Tooltip from '@mui/material/Tooltip';
 import InfoIcon from '@mui/icons-material/Info';
 import IconButton from '@mui/material/IconButton';
 
-function Map({ mapSelection }) {
+function Map({ showmodal, formsubmit, mapSelection}) {
   const mapRef = useRef(null);
   const mapContainerRef = useRef(null);
   const mockHeatMap = {
@@ -227,8 +227,9 @@ function Map({ mapSelection }) {
     <div>{test}</div>
     <div ref={mapContainerRef} className="map-container"></div>
     <div id = "table">
-      <table>
-        <tr><th id = "title" colspan="2">Summary of State Data</th></tr>
+      {!showmodal &&  <table id = "summarytable">
+        <tr>{mapSelection.selectedState=== "New Jersey" && <th id = "title" colspan="2">Summary of New Jersey State Data</th>}
+        {mapSelection.selectedState=== "Georgia" && <th id = "title" colspan="2">Summary of Georgia State Data</th>}</tr>
         <tr>
           <td>Total State Population</td>
           {mapSelection.selectedState=== "Georgia" && <td id ="state_pop" class="value">10,711,908</td>}
@@ -306,7 +307,12 @@ function Map({ mapSelection }) {
           {mapSelection.selectedState=== "Georgia" &&  <td class="value">101</td>}
           {mapSelection.selectedState=== "New Jersey" &&  <td class="value">30</td>}
         </tr>
-      </table>
+      </table>}
+      {showmodal && formsubmit && <div className="chart-container">
+              <div id = "charttitle"></div>
+                <canvas id="barchart" width="250" height="200"></canvas>
+                <canvas id="second-barchart" width="250" height="200"></canvas>
+              </div>}
     </div>
   </div>
   )

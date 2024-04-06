@@ -87,7 +87,7 @@ function Header({ mapSelection, setMapSelection, chartSelection, setChartSelecti
                   <option>Bar Chart</option>
                   <option>Box and Whiskers</option>
                   <option>Scatter Plot</option>
-                  <option>Pie Chart</option>
+                  <option>Ecological Inference</option>
                 </Form.Control>
               </Form.Group>
             </Col>
@@ -96,7 +96,7 @@ function Header({ mapSelection, setMapSelection, chartSelection, setChartSelecti
                 <Form.Label>Specific Area</Form.Label>
                 <Form.Control as="select" name="selectedAreaType" value={chartSelection.selectedAreaType} onChange={handleChange}>
                   <option>Currently Viewing State</option>
-                  <option>State Vs. State</option>
+                  <option>State vs State</option>
                   <option>County 1</option>
                   <option>County 2</option>
                   <option>County 3</option>

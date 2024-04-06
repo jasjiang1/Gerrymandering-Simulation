@@ -9,8 +9,11 @@
 .navbar {
   border-radius: 0;
 }
+
 #table{
+  
   width:50%;
+  height:100vh
 }
 .value{
   text-align: right;
@@ -19,32 +22,45 @@
 #title{
   font-size: 15px;
 }
+
 table,
 th,
 td {
-  font: Times, serif;
-  background-color: lightgoldenrodyellow;
-  color: crimson;
-  border: 1px solid cyan;
+  background-color: #222629;
+  color: white;
+  border: 1px solid #86C232;
   border-collapse: collapse;
   padding: 5px;
   font-size: 12px;
   border-radius: 5px;
 
 }
+td{
+  background-color: #6B6E70;
+}
 th{
-  background-color: darkred;
-  color: lightskyblue;
+  background-color: #86C232;
+  color:white;
   font:Times, serif;
   font-size: 12px;
   text-align: center;
   border-radius: 10px;
 }
 table {
-  background-color: lightskyblue;
+  font-family: Georgia;
+  background-color: #25274D;
   border-collapse: separate;
   border-radius: 10px;
   width:100%;
+}
+#charttitle{
+  font-family: Georgia;
+  font-size: 20px;
+  color:whitesmoke;
+  background-color: #86C232;
+  border: 2px solid #25274D;
+  text-align: center;
+  border-radius:5px;
 }
 .float{
   float: left;

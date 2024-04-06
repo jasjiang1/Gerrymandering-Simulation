@@ -17,6 +17,7 @@ function App() {
   const [showmodal, setModal] = useState(false);
   const [formsubmit, setSubmit] = useState(false);
   const [isWelcomePageVisible, setIsWelcomePageVisible] = useState(true);
+  const [chart, setChart] = useState(null);
   const [mapSelection, setMapSelection] = useState({
     selectedState: "",
     selectedMapType: "",
@@ -78,33 +79,56 @@ function App() {
     console.log(chartSelection.selectedChartType)
     console.log(chartSelection.selectedAreaType)
     var dataentries;
+    if(chart != null){
+      chart.destroy()
+    }
+    if(chartSelection.selectedChartType === "Choose..."){
+      setModal(false)
+      return;
+    }
     Chart.register(BoxPlotController, BoxAndWiskers, LinearScale, CategoryScale);
     if (document.getElementById("barchart") !== null && (mapSelection.selectedState !== '')) {
       var canvas = document.getElementById("barchart");
       if (chartSelection.selectedChartType === "Bar Chart" && showmodal && chartSelection.selectedAreaType === "Currently Viewing State") {
+        var popdata;
         if (mapSelection.selectedState === "Georgia") {
-          dataentries = [115, 54, 7, 2];
-          document.getElementById("contained-modal-title-vcenter").innerHTML = "Ethnicity of District Representatives (Total: 180 Respresentatives)";
+          popdata = [5555483/10711908*100, 3320513/10711908*100, 50618/10711908*100, 479028/10711908*100, 1123457/10711908*100, 7299/10711908*100, 555059/10711908*100];
+        }
+        else {
+          popdata = [5112280/9288994*100, 1219770/9288994*100, 51186/9288994*100, 950000/9288994*100, 2002575/9288994*100, 3533/9288994*100, 1048641/9288994*100];
+        }
+        if (mapSelection.selectedState === "Georgia") {
+          dataentries = [115/180*100, 54/180*100, 7/180*100, 2/180*100,0/180*100,0/180*100];
+          document.getElementById("charttitle").innerHTML = "% Ethnicity of District Representatives (Total: 180 Representatives) vs % Population By Race";
         }
         else if (mapSelection.selectedState === "New Jersey") {
-          dataentries = [55, 14, 3, 8];
-          document.getElementById("contained-modal-title-vcenter").innerHTML = "Ethnicity of District Representatives (Total: 80 Respresentatives)";
+          dataentries = [55/80*100, 14/80*100, 3/80*100, 8/80*100,0/80*100,0/80*100];
+          document.getElementById("charttitle").innerHTML = "% Ethnicity of District Representatives (Total: 80 Representatives) vs % Population By Race";
         }
         var config = {
           type: "bar",
           data: {
-            labels: ['White', 'African American', 'Asian American', 'Latino'],
+            labels: ['White', 'African American', 'Asian American', 'Latino', 'Native Hawaiin', 'Other'],
             datasets: [{
               label: 'Number of District Representatives',
               data: dataentries,
-              backgroundColor: ['lightblue','pink','violet','lightgreen'],
-              borderColor: ['blue','red','purple','green'],
-              borderWidth: 1
+              backgroundColor: ['#15DB95' ],
+              borderColor: ['#182628'],
+              borderWidth: 1,
+              borderRadius:5
+            },{
+              label: 'Population By Race',
+              data: popdata,
+              backgroundColor: ['#0074E1' ],
+              borderColor: ['#182628'],
+              borderWidth: 1,
+              borderRadius:5,
             }]}
         }
         var barchart = new Chart(canvas, config);
+        setChart(barchart)
       }
-      else if (chartSelection.selectedChartType === "Pie Chart" && chartSelection.selectedAreaType === "Currently Viewing State") {
+      else if (chartSelection.selectedChartType === "Ecological Inference" && chartSelection.selectedAreaType === "Currently Viewing State") {
         var dataentries;
         if (mapSelection.selectedState === "Georgia") {
           dataentries = [5555483, 3320513, 50618, 479028, 1123457, 7299, 555059];
@@ -150,8 +174,9 @@ function App() {
             }
           }
         }
-        document.getElementById("contained-modal-title-vcenter").innerHTML = "Population By Race";
+        document.getElementById("charttitle").innerHTML = "Ecological Inference";
         var piechart = new Chart(canvas, config);
+        setChart(piechart)
       }
       else if (chartSelection.selectedChartType === "Box and Whiskers" && chartSelection.selectedAreaType === "Currently Viewing State") {
         if (mapSelection.selectedState === "Georgia") {//180 districts - only 40 shown - 180 too much for array
@@ -202,8 +227,9 @@ function App() {
             }]
           }
         }
-        document.getElementById("contained-modal-title-vcenter").innerHTML = "%Vote Share of Minority ";
+        document.getElementById("charttitle").innerHTML = "MCMC Analysis ";
         var boxplot = new Chart(canvas, config);
+        setChart(boxplot)
       }
       else if (chartSelection.selectedChartType === "Scatter Plot" && chartSelection.selectedAreaType === "Currently Viewing State") {
         var Dregdata;
@@ -273,8 +299,9 @@ function App() {
             } 
           }
         }
-        document.getElementById("contained-modal-title-vcenter").innerHTML = "Precinct Analysis";
+        document.getElementById("charttitle").innerHTML = "Precinct Analysis";
         var boxplot = new Chart(canvas, config);
+        setChart(boxplot)
       } else if (chartSelection.selectedChartType === "Bar Chart" && chartSelection.selectedAreaType === "State Vs. State") {
         const [barchart, secondBarchart] = renderBarCharts({ mapSelection, chartSelection, showmodal });
       } else if (chartSelection.selectedChartType === "Pie Chart" && chartSelection.selectedAreaType === "State Vs. State") {
@@ -298,7 +325,7 @@ function App() {
               setChartSelection={setChartSelection} 
               submitted={() => submitted()}
             />
-          <Map mapSelection={mapSelection}/>
+          <Map showmodal = {showmodal} formsubmit = {formsubmit} mapSelection={mapSelection}/>
         </div>
       {/* <div className="navbar-container" id="navbar">
           <MyNavbar />
@@ -314,23 +341,7 @@ function App() {
         </Row>
         </Container> */}
         
-      {showmodal && formsubmit &&
-        <Modal size="lg" aria-labelledby="contained-modal-title-vcenter" centered animation={false} show={showmodalc} onHide= {hidemodal}>
-            <Modal.Header closeButton>
-              <Modal.Title  id="contained-modal-title-vcenter"></Modal.Title>
-            </Modal.Header>
-            {/*console.log(mapSelection.selectedState)*/}
-            {/*console.log(chartSelection.selectedChartType)*/}
-            <Modal.Body>
-              <div className="chart-container">
-                <canvas id="barchart" width="250" height="200"></canvas>
-                <canvas id="second-barchart" width="250" height="200"></canvas>
-              </div>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={hidemodal}>Close</Button>
-            </Modal.Footer>
-        </Modal>}
+     
       </>
      )}
     </>
