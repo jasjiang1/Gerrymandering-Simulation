@@ -63,15 +63,15 @@ function Map({ showmodal, formsubmit, mapSelection}) {
     // Function to fetch New Jersey GeoJSON data
     const fetchGeoJSON = async () => {
       try {
-        //const response = await axios.get('http://localhost:8080/api/geojson/{`mapSelection`}');
-        const stateParam = mapSelection.selectedState.toLowerCase().replace(/\s/g, '');
+        const stateParam = mapSelection.selectedState.toLowerCase().replace(/\s/g, ''); //convert to lowercase
         console.log(stateParam);
         const url = `http://localhost:8080/api/geojson/${stateParam}`;
-        //const url = `http://localhost:8080/api/geojson/${mapSelection.selectedState}`;
         const response = await axios.get(url);
+        console.log(response.data);
         if(mapSelection.selectedState == 'New Jersey'){
           const njGeoJSON = response.data;
           setNewJerseyGeoJSON(njGeoJSON[0]);
+          console.log(newJerseyGeoJSON);
         } else{
           const gaGeoJSON = response.data;
           setGeorigaGeoJSOn(gaGeoJSON[0]);
@@ -79,17 +79,6 @@ function Map({ showmodal, formsubmit, mapSelection}) {
       } catch (error) {
         console.error('Error fetching New Jersey GeoJSON data:', error);
       }
-      // try {
-      //   const response2 = await axios.get('http://localhost:8080/api/geojson/testing');
-      //   const testing = response2.data;
-      //   setTest(testing);
-      //   console.log(test);
-      //   console.log("hello")
-      //   console.log(response2);        
-      //   console.log(testing)
-      // } catch (error) {
-      //   console.error('Error fetching Test:', error);
-      // }
     };
   
     fetchGeoJSON();
@@ -108,8 +97,10 @@ function Map({ showmodal, formsubmit, mapSelection}) {
     let opacityData;
     switch (mapSelection.selectedMapType) {
       case "State":
-        //statesData = [newJerseyGeoJSON.features, newJerseyGeoJSON.features];//[...NewJerseyState.features, ...GeorgiaState.features];
-        statesData = [...newJerseyGeoJSON.features, ...GeorgiaState.features]
+        statesData = [newJerseyGeoJSON.features, newJerseyGeoJSON.features];//[...NewJerseyState.features, ...GeorgiaState.features];
+        //statesData = [...newJerseyGeoJSON.features, ...GeorgiaState.features]
+        console.log("state");
+        console.log(statesData);
         break;
       case "Counties":
         statesData = [...NewJerseyCounties.features, ...GeorgiaCounties.features];

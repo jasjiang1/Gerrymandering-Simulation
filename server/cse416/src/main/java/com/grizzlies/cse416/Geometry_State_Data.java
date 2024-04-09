@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
-public class Geometry_NJ_State_Data {
+public class Geometry_State_Data {
     private String type;
     private List<List<List<Double>>> coordinates;
 

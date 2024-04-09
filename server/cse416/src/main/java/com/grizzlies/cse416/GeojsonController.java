@@ -17,33 +17,12 @@ public class GeojsonController {
     @Autowired
     private  GeojsonService geoJsonService;
 
-    // @Autowired
-    // public GeojsonController(GeojsonService geoJsonService) {
-    //     this.geoJsonService = geoJsonService;
-    // }
-
     @GetMapping("/newjersey")
     public ResponseEntity<List<FeatureCollection_NJ_State_Data>> getNewJerseyGeoJson() {
         return new ResponseEntity<List<FeatureCollection_NJ_State_Data>>(geoJsonService.getNewJerseyData(), HttpStatus.OK);
-        // ResponseEntity<List<FeatureCollection_NJ_State_Data>> featureCollection = geoJsonService.getNewJerseyData();
-        // if (featureCollection != null) {
-        //     return ResponseEntity.ok(featureCollection);
-        // } else {
-        //     return ResponseEntity.notFound().build();
-        // }
     }
     @GetMapping("/georgia")
     public ResponseEntity<List<FeatureCollection_GA_State_Data>> getGeorgiaGeoJson() {
         return new ResponseEntity<List<FeatureCollection_GA_State_Data>>(geoJsonService.getGeorgiaData(), HttpStatus.OK);
     }
-    // @GetMapping("/testing")
-    // public ResponseEntity<String> getTest() {
-    //     return new ResponseEntity<String>("Hello ajdklsjkasd", HttpStatus.OK);
-    //     // ResponseEntity<List<FeatureCollection_NJ_State_Data>> featureCollection = geoJsonService.getNewJerseyData();
-    //     // if (featureCollection != null) {
-    //     //     return ResponseEntity.ok(featureCollection);
-    //     // } else {
-    //     //     return ResponseEntity.notFound().build();
-    //     // }
-    // }
 }

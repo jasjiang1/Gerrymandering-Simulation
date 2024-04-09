@@ -2,6 +2,7 @@ package com.grizzlies.cse416;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import java.util.List;
 
@@ -10,6 +11,7 @@ public class FeatureCollection_GA_State_Data {
     @Id
     private String id;
     private String type;
+    @DocumentReference
     private List<Feature_State_Data> features;
 
     public String getId() {
