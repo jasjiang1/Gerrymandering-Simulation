@@ -97,8 +97,8 @@ function Map({ showmodal, formsubmit, mapSelection}) {
     let opacityData;
     switch (mapSelection.selectedMapType) {
       case "State":
-        statesData = [newJerseyGeoJSON.features, newJerseyGeoJSON.features];//[...NewJerseyState.features, ...GeorgiaState.features];
-        //statesData = [...newJerseyGeoJSON.features, ...GeorgiaState.features]
+        //statesData = [newJerseyGeoJSON.features, newJerseyGeoJSON.features];//[...NewJerseyState.features, ...GeorgiaState.features];
+        statesData = [...newJerseyGeoJSON.features, ...georgiaGeoJSON.features]
         console.log("state");
         console.log(statesData);
         break;

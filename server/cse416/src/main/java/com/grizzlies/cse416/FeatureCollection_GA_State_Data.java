@@ -11,7 +11,6 @@ public class FeatureCollection_GA_State_Data {
     @Id
     private String id;
     private String type;
-    @DocumentReference
     private List<Feature_State_Data> features;
 
     public String getId() {

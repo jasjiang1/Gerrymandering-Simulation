@@ -1,8 +1,5 @@
 package com.grizzlies.cse416;
-
-import java.util.Properties;
-
-import com.mongodb.client.model.geojson.Geometry;
+import com.grizzlies.cse416.Geometry_State_Data;
 
 public class Feature_State_Data {
     private String type;
