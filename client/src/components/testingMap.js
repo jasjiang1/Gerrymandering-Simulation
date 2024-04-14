@@ -8,52 +8,6 @@ function Map({ mapSelection }) {
     const mapContainerRef = useRef(null);
     const mapInstance = useRef(null);
     const [geoJSONData, setGeoJSONData] = useState(null);
-    function isValidLatLng(lat, lng, featureId) {
-      if (
-        lat === undefined || lng === undefined ||
-        lat < -90 || lat > 90 ||
-        lng < -180 || lng > 180
-      ) {
-        console.error(`Invalid LatLng [${lat}, ${lng}] in feature ${featureId}`);
-        return false;
-      }
-      return true;
-    }
-    
-    function validateGeometry(geometry, featureId) {
-      switch (geometry.type) {
-        case 'Point':
-          return isValidLatLng(geometry.coordinates[1], geometry.coordinates[0], featureId);
-        case 'Polygon':
-          return geometry.coordinates.every((polygon, index) =>
-            polygon.every((coordinate) =>
-              isValidLatLng(coordinate[1], coordinate[0], `${featureId} Polygon Ring ${index}`)
-            )
-          );
-        case 'MultiPolygon':
-          return geometry.coordinates.every((multiPolygon, mpIndex) =>
-            multiPolygon.every((polygon, pIndex) =>
-              polygon.every((coordinate) =>
-                isValidLatLng(coordinate[1], coordinate[0], `${featureId} MultiPolygon ${mpIndex} Ring ${pIndex}`)
-              )
-            )
-          );
-        default:
-          return true;
-      }
-    }
-    
-    function checkGeoJSONFeatures(geoJSONData) {
-      geoJSONData.forEach((feature, index) => {
-        if (!validateGeometry(feature.geometry, `Feature ${index + 1}`)) {
-          console.log(feature);
-        }
-      });
-    }
-    function isEmptyArray(arr) {
-      return Array.isArray(arr) && arr.length === 0;
-  }
-  
     useEffect(() => {
       const fetchGeoJSON = async () => {
         try {
@@ -81,9 +35,7 @@ function Map({ mapSelection }) {
 
       let geoJSONLayer;
       if (geoJSONData && mapInstance.current) {
-        checkGeoJSONFeatures(geoJSONData);
-        let validFeatures = geoJSONData.filter(feature => validateGeometry(feature.geometry));
-        geoJSONLayer = L.geoJSON(validFeatures).addTo(mapInstance.current);
+        geoJSONLayer = L.geoJSON(geoJSONData).addTo(mapInstance.current);
       }
 
       return () => {
