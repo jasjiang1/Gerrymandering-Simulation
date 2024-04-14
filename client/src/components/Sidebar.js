@@ -8,7 +8,6 @@ function Sidebar({  mapSelection, setMapSelection, chartSelection, setChartSelec
   const handleChange = (event) => {
     const {name, value} = event.target;
     if (name in mapSelection) {
-      //console.log(name);
       if(name == "selectedState"){
         const stateSettings = {
           'Georgia': { center: [32.7, -83.4], zoom: 7 },
@@ -103,24 +102,6 @@ function Sidebar({  mapSelection, setMapSelection, chartSelection, setChartSelec
             </Form.Group>
           </Col>
           <Col>
-          {/* <Form.Group controlId="compareGroups">
-          <Form.Label>Select Ethnicities To Compare</Form.Label>
-          <Form.Control as="select" custom name="selectedEthnicityOne" value={chartSelection.selectedEthnicityOne} onChange={handleChange}>
-              <option>Choose...</option>
-              <option>Asian</option>
-              <option>Black</option>
-              <option>Hispanic</option>
-              <option>White</option>
-          </Form.Control>
-          <Form.Control as="select" custom name="selectedEthnicityTwo" value={chartSelection.selectedEthnicityTwo} onChange={handleChange}>
-              <option>Choose...</option>
-              <option>Asian</option>
-              <option>Black</option>
-              <option>Hispanic</option>
-              <option>White</option>
-          </Form.Control>
-          </Form.Group>
-          <br/> */}
           <Button type="submit" variant="primary"> Apply </Button>
           <Button variant="danger" color="red"> Reset </Button>
           </Col>

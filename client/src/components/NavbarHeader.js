@@ -7,7 +7,6 @@ function Header({ mapSelection, setMapSelection, chartSelection, setChartSelecti
   const handleChange = (event) => {
     const { name, value } = event.target;
     if (name in mapSelection) {
-      //console.log(name);
       if (name === "selectedState"){
         const stateSettings = {
           'Georgia': { center: [32.7, -83.4], zoom: 7 },

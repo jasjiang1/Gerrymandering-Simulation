@@ -5,15 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import NewJerseyCounties from '../mocks/NewJerseyCounties.json';
 import GeorgiaCounties from '../mocks/GeorgiaCounties.json';
-import GeorgiaState from '../mocks/GeorgiaState.json';
-import NewJerseyState from '../mocks/NewJerseyState.json';//trying to replace with server
 import GeorgiaApproved from '../mocks/GeorgiaApproved.json'; 
 import NewJerseyApproved from '../mocks/NewJerseyApproved.json';
-import legend from '../mocks/MockLegend.jpg'
-
-import Tooltip from '@mui/material/Tooltip';
-import InfoIcon from '@mui/icons-material/Info';
-import IconButton from '@mui/material/IconButton';
 
 function Map({ showmodal, formsubmit, mapSelection}) {
   const mapRef = useRef(null);
@@ -30,8 +23,27 @@ function Map({ showmodal, formsubmit, mapSelection}) {
   }
 
   const [newJerseyGeoJSON, setNewJerseyGeoJSON] = useState(null);
-  const[georgiaGeoJSON, setGeorigaGeoJSOn] = useState(null);
-  const [test, setTest] = useState("");
+  const[georgiaGeoJSON, setGeorigaGeoJSON] = useState(null);
+
+  useEffect(() => {
+    const fetchGeoJSON = async () => {
+      try {
+        const stateParam = mapSelection.selectedState.toLowerCase().replace(/\s/g, ''); //convert to lowercase
+        const url = `http://localhost:8080/api/geojson/${stateParam}`;
+        const response = await axios.get(url);
+        if(mapSelection.selectedState === 'New Jersey'){
+          const njGeoJSON = response.data;
+          setNewJerseyGeoJSON(njGeoJSON[0]);
+        } else{
+          const gaGeoJSON = response.data;
+          setGeorigaGeoJSON(gaGeoJSON[0]);
+        }
+      } catch (error) {
+        console.error('Error fetching New Jersey GeoJSON data:', error);
+      }
+    };
+    fetchGeoJSON();
+  }, [mapSelection]);
 
   useEffect(() => {
     if (!mapRef.current) {
@@ -42,14 +54,11 @@ function Map({ showmodal, formsubmit, mapSelection}) {
       }).addTo(mapRef.current);
     }
 
-    // Update map based on state selection
     if (mapSelection.selectedState) {
       const { center, zoom } = mapSelection;
-      console.log(mapSelection)
       mapRef.current.setView(center, zoom);
     }
 
-    // Cleanup function to remove map instance
     return () => {
       if (mapRef.current) {
         mapRef.current.remove();
@@ -57,50 +66,17 @@ function Map({ showmodal, formsubmit, mapSelection}) {
       }
     };
   }, [mapSelection]);
-
-  //axios call to get NJ State Data
   useEffect(() => {
-    // Function to fetch New Jersey GeoJSON data
-    const fetchGeoJSON = async () => {
-      try {
-        const stateParam = mapSelection.selectedState.toLowerCase().replace(/\s/g, ''); //convert to lowercase
-        console.log(stateParam);
-        const url = `http://localhost:8080/api/geojson/${stateParam}`;
-        const response = await axios.get(url);
-        console.log(response.data);
-        if(mapSelection.selectedState == 'New Jersey'){
-          const njGeoJSON = response.data;
-          setNewJerseyGeoJSON(njGeoJSON[0]);
-          console.log(newJerseyGeoJSON);
-        } else{
-          const gaGeoJSON = response.data;
-          setGeorigaGeoJSOn(gaGeoJSON[0]);
-        }
-      } catch (error) {
-        console.error('Error fetching New Jersey GeoJSON data:', error);
-      }
-    };
-  
-    fetchGeoJSON();
-  }, [mapSelection]);
-  
-
-  // To dynamically add GeoJSON layers based on mapSelection
-  useEffect(() => {
-    if (!newJerseyGeoJSON) {
+    if (!newJerseyGeoJSON || !georgiaGeoJSON) {
       return;
     }
-    console.log(newJerseyGeoJSON)
     const opacites = [0.6, 0.7, 0.8, 0.9]
     let statesData;
     let ethnicities;    
     let opacityData;
     switch (mapSelection.selectedMapType) {
       case "State":
-        //statesData = [newJerseyGeoJSON.features, newJerseyGeoJSON.features];//[...NewJerseyState.features, ...GeorgiaState.features];
         statesData = [...newJerseyGeoJSON.features, ...georgiaGeoJSON.features]
-        console.log("state");
-        console.log(statesData);
         break;
       case "Counties":
         statesData = [...NewJerseyCounties.features, ...GeorgiaCounties.features];
@@ -168,7 +144,6 @@ function Map({ showmodal, formsubmit, mapSelection}) {
         var div = L.DomUtil.create('div', 'info legend');
           var grades = [30, 20, 10, 10];
       
-        // loop through our density intervals and generate a label with a colored square for each interval
         for (var i = 0; i <grades.length; i++) { //rgb(0,174,243, opacites[i]);
           div.innerHTML +=
           '<i class="glyphicon glyphicon-stop" style="font-size:20px;  color:' + 'rgba(' + 0 + ',' + 173 + ',' + 243+ ',' + opacites[i] + ')' + '"></i>'+ (grades[i + 1] ? '+'+ grades[i] +'%'+'<br>' : '<'+grades[i] +'%');
@@ -186,7 +161,7 @@ function Map({ showmodal, formsubmit, mapSelection}) {
     return () => {
       geoJsonLayer.remove();
     }
-  }, [mapSelection]);
+  }, [mapSelection, newJerseyGeoJSON, georgiaGeoJSON]);
 
   const NJInfo = (
     <ul>
@@ -215,7 +190,6 @@ function Map({ showmodal, formsubmit, mapSelection}) {
 
   return(
     <div className="map-and-legend-container">
-    <div>{test}</div>
     <div ref={mapContainerRef} className="map-container"></div>
     <div id = "table">
       {!showmodal &&  <table id = "summarytable">

@@ -7,13 +7,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class Geometry_State_Data {
     private String type;
-    private List<List<List<Double>>> coordinates;
+    private List<List<List<List<Double>>>> coordinates;  // This can handle both Polygon and MultiPolygon
 
     public String getType() {
         return type;
     }
 
-    public List<List<List<Double>>> getCoordinates() {
+    public List<List<List<List<Double>>>> getCoordinates() {
         return coordinates;
     }
 }
+

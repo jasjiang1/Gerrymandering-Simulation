@@ -7,11 +7,9 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { renderBarCharts } from './mocks/mockChartData.js';
 import { LinearScale, CategoryScale } from 'chart.js/auto';
 import { BoxPlotController, BoxAndWiskers } from '@sgratzl/chartjs-chart-boxplot';
-//import { Container, Row, Col} from 'react-bootstrap';
 import React, { useState, useEffect } from 'react';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
 import './App.css'
+import TestMap from "./components/testingMap.js";
 
 function App() {
   const [showmodal, setModal] = useState(false);
@@ -32,7 +30,6 @@ function App() {
 
   function submitted() {
     setSubmit(true);
-    console.log("Submitted: "+ (chartSelection.selectedChartType ==""));
     if(chartSelection.selectedChartType =="" || chartSelection.selectedChartType =="Choose..."){
       return;
     }
@@ -60,24 +57,22 @@ function App() {
       'New Jersey': { center: [40.1, -74.7], zoom: 7.5 },
     };
     const selectedStateSettings = stateSettings[state];
-    setMapSelection({
+    const newState = {
       ...mapSelection,
       selectedState: state,
-      selectedMapType: "State",
+      selectedMapType: "Approved Districting Plan",
       selectedEthnicity: "Hispanic",
       center: selectedStateSettings.center,
       zoom: selectedStateSettings.zoom,
-    });
+    };
+    setMapSelection(newState);
     setChartSelection({
-      ...chartSelection,
-      selectedAreaType: "Currently Viewing State"
-    })
+        ...chartSelection,
+        selectedAreaType: "Currently Viewing State"
+    });
     setIsWelcomePageVisible(false);
   };
-
   useEffect(() => {
-    console.log(chartSelection.selectedChartType)
-    console.log(chartSelection.selectedAreaType)
     var dataentries;
     if(chart != null){
       chart.destroy()
@@ -204,26 +199,16 @@ function App() {
             }   
           },
           data: {
-            labels: bwLabel/*['District 1', 'District 2', 'District 3', 'District 4', 'District 5', 'District 6', 'District 7']*/,
+            labels: bwLabel,
             datasets: [{
               label: '% of Minority',
-              //backgroundColor: ['lightblue','#b2eee6','#8ad6cc','#66beb2',"#f97171","#f99192","pink"],
-              //borderColor: ['black','black','red','green',"green","purple","blue"],
               borderWidth: 1,
               padding: 10,
               itemRadius: 0,
               itemStyle: 'circle',
               outlierRadius: 3,
               outlierBackgroundColor: 'red',
-              data: bwData/*[
-                [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-                [2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
-                [3, 6, 9, 12, 15, 18, 21, 24, 27, 30],
-                [4, 8, 12, 16, 20, 24, 28, 32, 36, 40],
-                [5, 10, 15, 20, 25, 30, 35, 40, 45, 50],
-                [6, 12, 18, 24, 30, 36, 42, 48, 54, 60],
-                [7, 14, 21, 28, 35, 42, 49, 56, 63, 70]
-              ]*/
+              data: bwData
             }]
           }
         }
@@ -248,8 +233,6 @@ function App() {
           regression_R = regression.polynomial(dataR);
           Dregdata = regression_D.points.map(([x, y]) => {return {x,y};});
           Rregdata = regression_R.points.map(([x, y]) => {return {x,y};});
-          //console.log(regression_D);
-          //console.log(regression_R);
         }
         else {
           dataentriesR=[[10,70],[20,65],[40,55],[60,20],[80,15],[90,10],[95,5]];
@@ -260,8 +243,6 @@ function App() {
           regression_R = regression.polynomial(dataR);
           Dregdata = regression_D.points.map(([x, y]) => {return {x,y};})
           Rregdata = regression_R.points.map(([x, y]) => {return {x,y};})
-          //console.log(dataD);
-          //console.log(dataR);
         }
         var config = {
           type: "scatter",
@@ -325,23 +306,8 @@ function App() {
               setChartSelection={setChartSelection} 
               submitted={() => submitted()}
             />
-          <Map showmodal = {showmodal} formsubmit = {formsubmit} mapSelection={mapSelection}/>
-        </div>
-      {/* <div className="navbar-container" id="navbar">
-          <MyNavbar />
-        </div>
-        <Container fluid>
-          <Row>
-            <Col sm={3} md={2} className="bg-secondary sidebar">
-              <Sidebar  mapSelection={mapSelection} setMapSelection={setMapSelection} chartSelection={chartSelection} setChartSelection={setChartSelection} submitted = {submitted}/>
-            </Col>
-            <Col sm={9} md={10} className="main-content">
-              <Map mapSelection={mapSelection} />
-            </Col>
-        </Row>
-        </Container> */}
-        
-     
+          <TestMap mapSelection={mapSelection}/>
+        </div>     
       </>
      )}
     </>

@@ -1,5 +1,4 @@
 import React from 'react';
-//import logo from './grizzlies.png'
 import transparentlogo from './grizzliestransparent.png'
 
 function WelcomePage({ onStateSelected }) {
