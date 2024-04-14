@@ -61,18 +61,7 @@ function Map({ mapSelection }) {
           const url = `http://localhost:8080/api/geojson/district/${stateParam}`;
           const response = await axios.get(url);
           const data = response.data;
-          const cleanedData = data.map(feature => {
-            const filteredCoordinates = feature.geometry.coordinates.filter(coord => coord.length >= 2 && !isEmptyArray(coord));
-            return {
-                ...feature,
-                geometry: {
-                    ...feature.geometry,
-                    coordinates: filteredCoordinates
-                }
-            };
-          });
-          console.log(cleanedData)
-          setGeoJSONData(cleanedData);
+          setGeoJSONData(data);
         } catch (error) {
           console.error(`Error fetching ${mapSelection.selectedState} GeoJSON data:`, error);
         }

@@ -3,6 +3,7 @@ package com.grizzlies.cse416;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import net.minidev.json.JSONObject;
 
 @Document(collection = "District-Data")
 public class District_Data {
@@ -10,7 +11,7 @@ public class District_Data {
     private String id;
     private String type;
     private Properties_District_Data properties;
-    private Geometry_State_Data geometry;
+    private JSONObject geometry;
 
     public String getId() {
         return id;
@@ -20,7 +21,7 @@ public class District_Data {
         return type;
     }
 
-    public Geometry_State_Data getGeometry() {
+    public JSONObject getGeometry() {
         return geometry;
     }
 
