@@ -52,7 +52,7 @@ function Map({ showmodal, formsubmit, mapSelection}) {
             setnjDistrictPlan((njDistrict))
           } else{
             const gaDistrict = response.data;
-            console.log(gaDistrict);
+            console.log("hello", gaDistrict);
             setgaDistrictPlan(gaDistrict);
           }
         }
@@ -61,10 +61,10 @@ function Map({ showmodal, formsubmit, mapSelection}) {
         }
     };
     fetchGeoJSON();
-  }, [mapSelection]);
+  }, [mapSelection.selectedState]);
 
   useEffect(() => {
-    if (!mapRef.current) {
+    if (!mapRef.current && mapContainerRef.current) {
       mapRef.current = L.map(mapContainerRef.current, {center: [37.8, -95], zoom: 4,});
       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -100,10 +100,13 @@ function Map({ showmodal, formsubmit, mapSelection}) {
         statesData = [...NewJerseyCounties.features, ...GeorgiaCounties.features];
         break;
       default:
+        console.log("NJ District Plan:", njDistrictPlan);
+        console.log("GA District Plan:", gaDistrictPlan);
         //statesData = [...NewJerseyApproved.features, ...GeorgiaApproved.features];
-        statesData = njDistrictPlan;//[...njDistrictPlan.features, ...gaDistrictPlan.features];
+        statesData = [...njDistrictPlan, ...gaDistrictPlan]; //[...njDistrictPlan.features, ...gaDistrictPlan.features];
         break;
     }
+    console.log("state", statesData);
 
     if (mapSelection.selectedState === "Georgia") {
       if (mapSelection.selectedEthnicity === "White") {
@@ -140,6 +143,7 @@ function Map({ showmodal, formsubmit, mapSelection}) {
         };
       },
       onEachFeature: function(feature, layer) {
+        console.log(feature);
         if (feature.properties && feature.properties.name) {
           if (mapSelection.selectedMapType === "State") {
             // Always show state name
@@ -180,7 +184,7 @@ function Map({ showmodal, formsubmit, mapSelection}) {
     return () => {
       geoJsonLayer.remove();
     }
-  }, [mapSelection, newJerseyGeoJSON, georgiaGeoJSON]);
+  }, [mapSelection, newJerseyGeoJSON, georgiaGeoJSON, njDistrictPlan, gaDistrictPlan]);
 
 
   return(
