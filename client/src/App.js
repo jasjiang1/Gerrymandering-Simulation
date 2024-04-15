@@ -306,7 +306,7 @@ function App() {
               setChartSelection={setChartSelection} 
               submitted={() => submitted()}
             />
-          <TestMap mapSelection={mapSelection}/>
+          <Map mapSelection={mapSelection}/>
         </div>     
       </>
      )}

@@ -15,6 +15,7 @@ function Map({ mapSelection }) {
           const url = `http://localhost:8080/api/geojson/district/${stateParam}`;
           const response = await axios.get(url);
           const data = response.data;
+          console.log(data);
           setGeoJSONData(data);
         } catch (error) {
           console.error(`Error fetching ${mapSelection.selectedState} GeoJSON data:`, error);

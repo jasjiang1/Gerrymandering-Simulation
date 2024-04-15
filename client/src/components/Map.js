@@ -43,6 +43,7 @@ function Map({ showmodal, formsubmit, mapSelection}) {
             }
           }
         if(mapSelection.selectedMapType == "Approved Districting Plan"){
+          const stateParam = mapSelection.selectedState.toLowerCase().replace(/\s/g, '');
           const url = `http://localhost:8080/api/geojson/district/${stateParam}`;
           const response = await axios.get(url);
           if(mapSelection.selectedState == 'New Jersey'){
@@ -100,7 +101,7 @@ function Map({ showmodal, formsubmit, mapSelection}) {
         break;
       default:
         //statesData = [...NewJerseyApproved.features, ...GeorgiaApproved.features];
-        statesData = [...njDistrictPlan.features, ...gaDistrictPlan.features];
+        statesData = njDistrictPlan;//[...njDistrictPlan.features, ...gaDistrictPlan.features];
         break;
     }
 
