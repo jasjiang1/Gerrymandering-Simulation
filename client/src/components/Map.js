@@ -24,23 +24,40 @@ function Map({ showmodal, formsubmit, mapSelection}) {
 
   const [newJerseyGeoJSON, setNewJerseyGeoJSON] = useState(null);
   const[georgiaGeoJSON, setGeorigaGeoJSON] = useState(null);
+  const[njDistrictPlan, setnjDistrictPlan] = useState(null);
+  const[gaDistrictPlan, setgaDistrictPlan] = useState(null);
 
   useEffect(() => {
     const fetchGeoJSON = async () => {
       try {
         const stateParam = mapSelection.selectedState.toLowerCase().replace(/\s/g, ''); //convert to lowercase
-        const url = `http://localhost:8080/api/geojson/${stateParam}`;
-        const response = await axios.get(url);
-        if(mapSelection.selectedState === 'New Jersey'){
-          const njGeoJSON = response.data;
-          setNewJerseyGeoJSON(njGeoJSON[0]);
-        } else{
-          const gaGeoJSON = response.data;
-          setGeorigaGeoJSON(gaGeoJSON[0]);
+        if(mapSelection.selectedMapType == "State"){
+            const url = `http://localhost:8080/api/geojson/${stateParam}`;
+            const response = await axios.get(url);
+            if(mapSelection.selectedState === 'New Jersey'){
+              const njGeoJSON = response.data;
+              setNewJerseyGeoJSON(njGeoJSON[0]);
+            } else{
+              const gaGeoJSON = response.data;
+              setGeorigaGeoJSON(gaGeoJSON[0]);
+            }
+          }
+        if(mapSelection.selectedMapType == "Approved Districting Plan"){
+          const url = `http://localhost:8080/api/geojson/district/${stateParam}`;
+          const response = await axios.get(url);
+          if(mapSelection.selectedState == 'New Jersey'){
+            const njDistrict = response.data;
+            console.log(njDistrict);
+            setnjDistrictPlan((njDistrict))
+          } else{
+            const gaDistrict = response.data;
+            console.log(gaDistrict);
+            setgaDistrictPlan(gaDistrict);
+          }
         }
-      } catch (error) {
-        console.error('Error fetching New Jersey GeoJSON data:', error);
-      }
+        } catch (error) {
+          console.error('Error fetching New Jersey GeoJSON data:', error);
+        }
     };
     fetchGeoJSON();
   }, [mapSelection]);
@@ -82,7 +99,8 @@ function Map({ showmodal, formsubmit, mapSelection}) {
         statesData = [...NewJerseyCounties.features, ...GeorgiaCounties.features];
         break;
       default:
-        statesData = [...NewJerseyApproved.features, ...GeorgiaApproved.features];
+        //statesData = [...NewJerseyApproved.features, ...GeorgiaApproved.features];
+        statesData = [...njDistrictPlan.features, ...gaDistrictPlan.features];
         break;
     }
 
@@ -163,30 +181,6 @@ function Map({ showmodal, formsubmit, mapSelection}) {
     }
   }, [mapSelection, newJerseyGeoJSON, georgiaGeoJSON]);
 
-  const NJInfo = (
-    <ul>
-      <li>40 state Assembly Districts</li>
-      <li>80 Representatives</li>
-      <li>Does not require Preclearance</li>
-    </ul>
-  );
-
-  const GAInfo = (
-    <ul>
-      <li>180 State Assembly Districts</li>
-      <li>180 Representatives</li>
-      <li>Requires Preclearance</li>
-    </ul>
-  )
-
-  let stateInfo;
-  if (mapSelection.selectedState === "New Jersey") {
-    stateInfo = NJInfo;
-  } else if (mapSelection.selectedState === "Georgia") {
-    stateInfo = GAInfo;
-  } else {
-    stateInfo = "Select a state to see information.";
-  }
 
   return(
     <div className="map-and-legend-container">
