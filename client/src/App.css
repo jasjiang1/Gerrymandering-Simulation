@@ -188,3 +188,20 @@ option {
   font-size: 1.25rem !important;
   padding: 10px !important;
 }
+.main-container {
+  display: flex;  /* Enables Flexbox */
+  width: 100%;  /* Full width of the container */
+  height: auto;  /* Adjust height based on content */
+}
+
+.left-container {
+  flex: 1;  /* Flex grow to take up half the space */
+  width: 50%;
+  /* Optionally, set specific dimensions or padding as needed */
+}
+
+.right-container {
+  flex: 1;  /* Flex grow to take up half the space */
+  width: 50%;
+  /* Optionally, set specific dimensions or padding as needed */
+}
