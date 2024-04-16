@@ -195,13 +195,11 @@ option {
 }
 
 .left-container {
-  flex: 1;  /* Flex grow to take up half the space */
-  width: 50%;
-  /* Optionally, set specific dimensions or padding as needed */
+  flex: 6.5;
+  width: 65%;
 }
 
 .right-container {
-  flex: 1;  /* Flex grow to take up half the space */
-  width: 50%;
-  /* Optionally, set specific dimensions or padding as needed */
+  flex: 3.5;
+  width: 35%;
 }

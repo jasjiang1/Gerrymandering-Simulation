@@ -321,7 +321,6 @@ function App() {
           </div>
           <div className="right-container">
             {renderChart()}
-            {/* <h1>Hello World</h1> */}
           </div>
         </div>
         </div>
