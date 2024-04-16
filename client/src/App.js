@@ -10,6 +10,7 @@ import { BoxPlotController, BoxAndWiskers } from '@sgratzl/chartjs-chart-boxplot
 import React, { useState, useEffect } from 'react';
 import './App.css'
 import TestMap from "./components/testingMap.js";
+import BarChart from "./components/testingChart.js";
 
 function App() {
   const [showmodal, setModal] = useState(false);
@@ -293,6 +294,14 @@ function App() {
     }
   }, [mapSelection, chartSelection, showmodal]);
 
+    function renderChart(){
+      switch(chartSelection.selectedChartType){
+        case 'Bar Chart':
+          return <BarChart mapSelection={mapSelection} chartSelection={chartSelection}/>
+      }
+    }
+
+
   return (
     <>
     {isWelcomePageVisible ? (<WelcomePage onStateSelected={handleSelectState}/>) : 
@@ -308,10 +317,11 @@ function App() {
             />
         <div className="main-container">
           <div className="left-container">
-            <TestMap mapSelection={mapSelection}/>
+            <TestMap mapSelection={mapSelection} chartSelection={chartSelection}/>
           </div>
           <div className="right-container">
-            <h1>Hello World</h1>
+            {renderChart()}
+            {/* <h1>Hello World</h1> */}
           </div>
         </div>
         </div>
