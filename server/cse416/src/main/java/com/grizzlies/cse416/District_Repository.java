@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface District_Repository extends MongoRepository<District_Data, ObjectId>{
     List<District_Data> findByPropertiesState(String state);
-    District_Data findByProperties_StateAndId(String state, String id);
+    District_Data findByPropertiesStateAndPropertiesDistrict(String state, String district);
 }

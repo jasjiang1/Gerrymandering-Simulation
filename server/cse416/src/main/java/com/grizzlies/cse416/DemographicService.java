@@ -14,7 +14,7 @@ public class DemographicService {
         return districtRepository.findByPropertiesState(state);
     }
 
-    public District_Data getDistrict(String state, String id) {
-        return districtRepository.findByProperties_StateAndId(state, id);
+    public District_Data getDistrict(String state, String district) {
+        return districtRepository.findByPropertiesStateAndPropertiesDistrict(state, district);
     }
 }

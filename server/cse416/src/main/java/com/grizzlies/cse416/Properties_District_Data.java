@@ -4,7 +4,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 public class Properties_District_Data {
     private int ID;
-    private String DISTRICT;
+    private String district;
     private String ADJ_POPULA;
     private int Hispanic;
     private int White;
@@ -19,8 +19,9 @@ public class Properties_District_Data {
         return ID;
     }
 
+    @Field("DISTRICT")
     public String getDistrict() {
-        return DISTRICT;
+        return district;
     }
 
     @Field("ADJ_POPULA")
