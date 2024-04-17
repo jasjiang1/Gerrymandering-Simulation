@@ -10,7 +10,7 @@ import { BoxPlotController, BoxAndWiskers } from '@sgratzl/chartjs-chart-boxplot
 import React, { useState, useEffect } from 'react';
 import './App.css'
 import TestMap from "./components/testingMap.js";
-import BarChart from "./components/testingChart.js";
+import BarChart from "./components/chartcomponents/testingChart.js";
 
 function App() {
   const [showmodal, setModal] = useState(false);
@@ -298,6 +298,7 @@ function App() {
       switch(chartSelection.selectedChartType){
         case 'Bar Chart':
           return <BarChart mapSelection={mapSelection} chartSelection={chartSelection}/>
+        
       }
     }
 
