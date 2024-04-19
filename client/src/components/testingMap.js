@@ -27,6 +27,13 @@ function Map({ mapSelection }) {
       }
     }, [mapSelection.selectedState]);
 
+    //Replace feature.properties.popupContent with what ever is in GeoJSON for district
+    function popUp(feature, layer) {
+     /* if (feature.properties && feature.properties.popupContent) {
+          layer.bindPopup(feature.properties.popupContent);
+      }*/
+  }
+  
     useEffect(() => {
       if (!mapInstance.current && mapContainerRef.current) {
         mapInstance.current = L.map(mapContainerRef.current).setView([37.8, -95], 4);
@@ -74,7 +81,8 @@ function Map({ mapSelection }) {
                     opacity: 1,
                     fillOpacity: getOpacityByMinority(population, minorityPopulation)
                 };
-            }
+            },
+            onEachFeature: popUp //Add popUp details in function above
         }).addTo(mapInstance.current);
     }
 

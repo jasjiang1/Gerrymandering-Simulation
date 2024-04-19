@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Chart from 'chart.js/auto';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../App.css';
+import '../../App.css';
 
 function Graph({ mapSelection, chartSelection }) {
     const chartRef = useRef(null);

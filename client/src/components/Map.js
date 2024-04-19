@@ -161,13 +161,13 @@ function Map({ showmodal, formsubmit, mapSelection}) {
         }
       }
     }).addTo(mapRef.current);
-    var legend = L.control({position: 'topright'});
+    let legend = L.control({position: 'topright'});
     legend.onAdd = function (map) {
     
-        var div = L.DomUtil.create('div', 'info legend');
-          var grades = [30, 20, 10, 10];
+        let div = L.DomUtil.create('div', 'info legend');
+          let grades = [30, 20, 10, 10];
       
-        for (var i = 0; i <grades.length; i++) { //rgb(0,174,243, opacites[i]);
+        for (let i = 0; i <grades.length; i++) { //rgb(0,174,243, opacites[i]);
           div.innerHTML +=
           '<i class="glyphicon glyphicon-stop" style="font-size:20px;  color:' + 'rgba(' + 0 + ',' + 173 + ',' + 243+ ',' + opacites[i] + ')' + '"></i>'+ (grades[i + 1] ? '+'+ grades[i] +'%'+'<br>' : '<'+grades[i] +'%');
         }

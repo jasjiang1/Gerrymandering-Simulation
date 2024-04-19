@@ -82,11 +82,12 @@ function Header({ mapSelection, setMapSelection, chartSelection, setChartSelecti
               <Form.Group controlId="selectChartType">
                 <Form.Label>Chart Type</Form.Label>
                 <Form.Control as="select" name="selectedChartType" value={chartSelection.selectedChartType} onChange={handleChange}>
-                  <option>Choose...</option>
+                  <option>State Data Summary</option>
                   <option>Bar Chart</option>
                   <option>Box and Whiskers</option>
                   <option>Scatter Plot</option>
                   <option>Ecological Inference</option>
+                  <option>State Assembly Table</option>
                 </Form.Control>
               </Form.Group>
             </Col>
