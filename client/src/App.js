@@ -13,6 +13,7 @@ import TestMap from "./components/testingMap.js";
 import StateTable from "./components/chartcomponents/StateTable.js"
 import BarChart from "./components/chartcomponents/testingChart.js";
 import DistrictTable from "./components/chartcomponents/DistrictTable.js"
+import EcologicalInference from "./components/chartcomponents/EcologicalInference.js"
 
 function App() {
   const [showmodal, setModal] = useState(false);
@@ -306,7 +307,8 @@ function App() {
           return <StateTable mapSelection={mapSelection}/>
         case 'State Assembly Table':
           return <DistrictTable mapSelection={mapSelection}/>
-        
+        case 'Ecological Inference':
+          return <EcologicalInference mapSelection={mapSelection} chartSelection={chartSelection}/>
       }
     }
 
@@ -330,7 +332,6 @@ function App() {
           </div>
           <div className="right-container">
             {renderChart()}
-            {console.log("In console first render: ",chartSelection.selectedChartType)}
           </div>
         </div>
         </div>
