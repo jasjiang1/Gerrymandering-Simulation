@@ -13,7 +13,7 @@ public class RepsService {
         return reps.findAll();
     }
 
-    public List<Reps> getRepsByParty(Party party){
+    public List<Reps> getRepsByParty(String party){//Party party){
         return reps.findByParty(party);
     }
 

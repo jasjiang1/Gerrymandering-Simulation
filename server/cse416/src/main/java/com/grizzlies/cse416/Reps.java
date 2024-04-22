@@ -8,20 +8,20 @@ import lombok.Data;
 
 import java.util.List;
 
-enum Party{
-    R, //Republican
-    D  //Democrat
-}
-enum Ethnicity{
-    White,
-    Black,
-    Asian,
-    Hispanic
-}
-enum State{
-    GA,
-    NJ
-}
+// enum Party{
+//     R, //Republican
+//     D  //Democrat
+// }
+// enum Ethnicity{
+//     White,
+//     African_American,
+//     Asian,
+//     Hispanic
+// }
+// enum State{
+//     GA,
+//     NJ
+// }
 
 @Document(collection = "reps-data")
 @Data
@@ -29,11 +29,14 @@ public class Reps {
     @Id
     private String id;
     private String name;
-    private Party party;
-    private Ethnicity ethnicity;
+    //private Party party;
+    private String party;
+    //private Ethnicity ethnicity;
+    private String ethnicity;
     private String image;
     private String districtNum;
-    private State state;
+    //private State state;
+    private String state;
 
 
 }
