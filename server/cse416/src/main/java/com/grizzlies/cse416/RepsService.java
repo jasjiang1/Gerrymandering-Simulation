@@ -20,4 +20,8 @@ public class RepsService {
     public List<Reps> getRepsByDistrict(String DistrictNum){
         return reps.findByDistrictNum(DistrictNum);
     }
+
+    public List<Reps> getRepsByState(String state){
+        return reps.findByState(state);
+    }
 }

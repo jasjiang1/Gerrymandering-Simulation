@@ -21,7 +21,8 @@ public class RepsController {
     @GetMapping
     public ResponseEntity<List<Reps>> getReps(
             @RequestParam(value = "party", required = false) String party,//Party party,
-            @RequestParam(value = "districtNum", required = false) String districtNum){
+            @RequestParam(value = "districtNum", required = false) String districtNum,
+            @RequestParam(value= "state", required = false) String state){
 
             if(party != null){
                 List<Reps> repsByParty = service.getRepsByParty(party);
@@ -31,6 +32,11 @@ public class RepsController {
             if(districtNum != null){
                 List<Reps> repsByDistrict = service.getRepsByDistrict(districtNum);
                 return ResponseEntity.ok(repsByDistrict);
+            }
+
+            if(state != null){
+                List<Reps> repsByState = service.getRepsByState(state);
+                return ResponseEntity.ok(repsByState);
             }
 
             List<Reps> allReps = service.getAllReps();

@@ -10,4 +10,6 @@ public interface RepsRepository extends MongoRepository<Reps, ObjectId>{
     List<Reps> findByParty(String party);//Party party);
 
     List<Reps> findByDistrictNum(String districtNum);
+
+    List<Reps> findByState(String state);
 }
