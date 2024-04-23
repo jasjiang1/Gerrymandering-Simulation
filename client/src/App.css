@@ -34,6 +34,13 @@ td {
 td{
   background-color: #6B6E70;
 }
+#title{
+  background-color: #86C232;
+  color:white;
+  font:Times, serif;
+  font-size: 30px;
+  text-align: center;
+}
 th{
   background-color: #86C232;
   color:white;
@@ -48,6 +55,10 @@ table {
   border-collapse: separate;
   border-radius: 10px;
   width:100%;
+}
+.assemlbysummarytable {
+  height: 100vh;
+  overflow: auto;
 }
 #charttitle{
   font-family: Georgia;
