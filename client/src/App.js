@@ -14,6 +14,7 @@ import StateTable from "./components/chartcomponents/StateTable.js"
 import BarChart from "./components/chartcomponents/testingChart.js";
 import DistrictTable from "./components/chartcomponents/DistrictTable.js"
 import EcologicalInference from "./components/chartcomponents/EcologicalInference.js"
+import GinglesGraph from "./components/chartcomponents/Gingles.js";
 
 function App() {
   const [showmodal, setModal] = useState(false);
@@ -309,6 +310,8 @@ function App() {
           return <DistrictTable mapSelection={mapSelection}/>
         case 'Ecological Inference':
           return <EcologicalInference mapSelection={mapSelection} chartSelection={chartSelection}/>
+        case 'Gingles Plot':
+          return <GinglesGraph mapSelection={mapSelection}/>
       }
     }
 

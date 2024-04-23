@@ -4,7 +4,7 @@ import Chart from 'chart.js/auto';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../App.css';
 
-function EIGraph({ mapSelection, chartSelection }) {
+function EIGraph({ mapSelection }) {
     const canvasRef = useRef(null);
     const [ecologicalInferenceData, setEcologicalInferenceData] = useState(null);
     const termMapping = {

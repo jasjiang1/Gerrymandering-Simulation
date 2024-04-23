@@ -85,7 +85,7 @@ function Header({ mapSelection, setMapSelection, chartSelection, setChartSelecti
                   <option>State Data Summary</option>
                   <option>Bar Chart</option>
                   <option>Box and Whiskers</option>
-                  <option>Scatter Plot</option>
+                  <option>Gingles Plot</option>
                   <option>Ecological Inference</option>
                   <option>State Assembly Table</option>
                 </Form.Control>
