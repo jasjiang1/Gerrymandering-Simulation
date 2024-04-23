@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../App.css';
 import axios from 'axios';
+import sortBy from 'lodash/sortBy';
 import React, { useEffect, useRef, useState } from 'react';
 
 function StateAssembly({mapSelection}) {
@@ -20,10 +21,12 @@ function StateAssembly({mapSelection}) {
             const url = `http://localhost:8080/api/reps?state=${stateParam}`;
             const response = await axios.get(url);
             const data = response.data;
-            setReps(data);
-            setState(stateParam);
+            console.log(data);
+            let sortedData = sortBy(data, v => Number(v.districtNum));
+            
             if(data != false){
-
+              setReps(sortedData);
+              setState(stateParam);
             }
           } catch (error) {
             console.error(`Error fetching ${mapSelection.selectedState} Assembly Reps data:`, error);
