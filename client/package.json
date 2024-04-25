@@ -25,6 +25,7 @@
     "react-scripts": "5.0.1",
     "recharts": "^2.12.6",
     "regression": "^2.0.1",
+    "uplot": "^1.6.30",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

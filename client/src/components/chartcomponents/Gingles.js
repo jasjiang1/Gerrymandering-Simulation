@@ -53,7 +53,6 @@ function GinglesGraph({ mapSelection }) {
                 console.error('Failed to fetch data:', error);
             }
         };
-
         if (mapSelection.selectedState) {
             fetchGinglesData();
         }
