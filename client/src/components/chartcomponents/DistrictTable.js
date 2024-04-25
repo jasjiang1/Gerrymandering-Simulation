@@ -4,7 +4,7 @@ import axios from 'axios';
 import sortBy from 'lodash/sortBy';
 import React, { useEffect, useRef, useState } from 'react';
 
-function StateAssembly({mapSelection}) {
+function StateAssembly({mapSelection, setlayerhighlight}) {
     const [assemblyReps, setReps] = useState(false);
     const [state, setState] = useState(false);
     useEffect(() => {
@@ -21,8 +21,7 @@ function StateAssembly({mapSelection}) {
             const url = `http://localhost:8080/api/reps?state=${stateParam}`;
             const response = await axios.get(url);
             const data = response.data;
-            console.log(data);
-            let sortedData = sortBy(data, v => Number(v.districtNum));
+            let sortedData = sortBy(data, districtData => Number(districtData.districtNum));
             
             if(data != false){
               setReps(sortedData);
@@ -44,10 +43,10 @@ function StateAssembly({mapSelection}) {
         let name = document.createElement('td');
         let party = document.createElement('td');
         let ethnicity = document.createElement('td');
-        let vote = document.createElement('td');
+        let votemargin = document.createElement('td');
         district.textContent = "District";
         name.textContent = "Representative";
-        vote.textContent = "% Vote Margin";
+        votemargin.textContent = "% Vote Margin";
         ethnicity.textContent = "Ethnicity";
         party.textContent = "Party";
 
@@ -55,20 +54,10 @@ function StateAssembly({mapSelection}) {
         columns.appendChild(name);
         columns.appendChild(party);
         columns.appendChild(ethnicity);
-        columns.appendChild(vote);
+        columns.appendChild(votemargin);
         document.getElementById("assemblytable").appendChild(columns);
-
-
-
-
-
-
-
-
         if(assemblyReps != false ){
            for(let index =0; index<assemblyReps.length;index++){
-            console.log(assemblyReps[index]);
-            console.log(assemblyReps[index].name);
             let row = document.createElement("tr");
             let districtNum = document.createElement('td');
             districtNum.textContent = assemblyReps[index].districtNum;
@@ -89,6 +78,9 @@ function StateAssembly({mapSelection}) {
             row.appendChild(repname);
             row.appendChild(party);
             row.appendChild(ethnicity);
+            row.onclick= ()=>{
+              setlayerhighlight(assemblyReps[index].districtNum);
+            };
             document.getElementById("assemblytable").appendChild(row);
              /*district number--Added 
              the representative-Added

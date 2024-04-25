@@ -21,6 +21,7 @@ function App() {
   const [formsubmit, setSubmit] = useState(false);
   const [isWelcomePageVisible, setIsWelcomePageVisible] = useState(true);
   const [chart, setChart] = useState(null);
+  const [highlightDistrict,setLayerHighlight] = useState("");
   const [mapSelection, setMapSelection] = useState({
     selectedState: "",
     selectedMapType: "",
@@ -307,7 +308,7 @@ function App() {
         case 'State Data Summary':
           return <StateTable mapSelection={mapSelection}/>
         case 'State Assembly Table':
-          return <DistrictTable mapSelection={mapSelection}/>
+          return <DistrictTable mapSelection={mapSelection} setlayerhighlight = {setLayerHighlight}/>
         case 'Ecological Inference':
           return <EcologicalInference mapSelection={mapSelection} chartSelection={chartSelection}/>
         case 'Gingles Plot':
@@ -331,7 +332,7 @@ function App() {
             />
         <div className="main-container">
           <div className="left-container">
-            <TestMap mapSelection={mapSelection} chartSelection={chartSelection}/>
+            <TestMap mapSelection={mapSelection} chartSelection={chartSelection} highlightDistrict = {highlightDistrict}/>
           </div>
           <div className="right-container">
             {renderChart()}
