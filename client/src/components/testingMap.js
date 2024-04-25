@@ -4,13 +4,12 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 
-function Map({ mapSelection,chartSelection,highlightDistrict}) {
+function Map({ mapSelection,chartSelection,highlightDistrict, setHighlight}) {
     const mapContainerRef = useRef(null);
     const mapInstance = useRef(null);
     const [geoJSONData, setGeoJSONData] = useState(null);
     const outline = "#FFFFFF";
     const mapColor = "#1DA1F2";
-    const [currentOpacity, setOpacity] = useState(null);
     const [currentHighlight, setHighlighted] = useState(null);
     useEffect(() => {
       console.log(chartSelection.selectedChartType);
@@ -19,16 +18,14 @@ function Map({ mapSelection,chartSelection,highlightDistrict}) {
       if(mapInstance.current != null){
         map = mapInstance.current;
         console.log(chartSelection.selectedChartType);
-        
       }
-      if(chartSelection.selectedChartType != "State Assembly Data" && currentHighlight != null && map != null){
+      if(chartSelection.selectedChartType != "State Assembly Table" && currentHighlight != null && map != null){
         currentHighlight.setStyle({ color: outline});
         setHighlighted(null);
         map.setView(center, zoom);
+        setHighlight("");
       }
       else if(highlightDistrict != "" && map != null){
-        console.log(mapInstance);
-        console.log(mapInstance.current);
         if(map){
           map.eachLayer(function(layer) {
 
@@ -107,8 +104,6 @@ function Map({ mapSelection,chartSelection,highlightDistrict}) {
           layer.bindPopup(feature.properties.popupContent);
       }
     }*/
-  
-  
     useEffect(() => {
       if (!mapInstance.current && mapContainerRef.current) {
         mapInstance.current = L.map(mapContainerRef.current).setView([37.8, -95], 4);
@@ -125,16 +120,12 @@ function Map({ mapSelection,chartSelection,highlightDistrict}) {
         const getOpacityByMinority = (totalPop, minorityPop) => {
           const percentage = minorityPop / totalPop
           if (percentage > 0.3) {
-            setOpacity(0.7);
             return 0.7
           } else if (percentage > 0.2) {
-            setOpacity(0.6);
             return 0.6
           } else if (percentage > 0.1) {
-            setOpacity(0.5);
             return 0.5
           } else {
-            setOpacity(0.4);
             return 0.4
           }
         };
@@ -164,7 +155,6 @@ function Map({ mapSelection,chartSelection,highlightDistrict}) {
             //onEachFeature: popUp //Add popUp details in function above
         }).addTo(mapInstance.current);
     }
-
       return () => {
         if (geoJSONLayer) {
           mapInstance.current.removeLayer(geoJSONLayer);
@@ -180,7 +170,6 @@ function Map({ mapSelection,chartSelection,highlightDistrict}) {
         }
       };
     }, []);
-
     return <div ref={mapContainerRef} style={{ height: '950px', width: '100%'}} />;
 }
 

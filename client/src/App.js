@@ -332,7 +332,7 @@ function App() {
             />
         <div className="main-container">
           <div className="left-container">
-            <TestMap mapSelection={mapSelection} chartSelection={chartSelection} highlightDistrict = {highlightDistrict}/>
+            <TestMap mapSelection={mapSelection} chartSelection={chartSelection} highlightDistrict = {highlightDistrict} setHighlight ={setLayerHighlight}/>
           </div>
           <div className="right-container">
             {renderChart()}
