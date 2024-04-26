@@ -9,7 +9,7 @@ import { LinearScale, CategoryScale } from 'chart.js/auto';
 import { BoxPlotController, BoxAndWiskers } from '@sgratzl/chartjs-chart-boxplot';
 import React, { useState, useEffect } from 'react';
 import './App.css'
-import TestMap from "./components/testingMap.js";
+import TestMap from "./components/Map/testingMap.js";
 import StateTable from "./components/chartcomponents/StateTable.js"
 import BarChart from "./components/chartcomponents/testingChart.js";
 import DistrictTable from "./components/chartcomponents/DistrictTable.js"

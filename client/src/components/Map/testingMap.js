@@ -1,23 +1,22 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { getMinorityPopulationDistrict, getMinorityPopulationPrecinct } from './MapHelpers.js';
 import * as L from 'leaflet';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../App.css';
+import '../../App.css'
 
 function Map({ mapSelection,chartSelection,highlightDistrict, setHighlight}) {
     const mapContainerRef = useRef(null);
     const mapInstance = useRef(null);
     const [geoJSONData, setGeoJSONData] = useState(null);
+    const [currentHighlight, setHighlighted] = useState(null);
     const outline = "#FFFFFF";
     const mapColor = "#1DA1F2";
-    const [currentHighlight, setHighlighted] = useState(null);
     useEffect(() => {
-      console.log(chartSelection.selectedChartType);
       const { center, zoom } = mapSelection;
       let map;
       if(mapInstance.current != null){
         map = mapInstance.current;
-        console.log(chartSelection.selectedChartType);
       }
       if(chartSelection.selectedChartType != "State Assembly Table" && currentHighlight != null && map != null){
         currentHighlight.setStyle({ color: outline});
@@ -28,7 +27,6 @@ function Map({ mapSelection,chartSelection,highlightDistrict, setHighlight}) {
       else if(highlightDistrict != "" && map != null){
         if(map){
           map.eachLayer(function(layer) {
-
             if(layer.feature ){
               if(currentHighlight != null && (Number(layer.feature.properties.district) == highlightDistrict)){
                 if((highlightDistrict != Number(currentHighlight.feature.properties.district))){
@@ -49,14 +47,19 @@ function Map({ mapSelection,chartSelection,highlightDistrict, setHighlight}) {
             }
           });
         }
-       
       }
     }, [highlightDistrict,chartSelection]);
+
     useEffect(() => {
       const fetchGeoJSON = async () => {
         try {
           const stateParam = mapSelection.selectedState.toLowerCase().replace(/\s/g, '');
-          const url = `http://localhost:8080/api/geojson/district/${stateParam}`;
+          let url
+          if(mapSelection.selectedMapType === 'Approved Districting Plan') {
+            url = `http://localhost:8080/api/geojson/district/${stateParam}`;
+          } else {
+            url = `http://localhost:8080/api/geojson/precinct/${stateParam}`;
+          }
           const response = await axios.get(url);
           const data = response.data;
           setGeoJSONData(data);
@@ -67,7 +70,7 @@ function Map({ mapSelection,chartSelection,highlightDistrict, setHighlight}) {
       if (mapSelection.selectedState) {
         fetchGeoJSON();
       }
-    }, [mapSelection.selectedState]);
+    }, [mapSelection]);
 /*
     function image(event) {
       console.log(event.target.feature.properties.district);
@@ -129,21 +132,15 @@ function Map({ mapSelection,chartSelection,highlightDistrict, setHighlight}) {
             return 0.4
           }
         };
-        const getMinorityPopulation = (feature) => {
-          if (mapSelection.selectedEthnicity == "Hispanic") {
-            return feature.properties.hispanic
-          } else if (mapSelection.selectedEthnicity == "Asian") {
-            return feature.properties.asian
-          } else if (mapSelection.selectedEthnicity == "White") {
-            return feature.properties.white
-          } else {
-            return feature.properties.africanAmerican
-          }
-        }
         geoJSONLayer = L.geoJSON(geoJSONData, {
             style: function(feature) {
-                const population = feature.properties.population;
-                const minorityPopulation = getMinorityPopulation(feature)
+                const population = feature.properties.population
+                let minorityPopulation
+                if (mapSelection.selectedMapType === 'Approved Districting Plan') {
+                  minorityPopulation = getMinorityPopulationDistrict(feature, mapSelection)
+                } else {
+                  minorityPopulation = getMinorityPopulationPrecinct(feature, mapSelection)
+                }
                 return {
                     color: outline,
                     fillColor: mapColor,

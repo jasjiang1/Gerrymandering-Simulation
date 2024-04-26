@@ -62,8 +62,8 @@ function Header({ mapSelection, setMapSelection, chartSelection, setChartSelecti
                 <Form.Label>Map Type</Form.Label>
                 <Form.Control as="select" name="selectedMapType" value={mapSelection.selectedMapType} onChange={handleChange}>
                   <option>Approved Districting Plan</option>
+                  <option>Precincts</option>
                   <option>Counties</option>
-                  <option>State</option>
                 </Form.Control>
               </Form.Group>
             </Col>
