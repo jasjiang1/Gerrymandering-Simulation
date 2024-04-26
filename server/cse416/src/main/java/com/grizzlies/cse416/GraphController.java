@@ -30,4 +30,10 @@ public class GraphController {
         List<Gingles_Data> getGingles = graphService.getGinglesData(state);
         return new ResponseEntity<>(getGingles, HttpStatus.OK);
     }
+
+    @GetMapping("barchart/{state}")
+    public ResponseEntity<BarChart_Data> getBarChart(@PathVariable String state) {
+        BarChart_Data barChartData = graphService.getBarChartData(state);
+        return new ResponseEntity<>(barChartData, HttpStatus.OK);
+    }
 }

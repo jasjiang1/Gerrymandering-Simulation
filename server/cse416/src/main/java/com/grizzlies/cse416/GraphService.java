@@ -13,11 +13,18 @@ public class GraphService {
     @Autowired
     private ginglesGraphRepository ginglesGraphRepository;
     
+    @Autowired
+    private BarChart_Repository barChartRepository;
+
     public EI_Data getEcologicalInferenceData(String state, String minority) {
         return eiGraphRepository.findByStateAndMinority(state, minority);
     }
 
     public List<Gingles_Data> getGinglesData(String state) {
         return ginglesGraphRepository.findByState(state);
+    }
+
+    public BarChart_Data getBarChartData(String state) {
+        return barChartRepository.findByState(state);
     }
 }
