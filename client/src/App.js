@@ -11,7 +11,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css'
 import TestMap from "./components/testingMap.js";
 import StateTable from "./components/chartcomponents/StateTable.js"
-import BarChart from "./components/chartcomponents/testingChart.js";
+import BarChart from "./components/chartcomponents/BarChart.js";
 import DistrictTable from "./components/chartcomponents/DistrictTable.js"
 import EcologicalInference from "./components/chartcomponents/EcologicalInference.js"
 import GinglesGraph from "./components/chartcomponents/Gingles2.js";
