@@ -71,10 +71,9 @@ function Map({ mapSelection,chartSelection,highlightDistrict, setHighlight}) {
         fetchGeoJSON();
       }
     }, [mapSelection]);
-/*
-    function image(event) {
-      console.log(event.target.feature.properties.district);
-    
+
+    function image(event,layer) {
+      let map = mapInstance.current
       const fetchGeoJSON = async () => {
         try {
           let stateParam = mapSelection.selectedState
@@ -84,11 +83,33 @@ function Map({ mapSelection,chartSelection,highlightDistrict, setHighlight}) {
           else{
             stateParam = "NJ";
           }
-          const  district = event.target.feature.properties.district;
-          const url = `http://localhost:8080/api/reps?districtNum=${district}&state=${stateParam}`;
+          const  district = Number(event.target.feature.properties.district);
+          const url = `http://localhost:8080/api/reps?districtNum=${district}`;
           const response = await axios.get(url);
-          const data = response.data;
-          console.log(data);
+          let data  = response.data;  
+          let districtReps = [];
+          let numberOfreps = 0;
+          for(let index =0; index<data.length;index++){
+            if(data[index].state === stateParam){
+              districtReps[numberOfreps++] = data[index];
+            }
+          }
+          if(map != null){
+            map.fitBounds(layer.getBounds());
+          }
+          if(districtReps.length ===1){
+            layer.bindPopup(`<h1>District: ${districtReps[0].districtNum}</h1><img src=${districtReps[0].image} width =250px height=250px/><h3>Representative ${districtReps[0].name}</h3>`);
+            layer.openPopup();
+          }
+          else{
+            let image = `<h1>District: ${districtReps[0].districtNum}</h1>`;
+            for(let index =0; index<districtReps.length;index++){
+                image +=`<img src=${districtReps[index].image} width =150px height=150px/>\n<h5>Representative ${districtReps[index].name}</h5>`;
+            }
+            layer.bindPopup(image);
+            layer.openPopup();
+          }
+          
         } catch (error) {
           console.error(`Error fetching ${mapSelection.selectedState} GeoJSON data:`, error);
         }
@@ -96,17 +117,12 @@ function Map({ mapSelection,chartSelection,highlightDistrict, setHighlight}) {
       if (mapSelection.selectedState) {
         fetchGeoJSON();
       }
-    }*/
-    //Replace feature.properties.popupContent with what ever is in GeoJSON for district
-    /*function popUp(feature, layer) {
-      console.log(layer);
+    }
+    function popUp(layer) {
       layer.on({
-        click: image
-    });*/
-     /* if (feature.properties && feature.properties.popupContent) {
-          layer.bindPopup(feature.properties.popupContent);
-      }
-    }*/
+        click: (event)=>{image(event,layer)}
+      });
+    }
     useEffect(() => {
       if (!mapInstance.current && mapContainerRef.current) {
         mapInstance.current = L.map(mapContainerRef.current).setView([37.8, -95], 4);
@@ -149,7 +165,7 @@ function Map({ mapSelection,chartSelection,highlightDistrict, setHighlight}) {
                     fillOpacity: getOpacityByMinority(population, minorityPopulation)
                 };
             },
-            //onEachFeature: popUp //Add popUp details in function above
+            onEachFeature: popUp 
         }).addTo(mapInstance.current);
     }
       return () => {
