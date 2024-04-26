@@ -102,7 +102,7 @@ function Map({ mapSelection,chartSelection,highlightDistrict, setHighlight}) {
             layer.openPopup();
           }
           else{
-            let image = `<h1>District: ${districtReps[0].districtNum}</h1>`;
+           let image = `<h1>District: ${districtReps[0].districtNum}</h1>`;
             for(let index =0; index<districtReps.length;index++){
                 image +=`<img src=${districtReps[index].image} width =150px height=150px/>\n<h5>Representative ${districtReps[index].name}</h5>`;
             }
@@ -118,7 +118,8 @@ function Map({ mapSelection,chartSelection,highlightDistrict, setHighlight}) {
         fetchGeoJSON();
       }
     }
-    function popUp(layer) {
+    
+    function popUp(feature, layer) {
       layer.on({
         click: (event)=>{image(event,layer)}
       });
