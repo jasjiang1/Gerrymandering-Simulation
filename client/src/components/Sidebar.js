@@ -1,20 +1,17 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import * as L from "leaflet";
-import legend from '../mocks/MockLegend.jpg';
+import { Row, Col, Form, Button } from 'react-bootstrap';
 
-function Sidebar({  mapSelection, setMapSelection, chartSelection, setChartSelection,setModal, submitted}) {
+function Sidebar({ mapSelection, setMapSelection, chartSelection, setChartSelection, submitted}) {
   const handleChange = (event) => {
     const {name, value} = event.target;
     if (name in mapSelection) {
-      if(name == "selectedState"){
+      if (name == "selectedState") {
         const stateSettings = {
           'Georgia': { center: [32.7, -83.4], zoom: 7 },
           'New Jersey': { center: [40.1, -74.7], zoom: 7 },
         };
         const selectedStateSettings = stateSettings[value];
-
         setMapSelection({
           ...mapSelection,
           selectedState: value,
@@ -35,7 +32,6 @@ function Sidebar({  mapSelection, setMapSelection, chartSelection, setChartSelec
       }));
     }
   };
-
   const handleSubmit = (event) =>{
     event.preventDefault();
     submitted();

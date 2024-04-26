@@ -17,7 +17,6 @@ function StateAssembly({mapSelection, setlayerhighlight}) {
             stateParam = "NJ";
           }
           try {
-            //Can we add a by state option for reps api with mapSelection.selectedState as arguement?
             const url = `http://localhost:8080/api/reps?state=${stateParam}`;
             const response = await axios.get(url);
             const data = response.data;
@@ -35,6 +34,7 @@ function StateAssembly({mapSelection, setlayerhighlight}) {
             fetchRepsJSON();
         }
       }, [mapSelection.selectedState]);
+
       useEffect(()=>{
         let table = document.getElementById("assemblytable");
         table.innerHTML = "";
@@ -49,7 +49,6 @@ function StateAssembly({mapSelection, setlayerhighlight}) {
         votemargin.textContent = "% Vote Margin";
         ethnicity.textContent = "Ethnicity";
         party.textContent = "Party";
-
         columns.appendChild(district);
         columns.appendChild(name);
         columns.appendChild(party);
@@ -82,16 +81,11 @@ function StateAssembly({mapSelection, setlayerhighlight}) {
               setlayerhighlight(assemblyReps[index].districtNum);
             };
             document.getElementById("assemblytable").appendChild(row);
-             /*district number--Added 
-             the representative-Added
-             the representative’s party-Added
-             the representative’s racial/ethnic group--Added
-             vote margin as a percentage in the most recent election--Need to add
-            */ 
            }
         }
       })
-    return (
+
+      return (
         <div class = "assemlbysummarytable" >
           <h1 id = "title">State Assembly Table</h1>
        <table id = "assemblytable">

@@ -53,13 +53,11 @@ function Graph({ mapSelection, chartSelection }) {
                     }]
                 }
             };
-
             if (chartRef.current) {
                 chartRef.current.destroy();
             }
             chartRef.current = new Chart(ctx, config);
         }
-
         return () => {
             if (chartRef.current) {
                 chartRef.current.destroy();

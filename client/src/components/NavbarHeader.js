@@ -34,7 +34,6 @@ function Header({ mapSelection, setMapSelection, chartSelection, setChartSelecti
       }));
     }
   };
-
   const handleSubmit = (event) =>{
     event.preventDefault();
     submitted();

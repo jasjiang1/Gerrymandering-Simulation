@@ -63,7 +63,6 @@ function EIGraph({ mapSelection }) {
                     }
                 }
             });
-
             return () => {
                 chartInstance.destroy();
             };

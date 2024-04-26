@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
-import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Legend, Line, ResponsiveContainer} from 'recharts';
 import regression from 'regression';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import uPlot from 'uplot';
+import 'uplot/dist/uPlot.min.css';
 import '../../App.css';
 
 function GinglesGraph({ mapSelection }) {
-    const [ginglesData, setGinglesData] = useState([]);
-    const [regressionDataD, setRegressionDataD] = useState([]);
-    const [regressionDataR, setRegressionDataR] = useState([]);
+    const [ginglesData, setGinglesData] = useState([])
+    const plotRef = useRef(null)
+    const chartRef = useRef(null)
     const termMapping = {
         "New Jersey": "NJ",
         "Georgia": "GA",
@@ -17,6 +17,7 @@ function GinglesGraph({ mapSelection }) {
         "Black": "africanAmericanPCT",
         "Hispanic": "hispanicPCT"
     };
+
     useEffect(() => {
         const fetchGinglesData = async () => {
             try {
@@ -30,7 +31,6 @@ function GinglesGraph({ mapSelection }) {
                     republicanPCT: info.republicPCT,
                     democraticPCT: info.democraticPCT
                 }));
-                setGinglesData(data);
                 const regressionResultD = regression.polynomial(
                     data.map(d => [d.minorityPCT, d.democraticPCT]),
                     { order: 2, precision: 5 }
@@ -39,16 +39,14 @@ function GinglesGraph({ mapSelection }) {
                     data.map(d => [d.minorityPCT, d.republicanPCT]),
                     { order: 2, precision: 5 }
                 );
-                const formattedRegressionDataD = regressionResultD.points.map(point => ({
-                    minorityPCT: point[0],
-                    y: String(point[1])
-                }));
-                const formattedRegressionDataR = regressionResultR.points.map(point => ({
-                    minorityPCT: point[0],
-                    y: String(point[1])
-                }));
-                setRegressionDataD(formattedRegressionDataD);
-                setRegressionDataR(formattedRegressionDataR);
+                const plotData = [
+                    data.map(d => d.minorityPCT),
+                    data.map(d => d.democraticPCT),
+                    data.map(d => d.republicanPCT),
+                    regressionResultD.points.map(point => point[1]),
+                    regressionResultR.points.map(point => point[1])
+                ];
+                setGinglesData(plotData)
             } catch (error) {
                 console.error('Failed to fetch data:', error);
             }
@@ -57,25 +55,69 @@ function GinglesGraph({ mapSelection }) {
             fetchGinglesData();
         }
     }, [mapSelection.selectedState, mapSelection.selectedEthnicity]);
+
+    useEffect(() => {
+        if (ginglesData.length > 0 && plotRef.current) {
+            const opts = {
+                width: plotRef.current.offsetWidth,
+                height: 400,
+                scales: {
+                    x: {
+                        time: false,
+                        min: 0.0,
+                        max: 1.0
+                    },
+                    y: {
+                        min: 0.0,
+                        max: 1.0
+                    }
+                },
+                series: [
+                    { label: "Minority Percentage" },
+                    { 
+                        label: "Democratic Votes",
+                        stroke: "rgba(135, 206, 235)",
+                        points: { show: true, size: 3 },
+                        paths: () => null
+                    },
+                    {
+                        label: "Republican Votes",
+                        stroke: "rgba(230,149,152)",
+                        points: { show: true, size: 3 },
+                        paths: () => null
+                    },
+                    {
+                        label: "Democratic Regression Line",
+                        stroke: "blue",
+                        width: 2,
+                        points: { show: true, size: 3 },
+                        paths: () => null
+                    },
+                    {
+                        label: "Republican Regression Line",
+                        stroke: "red",
+                        width: 2,
+                        points: { show: true, size: 3 },
+                        paths: () => null
+                    }
+                ],
+                axes: [
+                    { stroke: "black", grid: { show: true }, label: "Minority Percentage" },
+                    { stroke: "black", grid: { show: true }, label : "Vote Percentage Margin" }
+                ]
+            };
+            if (chartRef.current) {
+                chartRef.current.destroy();
+            }
+            chartRef.current = new uPlot(opts, ginglesData, plotRef.current);
+        }
+    }, [ginglesData]);
+
     return (
-        <>
-        <h1 style={{textAlign: 'center'}}>Governor Election Sorted By Percent {mapSelection.selectedEthnicity} Within Each Precinct</h1>
-        <ResponsiveContainer width="100%" height={400}>
-            <ScatterChart
-                margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
-                <CartesianGrid />
-                <XAxis type="number" dataKey="minorityPCT" name="Minority %" label={{ value: 'Minority Percentage', position: 'insideBottomRight', offset: 0 }} />
-                <YAxis type="number" name="Vote Percentage" label={{ value: 'Vote Percentage', angle: -90, position: 'insideLeft' }}>
-                    <YAxis.Label value="Vote Percentage" angle={-90} position="insideLeft" />
-                </YAxis>
-                <Legend />
-                <Scatter name="Democratic Votes" data={ginglesData} fill="rgba(135, 206, 235)" shape="circle" dataKey="democraticPCT" />
-                <Scatter name="Republican Votes" data={ginglesData} fill="rgba(230,149,152)" shape="circle" dataKey="republicanPCT" />
-                <Scatter name="Democratic Line" data={regressionDataD} fill="rgba(0, 0, 255)" shape="circle" dataKey="y" />
-                <Scatter name="Repbulican Line" data={regressionDataR} fill="rgba(255, 0, 0)" shape="circle" dataKey="y" />
-                </ScatterChart>
-        </ResponsiveContainer>
-        </>
+        <div>
+            <h1 style={{ textAlign: 'center' }}>Governor Election Sorted By Percent {mapSelection.selectedEthnicity} Within Each Precinct</h1>
+            <div ref={plotRef} style={{ width: '100%', height: '400px' }}></div>
+        </div>
     );
 }
 
