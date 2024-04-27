@@ -1,5 +1,4 @@
 package com.grizzlies.cse416;
-import com.grizzlies.cse416.Geometry_State_Data;
 
 public class Feature_State_Data {
     private String type;

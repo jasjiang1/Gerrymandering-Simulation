@@ -20,7 +20,7 @@ public class RepsController {
 
     @GetMapping
     public ResponseEntity<List<Reps>> getReps(
-            @RequestParam(value = "party", required = false) String party,//Party party,
+            @RequestParam(value = "party", required = false) String party,
             @RequestParam(value = "districtNum", required = false) String districtNum,
             @RequestParam(value= "state", required = false) String state){
 

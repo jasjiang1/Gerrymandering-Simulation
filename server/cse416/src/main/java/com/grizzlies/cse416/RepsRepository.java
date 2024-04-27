@@ -7,7 +7,7 @@ import java.util.List;
 
 @Repository
 public interface RepsRepository extends MongoRepository<Reps, ObjectId>{
-    List<Reps> findByParty(String party);//Party party);
+    List<Reps> findByParty(String party);
 
     List<Reps> findByDistrictNum(String districtNum);
 

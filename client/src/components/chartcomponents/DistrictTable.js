@@ -73,10 +73,13 @@ function StateAssembly({mapSelection, setlayerhighlight}) {
             party.textContent = repparty;
             let ethnicity = document.createElement('td');
             ethnicity.textContent = assemblyReps[index].ethnicity;
+            let vm = document.createElement('td');
+            vm.textContent = assemblyReps[index].voterMargin;
             row.appendChild(districtNum);
             row.appendChild(repname);
             row.appendChild(party);
             row.appendChild(ethnicity);
+            row.appendChild(vm);
             row.onclick= ()=>{
               setlayerhighlight(assemblyReps[index].districtNum);
             };
