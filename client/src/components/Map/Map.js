@@ -118,7 +118,7 @@ function Map({ mapSelection,chartSelection,highlightDistrict, setHighlight}) {
         fetchGeoJSON();
       }
     }
-    
+
     function popUp(feature, layer) {
       layer.on({
         click: (event)=>{image(event,layer)}

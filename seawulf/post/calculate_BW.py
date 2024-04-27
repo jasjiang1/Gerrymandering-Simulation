@@ -7,7 +7,6 @@ def calculate_BW(folder_path, num_districts):
     aa_index = [[] for _ in range(num_districts)]
     asian_index = [[] for _ in range(num_districts)]
     hispanic_index = [[] for _ in range(num_districts)]
-    
     for filename in os.listdir(folder_path):
         if os.path.isfile(os.path.join(folder_path, filename)) and filename.endswith('.json'):
             with open(os.path.join(folder_path, filename), 'r') as file:
@@ -21,7 +20,6 @@ def calculate_BW(folder_path, num_districts):
                     aa_index[i].append(aa_BW[i])
                     asian_index[i].append(asian_BW[i])
                     hispanic_index[i].append(hispanic_BW[i])
-
     white_calc_BW, aa_calc_BW, asian_calc_BW, hispanic_calc_BW = [], [], [], []
     for i in range(num_districts):
         white_calc_BW.append(combine_index(white_index[i]))

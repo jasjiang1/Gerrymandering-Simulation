@@ -1,6 +1,4 @@
 package com.grizzlies.cse416;
-import org.springframework.data.mongodb.core.mapping.Field;
-
 
 public class Properties_Precinct_Data {
     private String ID;

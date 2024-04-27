@@ -17,7 +17,6 @@ def calculate_avg_plan(folder_path, ensemble_size):
                 majority_winner[data['winner']] += 1
                 total_dem_districts += data['dem_districts']
                 total_rep_districts += data['rep_districts']
-
                 if data['random_plan']:
                     all_opp_37.update(opp_37)
                     all_opp_50.update(opp_50)
@@ -26,11 +25,9 @@ def calculate_avg_plan(folder_path, ensemble_size):
                     max_opp_50 = update_max_opp(opp_50, max_opp_50)
                     max_opp_70 = update_max_opp(opp_70, max_opp_70)
 
-
     avg_dem_districts = total_dem_districts // ensemble_size
     avg_rep_districts = total_rep_districts // ensemble_size
     expected_winner = "Dem" if majority_winner['Dem'] > majority_winner['Rep'] else "Rep"
-
     avg_opp_37, avg_opp_50, avg_opp_70 = {}, {}, {}
     for key in all_opp_37:
         avg_opp_37[key] = all_opp_37[key] // ensemble_size

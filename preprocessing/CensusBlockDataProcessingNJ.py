@@ -51,9 +51,9 @@ def merge_dataframes(DF1, DF2):
     return merged_df
 
 def census_geojson():
-    censusBlockDf = census_block_voting_preprocess()
-    censusBlockGeneral = census_block_general_preprocess()
-    merged = merge_dataframes(censusBlockDf, censusBlockGeneral)
+    census_block_df = census_block_voting_preprocess()
+    census_block_general = census_block_general_preprocess()
+    merged = merge_dataframes(census_block_df, census_block_general)
     with open('Census_Blocks_2020_Hosted_3424_8002927981741920445.geojson', 'r') as f:
         geojson_data = json.load(f)
     geoid_demographics_mapping = dict(zip(merged['GEOID'], merged.to_dict(orient='records')))

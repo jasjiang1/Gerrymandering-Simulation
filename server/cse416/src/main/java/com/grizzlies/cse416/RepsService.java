@@ -13,15 +13,15 @@ public class RepsService {
         return reps.findAll();
     }
 
-    public List<Reps> getRepsByParty(String party){//Party party){
+    public List<Reps> getRepsByParty(String party) {
         return reps.findByParty(party);
     }
 
-    public List<Reps> getRepsByDistrict(String DistrictNum){
+    public List<Reps> getRepsByDistrict(String DistrictNum) {
         return reps.findByDistrictNum(DistrictNum);
     }
 
-    public List<Reps> getRepsByState(String state){
+    public List<Reps> getRepsByState(String state) {
         return reps.findByState(state);
     }
 }

@@ -41,7 +41,6 @@ state = "NJ" if folder_path.endswith("NJ") else "GA"
 ensemble_size = len(fnmatch.filter(os.listdir(folder_path), '*.json'))
 num_districts = 40 if state == "NJ" else 180
 summary_data = create_summary(folder_path, ensemble_size)
-
 json_obj = json.dumps(summary_data, indent = 4)
 with open(f"summary_{ensemble_size}_{state}.json", "w") as file:
     file.write(json_obj)

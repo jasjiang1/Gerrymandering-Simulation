@@ -54,6 +54,6 @@ def create_chain(initial_partition, state):
         ],
         accept = accept.always_accept,
         initial_state= initial_partition,
-        total_steps = 10000 #change to 10000
+        total_steps = 10000
     )
     return chain
