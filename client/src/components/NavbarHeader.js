@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import logo from './grizzliestransparent.png';
 import { Container, Navbar, Form, Row, Col, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function Header({ mapSelection, setMapSelection, chartSelection, setChartSelection, submitted }){
+function Header({ mapSelection, setMapSelection, chartSelection, setChartSelection,setComparison, comparison}){
+  
+  const view = useRef(null);
+
+  useEffect(()=>{
+    if(chartSelection.selectedAreaType != "Currently Viewing State"){
+      view.current.value = "Currently Viewing State";
+      const event = new Event('change', { bubbles: true });
+      view.current.dispatchEvent(event);
+  }
+  },[comparison]);
   const handleChange = (event) => {
     const { name, value } = event.target;
+    if(value == "State vs State"){
+      setComparison(true);
+    }
     if (name in mapSelection) {
       if (name === "selectedState"){
         const stateSettings = {
@@ -36,7 +49,6 @@ function Header({ mapSelection, setMapSelection, chartSelection, setChartSelecti
   };
   const handleSubmit = (event) =>{
     event.preventDefault();
-    submitted();
   }
 
   return (
@@ -93,7 +105,7 @@ function Header({ mapSelection, setMapSelection, chartSelection, setChartSelecti
             <Col xs={6} md={2}>
               <Form.Group controlId="selectSpecificArea">
                 <Form.Label>Specific Area</Form.Label>
-                <Form.Control as="select" name="selectedAreaType" value={chartSelection.selectedAreaType} onChange={handleChange}>
+                <Form.Control ref = {view} as="select" name="selectedAreaType" value={chartSelection.selectedAreaType} onChange={handleChange}>
                   <option>Currently Viewing State</option>
                   <option>State vs State</option>
                   <option>County 1</option>

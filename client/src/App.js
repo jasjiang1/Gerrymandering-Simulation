@@ -6,12 +6,15 @@ import TestMap from "./components/Map/Map.js";
 import StateTable from "./components/chartcomponents/StateTable.js"
 import BarChart from "./components/chartcomponents/BarChart.js";
 import DistrictTable from "./components/chartcomponents/DistrictTable.js"
+import ComparisonDistrict from "./components/chartcomponents/ComparisonDistrict.js"
 import EcologicalInference from "./components/chartcomponents/EcologicalInference.js"
 import GinglesGraph from "./components/chartcomponents/Gingles.js";
+import ComparisonNavBar from './components/StatevsStateNav.js';
 
 function App() {
   const [isWelcomePageVisible, setIsWelcomePageVisible] = useState(true);
   const [highlightDistrict,setLayerHighlight] = useState("");
+  const [statevstate, setComparison] = useState(false);
   const [mapSelection, setMapSelection] = useState({
     selectedState: "",
     selectedMapType: "",
@@ -23,6 +26,30 @@ function App() {
     selectedEthnicityOne: "",
     selectedEthnicityTwo: ""
   });
+
+  const [firstMapSelection, setFirstMapSelection] = useState({
+    selectedState: "",
+    selectedMapType: "",
+    selectedEthnicity: ""
+  });
+  const [firstChartSelection, setFirstChartSelection] = useState({
+    selectedChartType: "",
+    selectedAreaType: "",
+    selectedEthnicityOne: "",
+    selectedEthnicityTwo: ""
+  });
+  const [secondMapSelection, setSecondMapSelection] = useState({
+    selectedState: "",
+    selectedMapType: "",
+    selectedEthnicity: ""
+  });
+  const [secondChartSelection, setSecondChartSelection] = useState({
+    selectedChartType: "",
+    selectedAreaType: "",
+    selectedEthnicityOne: "",
+    selectedEthnicityTwo: ""
+  });
+
   const handleSelectState = (state) => {
     const stateSettings = {
       'Georgia': { center: [32.5, -82.3], zoom: 6.5 },
@@ -48,7 +75,7 @@ function App() {
   function renderChart(){
       switch(chartSelection.selectedChartType){
         case 'Bar Chart':
-          return <BarChart mapSelection={mapSelection} chartSelection={chartSelection}/>
+          return <BarChart mapSelection={mapSelection} chartSelection={chartSelection} comparison={statevstate}/>
         case 'State Data Summary':
           return <StateTable mapSelection={mapSelection}/>
         case 'State Assembly Table':
@@ -59,32 +86,81 @@ function App() {
           return <GinglesGraph mapSelection={mapSelection}/>
       }
     }
+    function firstRenderChart(){
 
-    return (
-    <>
-    {isWelcomePageVisible ? (<WelcomePage onStateSelected={handleSelectState}/>) : 
-      (
-        <>
-        <div className="navbar-container" id="navbar">
-          <MyNavbar
-              mapSelection={mapSelection} 
-              setMapSelection={setMapSelection} 
-              chartSelection={chartSelection} 
-              setChartSelection={setChartSelection} 
-            />
-        <div className="main-container">
-          <div className="left-container">
-            <TestMap mapSelection={mapSelection} chartSelection={chartSelection} highlightDistrict = {highlightDistrict} setHighlight ={setLayerHighlight}/>
+      switch(firstChartSelection.selectedChartType){
+        case 'Bar Chart':
+          return <BarChart mapSelection={firstMapSelection} chartSelection={firstChartSelection} comparison={statevstate}/>
+        case 'State Data Summary':
+          return <StateTable mapSelection={firstMapSelection}/>
+        case 'State Assembly Table':
+          return <DistrictTable mapSelection={firstMapSelection} comparison={statevstate}/>
+        case 'Ecological Inference':
+          return <EcologicalInference mapSelection={firstMapSelection} chartSelection={firstChartSelection} comparison={statevstate}/>
+        case 'Gingles Plot':
+          return <GinglesGraph mapSelection={firstMapSelection}/>
+      }
+    }
+    function secondRenderChart(){
+      switch(secondChartSelection.selectedChartType){
+        case 'Bar Chart':
+          return <BarChart mapSelection={secondMapSelection} chartSelection={secondChartSelection} comparison={statevstate}/>
+        case 'State Data Summary':
+          return <StateTable mapSelection={secondMapSelection}/>
+        case 'State Assembly Table':
+          return <ComparisonDistrict mapSelection={secondMapSelection} comparison={statevstate}/>
+        case 'Ecological Inference':
+          return <EcologicalInference mapSelection={secondMapSelection} chartSelection={secondChartSelection}/>
+        case 'Gingles Plot':
+          return <GinglesGraph mapSelection={secondMapSelection} />
+      }
+    }
+
+
+  return (
+      <>
+      {isWelcomePageVisible ? (<WelcomePage onStateSelected={handleSelectState}/>) : 
+        (
+          <>
+          <div className="navbar-container" id="navbar">
+           {!statevstate && <MyNavbar
+                mapSelection={mapSelection} 
+                setMapSelection={setMapSelection} 
+                chartSelection={chartSelection} 
+                setChartSelection={setChartSelection} 
+                setComparison = {setComparison}
+                comparison={statevstate}
+              />}
+              
+            {statevstate && <ComparisonNavBar
+
+                mapSelection={firstMapSelection} 
+                setMapSelection={setFirstMapSelection} 
+                chartSelection={firstChartSelection} 
+                setChartSelection={setFirstChartSelection} 
+
+                secondMapSelection={secondMapSelection} 
+                setSecondMapSelection={setSecondMapSelection} 
+                secondChartSelection={secondChartSelection} 
+                setSecondChartSelection={setSecondChartSelection} 
+                setComparison = {setComparison}
+              />}
+  
+          <div className="main-container">
+            <div className="left-container" id ="leftContainer">
+              {!statevstate && <TestMap mapSelection={mapSelection} chartSelection={chartSelection} highlightDistrict = {highlightDistrict} setHighlight ={setLayerHighlight}/>}
+              {statevstate && firstRenderChart()}
+            </div>
+            <div className="right-container" id = "rightContainer">
+              {!statevstate && renderChart()}
+              {statevstate && secondRenderChart() }
+            </div>
           </div>
-          <div className="right-container">
-            {renderChart()}
           </div>
-        </div>
-        </div>
+        </>
+       )}
       </>
-     )}
-    </>
-  );
+    );
 }
 
 export default App;
