@@ -16,6 +16,15 @@ public class GraphService {
     @Autowired
     private BarChart_Repository barChartRepository;
 
+    @Autowired
+    private BoxAndWhisker_Repository boxAndWhiskerRepository;
+
+    @Autowired
+    private DemRepSplits_Repository demRepSplitsRepository;
+
+    @Autowired
+    private EnsembleOpp_Repository ensembleOppRepository;
+
     public EI_Data getEcologicalInferenceData(String state, String minority) {
         return eiGraphRepository.findByStateAndMinority(state, minority);
     }
@@ -26,5 +35,17 @@ public class GraphService {
 
     public BarChart_Data getBarChartData(String state) {
         return barChartRepository.findByState(state);
+    }
+
+    public List<BoxAndWhisker_Data> getBoxAndWhiskerData(String state){
+        return boxAndWhiskerRepository.findByState(state);
+    }
+
+    public List<DemRepSplits_Data> getDemRepSplitsData(String state){
+        return demRepSplitsRepository.findByState(state);
+    }
+
+    public List<EnsembleOpp_Data> getEnsembleOppData(String state){
+        return ensembleOppRepository.findByState(state);
     }
 }
