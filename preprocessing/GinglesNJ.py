@@ -1,5 +1,4 @@
 import json
-from venv import create
 import geopandas as gpd
 
 def create_JSON():
