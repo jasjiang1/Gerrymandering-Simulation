@@ -210,3 +210,9 @@ option {
   flex: 3.5;
   width: 35%;
 }
+
+.district-row {
+  color: 'white';
+  font-family: Georgia;
+  font-size: '12px';
+}
