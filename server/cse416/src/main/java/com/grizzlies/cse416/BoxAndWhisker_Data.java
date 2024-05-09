@@ -15,7 +15,7 @@ public class BoxAndWhisker_Data {
     private String state;
     private int size;
     private String race;
-    private List<IndexDistrict> indexDistricts;
+    private List<IndexDistrict> index_districts;
 
     @Data
     public static class IndexDistrict {
