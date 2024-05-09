@@ -51,6 +51,17 @@ function Header({ mapSelection, setMapSelection, chartSelection, setChartSelecti
     event.preventDefault();
   }
 
+  const reset = () => {
+    setMapSelection(prevState => ({
+      ...prevState,
+      selectedEthnicity: "Hispanic",
+      selectedMapType: "Approved Districting Plan",
+    }));
+    setChartSelection(prevState => ({
+      ...prevState,
+      selectedChartType: "State Data Summary"
+    }))
+  }
   return (
     <Navbar bg="secondary" expand="lg" variant="dark" className="py-2">
       <Container fluid>
@@ -118,7 +129,7 @@ function Header({ mapSelection, setMapSelection, chartSelection, setChartSelecti
             </Col>
             <Col xs={6} md="auto" className="d-flex align-items-end pb-2">
               <Button type="submit" variant="primary" size="lg">Apply</Button>
-              <Button variant="danger" size="lg" className="ms-2">Reset</Button>
+              <Button variant="danger" size="lg" className="ms-2" onClick={reset}>Reset</Button>
             </Col>
           </Row>
         </Form>

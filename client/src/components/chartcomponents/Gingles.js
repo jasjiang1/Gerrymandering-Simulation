@@ -2,11 +2,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import regression from 'regression';
 import uPlot from 'uplot';
+import GinglesTable from './GinglesTable';
 import 'uplot/dist/uPlot.min.css';
 import '../../App.css';
 
 function GinglesGraph({ mapSelection }) {
     const [ginglesData, setGinglesData] = useState([])
+    const [ginglesTableData, setGinglesTableData] = useState([])
     const plotRef = useRef(null)
     const chartRef = useRef(null)
     const termMapping = {
@@ -47,6 +49,7 @@ function GinglesGraph({ mapSelection }) {
                     regressionResultR.points.map(point => point[1])
                 ];
                 setGinglesData(plotData)
+                setGinglesTableData(data)
             } catch (error) {
                 console.error('Failed to fetch data:', error);
             }
@@ -104,7 +107,10 @@ function GinglesGraph({ mapSelection }) {
                 axes: [
                     { stroke: "black", grid: { show: true }, label: "Minority Percentage" },
                     { stroke: "black", grid: { show: true }, label : "Vote Percentage Margin" }
-                ]
+                ],
+                legend: {
+                    show: false
+                }
             };
             if (chartRef.current) {
                 chartRef.current.destroy();
@@ -114,10 +120,13 @@ function GinglesGraph({ mapSelection }) {
     }, [ginglesData]);
 
     return (
+        <>
         <div>
             <h1 style={{ textAlign: 'center' }}>Governor Election Sorted By Percent {mapSelection.selectedEthnicity} Within Each Precinct</h1>
             <div ref={plotRef} style={{ width: '100%', height: '400px' }}></div>
         </div>
+        <GinglesTable ginglesTableData={ginglesTableData}></GinglesTable>
+        </>
     );
 }
 

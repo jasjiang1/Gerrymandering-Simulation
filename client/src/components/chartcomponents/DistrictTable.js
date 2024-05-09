@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../App.css';
 import axios from 'axios';
 import sortBy from 'lodash/sortBy';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function StateAssembly({mapSelection, setlayerhighlight}) {
     const [assemblyReps, setReps] = useState(false);
@@ -21,7 +21,6 @@ function StateAssembly({mapSelection, setlayerhighlight}) {
             const response = await axios.get(url);
             const data = response.data;
             let sortedData = sortBy(data, districtData => Number(districtData.districtNum));
-            
             if(data != false){
               setReps(sortedData);
               setState(stateParam);

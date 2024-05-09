@@ -5,7 +5,7 @@ import './App.css'
 import TestMap from "./components/Map/Map.js";
 import StateTable from "./components/chartcomponents/StateTable.js"
 import BarChart from "./components/chartcomponents/BarChart.js";
-import DistrictTable from "./components/chartcomponents/DistrictTable.js"
+import DistrictTable from "./components/chartcomponents/DistrictTableWithFilter.js"
 import ComparisonDistrict from "./components/chartcomponents/ComparisonDistrict.js"
 import EcologicalInference from "./components/chartcomponents/EcologicalInference.js"
 import GinglesGraph from "./components/chartcomponents/Gingles.js";

@@ -70,7 +70,7 @@ function Map({ mapSelection,chartSelection,highlightDistrict, setHighlight}) {
       if (mapSelection.selectedState) {
         fetchGeoJSON();
       }
-    }, [mapSelection]);
+    }, [mapSelection.selectedState, mapSelection.selectedMapType]);
 
     function image(event,layer) {
       let map = mapInstance.current
