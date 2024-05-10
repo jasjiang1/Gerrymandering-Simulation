@@ -11,6 +11,7 @@ import EcologicalInference from "./components/chartcomponents/EcologicalInferenc
 import GinglesGraph from "./components/chartcomponents/Gingles.js";
 import ComparisonNavBar from './components/StatevsStateNav.js';
 import BWGraph from './components/chartcomponents/BoxAndWhiskers.js'
+import DRGraph from './components/chartcomponents/DemRepBar.js';
 
 function App() {
   const [isWelcomePageVisible, setIsWelcomePageVisible] = useState(true);
@@ -87,6 +88,8 @@ function App() {
           return <GinglesGraph mapSelection={mapSelection}/>
         case 'Box and Whiskers':
           return <BWGraph mapSelection={mapSelection}/>
+        case 'Dem Rep Splits':
+          return <DRGraph mapSelection={mapSelection}/>
       }
     }
     function firstRenderChart(){
@@ -104,6 +107,8 @@ function App() {
           return <GinglesGraph mapSelection={firstMapSelection}/>
         case 'Box and Whiskers':
           return <BWGraph mapSelection={firstMapSelection}/>
+        case 'Dem Rep Splits':
+          return <DRGraph mapSelection={firstMapSelection}/>
       }
     }
     function secondRenderChart(){
@@ -120,6 +125,8 @@ function App() {
           return <GinglesGraph mapSelection={secondMapSelection} />
         case 'Box and Whiskers':
           return <BWGraph mapSelection={secondMapSelection} />
+        case 'Dem Rep Splits':
+          return <DRGraph mapSelection={secondMapSelection}/>
       }
     }
 

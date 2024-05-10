@@ -110,6 +110,7 @@ function Header({ mapSelection, setMapSelection, chartSelection, setChartSelecti
                   <option>Gingles Plot</option>
                   <option>Ecological Inference</option>
                   <option>State Assembly Table</option>
+                  <option>Dem Rep Splits</option>
                 </Form.Control>
               </Form.Group>
             </Col>

@@ -13,7 +13,7 @@ public class DemRepSplits_Data {
     private String expected_winner;
     private int average_dem_districts;
     private int average_rep_districts;
-    private Map<String, Integer> demRepSplits;
+    private Map<String, Integer> dem_rep_splits;
 
     public String getId() {
         return id;
@@ -41,7 +41,7 @@ public class DemRepSplits_Data {
     }
 
     public Map<String, Integer> getDemRepSplits() {
-        return demRepSplits;
+        return dem_rep_splits;
     }
 
 }
