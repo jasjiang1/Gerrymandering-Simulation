@@ -103,7 +103,7 @@ function App() {
         case 'Gingles Plot':
           return <GinglesGraph mapSelection={firstMapSelection}/>
         case 'Box and Whiskers':
-          return <BWGraph mapSelection={mapSelection}/>
+          return <BWGraph mapSelection={firstMapSelection}/>
       }
     }
     function secondRenderChart(){
