@@ -119,7 +119,7 @@ function App() {
         case 'Gingles Plot':
           return <GinglesGraph mapSelection={secondMapSelection} />
         case 'Box and Whiskers':
-          return <BWGraph mapSelection={mapSelection}/>
+          return <BWGraph mapSelection={secondMapSelection} />
       }
     }
 
