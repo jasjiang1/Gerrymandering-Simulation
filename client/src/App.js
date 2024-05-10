@@ -10,6 +10,7 @@ import ComparisonDistrict from "./components/chartcomponents/ComparisonDistrict.
 import EcologicalInference from "./components/chartcomponents/EcologicalInference.js"
 import GinglesGraph from "./components/chartcomponents/Gingles.js";
 import ComparisonNavBar from './components/StatevsStateNav.js';
+import BWGraph from './components/chartcomponents/BoxAndWhiskers.js'
 
 function App() {
   const [isWelcomePageVisible, setIsWelcomePageVisible] = useState(true);
@@ -84,6 +85,8 @@ function App() {
           return <EcologicalInference mapSelection={mapSelection} chartSelection={chartSelection}/>
         case 'Gingles Plot':
           return <GinglesGraph mapSelection={mapSelection}/>
+        case 'Box and Whiskers':
+          return <BWGraph mapSelection={mapSelection}/>
       }
     }
     function firstRenderChart(){
@@ -99,6 +102,8 @@ function App() {
           return <EcologicalInference mapSelection={firstMapSelection} chartSelection={firstChartSelection} comparison={statevstate}/>
         case 'Gingles Plot':
           return <GinglesGraph mapSelection={firstMapSelection}/>
+        case 'Box and Whiskers':
+          return <BWGraph mapSelection={mapSelection}/>
       }
     }
     function secondRenderChart(){
@@ -113,6 +118,8 @@ function App() {
           return <EcologicalInference mapSelection={secondMapSelection} chartSelection={secondChartSelection}/>
         case 'Gingles Plot':
           return <GinglesGraph mapSelection={secondMapSelection} />
+        case 'Box and Whiskers':
+          return <BWGraph mapSelection={mapSelection}/>
       }
     }
 
