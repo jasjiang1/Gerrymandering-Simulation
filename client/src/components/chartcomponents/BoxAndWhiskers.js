@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Chart from 'chart.js/auto';
+import { Container, Navbar, Form, Row, Col, Button } from 'react-bootstrap';
 import { BoxPlotController, BoxAndWiskers } from '@sgratzl/chartjs-chart-boxplot';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -9,8 +10,10 @@ function BWGraph({ mapSelection }) {
     Chart.register(BoxPlotController, BoxAndWiskers)
     const chartRef = useRef(null);
     const canvasRef = useRef(null);
-    const [BWData, setBWData] = useState([])
+    const [BWData250, seTBWData250] = useState([])
+    const [BWData5000, setBWData5000] = useState([])
     const [actualBW, setActualBW] = useState([])
+    const [size, setSize] = useState(250)
     const termMapping = {
         "New Jersey": "NJ", 
         "Georgia": "GA",
@@ -27,20 +30,25 @@ function BWGraph({ mapSelection }) {
                 const url = `http://localhost:8080/api/graph/box_and_whisker/${state}`            
                 const response = await axios.get(url)
                 const data = response.data.filter(bw => bw.race === ethnicity)
-                setBWData(data.find(dic => dic.size === 5000).index_districts)
+                seTBWData250(data.find(dic => dic.size === 250).index_districts)
+                setBWData5000(data.find(dic => dic.size === 5000).index_districts)
                 setActualBW(data.find(dic => dic.size === 1).index_districts)
             } catch (error) {
                 console.error('Error fetching box and whisker data', error)
             }
         }            
         fetchData()
-    }, [mapSelection.selectedState, mapSelection.selectedEthnicity])
+    }, [mapSelection.selectedState, mapSelection.selectedEthnicity, size])
 
     useEffect(() => {
-        if (BWData && actualBW && canvasRef.current) {
+        if (BWData250 && BWData5000 && actualBW && canvasRef.current) {
             const canvas = canvasRef.current
             const ctx = canvas.getContext('2d')
-            BWData.forEach(obj => {
+            BWData250.forEach(obj => {
+                obj['median'] = obj['q2']
+                delete obj['q2']
+            })
+            BWData5000.forEach(obj => {
                 obj['median'] = obj['q2']
                 delete obj['q2']
             })
@@ -49,8 +57,17 @@ function BWGraph({ mapSelection }) {
                 actualplan.push([actualBW[i].q1])
             }
             const indexes = []
-            for (let i = 1; i <= BWData.length;i++) {
+            for (let i = 1; i <= BWData5000.length;i++) {
                 indexes.push(i)
+            }
+            let toShow = BWData250
+            let ensembleLabel = "250-Ensemble"
+            if (size === '250') {
+                toShow = BWData250
+                ensembleLabel = "250-Ensemble"
+            } else if (size === '5000') {
+                toShow = BWData5000
+                ensembleLabel = "5000-Ensemble"
             }
             const config = {
                 type:"boxplot",
@@ -64,12 +81,12 @@ function BWGraph({ mapSelection }) {
                     labels: indexes,
                     datasets:[
                         {
-                            label: "5000-Ensemble",
+                            label: ensembleLabel,
                             backgroundColor:'blue', 
                             borderColor:'blue',
                             borderWidth:1,
                             padding:10,
-                            data: BWData,
+                            data: toShow,
                         },
                         {
                             label: "Actual Plan",
@@ -87,12 +104,26 @@ function BWGraph({ mapSelection }) {
             }
             chartRef.current = new Chart(ctx, config);
         }
-    }, [BWData])
+    }, [BWData5000, BWData250, size])
+
+    const handleChange = (event) => {
+        const {value} = event.target;
+        setSize(value)
+    }
 
     return (
         <div className = "chart-container">
             <div>
                 <div id="charttitle">{mapSelection.selectedState} Box And Whiskers</div>
+                <Form>
+                    <Form.Group controlId="selectBWEnsembleSize">
+                    <Form.Label>Select Ensemble Size</Form.Label>
+                    <Form.Control as="select" onChange = {handleChange}>
+                        <option value = "250">250</option>
+                        <option value = "5000">5000</option>
+                    </Form.Control>
+                    </Form.Group>
+                </Form>
                 <canvas ref={canvasRef} width="200" height="150"></canvas>
             </div>
         </div>
