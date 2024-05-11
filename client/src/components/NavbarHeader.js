@@ -111,6 +111,7 @@ function Header({ mapSelection, setMapSelection, chartSelection, setChartSelecti
                   <option>Ecological Inference</option>
                   <option>State Assembly Table</option>
                   <option>Dem Rep Splits</option>
+                  <option>Ensemble Opportunity Districts</option>
                 </Form.Control>
               </Form.Group>
             </Col>

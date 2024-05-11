@@ -12,6 +12,7 @@ import GinglesGraph from "./components/chartcomponents/Gingles.js";
 import ComparisonNavBar from './components/StatevsStateNav.js';
 import BWGraph from './components/chartcomponents/BoxAndWhiskers.js'
 import DRGraph from './components/chartcomponents/DemRepBar.js';
+import EnsembleOpportunityGraph from './components/chartcomponents/Ensemble_Opportunity_Bar.js'
 
 function App() {
   const [isWelcomePageVisible, setIsWelcomePageVisible] = useState(true);
@@ -90,6 +91,8 @@ function App() {
           return <BWGraph mapSelection={mapSelection}/>
         case 'Dem Rep Splits':
           return <DRGraph mapSelection={mapSelection}/>
+          case 'Ensemble Opportunity Districts':
+            return <EnsembleOpportunityGraph mapSelection={mapSelection} chartSelection={chartSelection} comparison={statevstate}></EnsembleOpportunityGraph>
       }
     }
     function firstRenderChart(){
@@ -109,6 +112,8 @@ function App() {
           return <BWGraph mapSelection={firstMapSelection}/>
         case 'Dem Rep Splits':
           return <DRGraph mapSelection={firstMapSelection}/>
+        case 'Ensemble Opportunity Districts':
+          return <EnsembleOpportunityGraph mapSelection={firstMapSelection} chartSelection={firstChartSelection} comparison={statevstate}></EnsembleOpportunityGraph>
       }
     }
     function secondRenderChart(){
@@ -118,7 +123,7 @@ function App() {
         case 'State Data Summary':
           return <StateTable mapSelection={secondMapSelection}/>
         case 'State Assembly Table':
-          return <ComparisonDistrict mapSelection={secondMapSelection} comparison={statevstate}/>
+          return <DistrictTable mapSelection={secondMapSelection} comparison={statevstate}/>
         case 'Ecological Inference':
           return <EcologicalInference mapSelection={secondMapSelection} chartSelection={secondChartSelection}/>
         case 'Gingles Plot':
@@ -127,6 +132,8 @@ function App() {
           return <BWGraph mapSelection={secondMapSelection} />
         case 'Dem Rep Splits':
           return <DRGraph mapSelection={secondMapSelection}/>
+          case 'Ensemble Opportunity Districts':
+            return <EnsembleOpportunityGraph mapSelection={secondMapSelection} chartSelection={secondChartSelection} comparison={statevstate}></EnsembleOpportunityGraph>
       }
     }
 

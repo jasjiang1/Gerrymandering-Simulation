@@ -155,7 +155,7 @@ function StatevStateHeader({ mapSelection, setMapSelection, chartSelection, setC
 
             <Col xs={6} md={2}>
               <Form.Group controlId="selectChartType">
-                <Form.Label>Second Chart Type</Form.Label>
+                <Form.Label>First Chart Type</Form.Label>
                 <Form.Control as="select" name="selectedChartType" value={chartSelection.selectedChartType} onChange={handleChange}>
                   <option>State Data Summary</option>
                   <option>Bar Chart</option>
@@ -164,6 +164,7 @@ function StatevStateHeader({ mapSelection, setMapSelection, chartSelection, setC
                   <option>Ecological Inference</option>
                   <option>State Assembly Table</option>
                   <option>Dem Rep Splits</option>
+                  <option>Ensemble Opportunity Districts</option>
                 </Form.Control>
               </Form.Group>
             </Col>
@@ -192,7 +193,7 @@ function StatevStateHeader({ mapSelection, setMapSelection, chartSelection, setC
 
             <Col xs={6} md={2}>
               <Form.Group controlId="selectChartType">
-                <Form.Label>First Chart Type</Form.Label>
+                <Form.Label>Second Chart Type</Form.Label>
                 <Form.Control as="select" name="secondSelectedChartType" value={secondChartSelection.selectedChartType} onChange={handleChange}>
                   <option>State Data Summary</option>
                   <option>Bar Chart</option>
@@ -201,6 +202,7 @@ function StatevStateHeader({ mapSelection, setMapSelection, chartSelection, setC
                   <option>Ecological Inference</option>
                   <option>State Assembly Table</option>
                   <option>Dem Rep Splits</option>
+                  <option>Ensemble Opportunity Districts</option>
                 </Form.Control>
               </Form.Group>
             </Col>

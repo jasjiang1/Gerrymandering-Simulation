@@ -216,3 +216,14 @@ option {
   font-family: Georgia;
   font-size: '12px';
 }
+#threshold{
+  font-size: 15px;
+  text-align: center;
+  font:Times, serif;
+}
+form, input, label, p {
+  color: white !important;
+}
+#labelthresh{
+  color: black !important;
+}

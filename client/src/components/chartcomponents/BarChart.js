@@ -12,7 +12,7 @@ function Graph({ mapSelection, chartSelection }) {
     useEffect(() => {
         const state = mapSelection.selectedState.toLowerCase().replace(/\s/g, '');
         const fetchData = async () => {
-            if (mapSelection.selectedState !== '' && chartSelection.selectedChartType === "Bar Chart" && chartSelection.selectedAreaType === "Currently Viewing State") {
+            if (mapSelection.selectedState !== '' && chartSelection.selectedChartType === "Bar Chart") {
                 try {
                     console.log(mapSelection.selectedState);
                     const response = await axios.get(`http://localhost:8080/api/graph/barchart/${state}`);
