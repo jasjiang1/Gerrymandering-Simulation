@@ -4,7 +4,7 @@ import Chart from 'chart.js/auto';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../App.css';
 
-function VoteSeatShareGraph({ mapSelection}) {
+function VoteSeatShareGraph({ mapSelection }) {
     const [voteSeatShareData, setVoteSeatShareData] = useState(null);
     const stateMapping = {
         "New Jersey": "NJ",

@@ -98,13 +98,13 @@ function Map({ mapSelection,chartSelection,highlightDistrict, setHighlight}) {
             map.fitBounds(layer.getBounds());
           }
           if(districtReps.length ===1){
-            layer.bindPopup(`<h1>District: ${districtReps[0].districtNum}</h1><img src=${districtReps[0].image} width =250px height=250px/><h3>Representative ${districtReps[0].name}</h3>`);
+            layer.bindPopup(`<h1>District: ${districtReps[0].districtNum}</h1><img src=${districtReps[0].image} style="width: 220px; height: 250px;"/><h3>Representative ${districtReps[0].name}</h3>`);
             layer.openPopup();
           }
           else{
            let image = `<h1>District: ${districtReps[0].districtNum}</h1>`;
             for(let index =0; index<districtReps.length;index++){
-                image +=`<img src=${districtReps[index].image} width =150px height=150px/>\n<h5>Representative ${districtReps[index].name}</h5>`;
+                image +=`<img src=${districtReps[index].image} style="width: 220px; height: 250px;"/>\n<h5>Representative ${districtReps[index].name}</h5>`;
             }
             layer.bindPopup(image);
             layer.openPopup();
