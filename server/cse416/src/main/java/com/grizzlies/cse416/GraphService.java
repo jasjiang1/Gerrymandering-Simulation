@@ -24,6 +24,9 @@ public class GraphService {
 
     @Autowired
     private EnsembleOpp_Repository ensembleOppRepository;
+    
+    @Autowired
+    private VoteSeatShare_Repository voteSeatShareRepository;
 
     public EI_Data getEcologicalInferenceData(String state, String minority) {
         return eiGraphRepository.findByStateAndMinority(state, minority);
@@ -47,5 +50,9 @@ public class GraphService {
 
     public List<EnsembleOpp_Data> getEnsembleOppData(String state){
         return ensembleOppRepository.findByState(state);
+    }
+
+    public VoteSeatShare_Data getVoteSeatShareData(String state){
+        return voteSeatShareRepository.findByState(state);
     }
 }

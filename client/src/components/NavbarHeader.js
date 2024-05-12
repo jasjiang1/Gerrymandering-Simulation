@@ -112,6 +112,7 @@ function Header({ mapSelection, setMapSelection, chartSelection, setChartSelecti
                   <option>State Assembly Table</option>
                   <option>Dem Rep Splits</option>
                   <option>Ensemble Opportunity Districts</option>
+                  <option>Vote Seat Share Curve</option>
                 </Form.Control>
               </Form.Group>
             </Col>

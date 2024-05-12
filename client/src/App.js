@@ -13,6 +13,7 @@ import ComparisonNavBar from './components/StatevsStateNav.js';
 import BWGraph from './components/chartcomponents/BoxAndWhiskers.js'
 import DRGraph from './components/chartcomponents/DemRepBar.js';
 import EnsembleOpportunityGraph from './components/chartcomponents/Ensemble_Opportunity_Bar.js'
+import VoteSeatShare from './components/chartcomponents/VoteSeatShare.js'
 
 function App() {
   const [isWelcomePageVisible, setIsWelcomePageVisible] = useState(true);
@@ -91,8 +92,10 @@ function App() {
           return <BWGraph mapSelection={mapSelection}/>
         case 'Dem Rep Splits':
           return <DRGraph mapSelection={mapSelection}/>
-          case 'Ensemble Opportunity Districts':
-            return <EnsembleOpportunityGraph mapSelection={mapSelection} chartSelection={chartSelection} comparison={statevstate}></EnsembleOpportunityGraph>
+        case 'Ensemble Opportunity Districts':
+          return <EnsembleOpportunityGraph mapSelection={mapSelection} chartSelection={chartSelection} comparison={statevstate}></EnsembleOpportunityGraph>
+        case 'Vote Seat Share Curve':
+          return <VoteSeatShare mapSelection={mapSelection}/>
       }
     }
     function firstRenderChart(){
@@ -114,6 +117,8 @@ function App() {
           return <DRGraph mapSelection={firstMapSelection}/>
         case 'Ensemble Opportunity Districts':
           return <EnsembleOpportunityGraph mapSelection={firstMapSelection} chartSelection={firstChartSelection} comparison={statevstate}></EnsembleOpportunityGraph>
+        case 'Vote Seat Share Curve':
+          return <VoteSeatShare mapSelection={firstMapSelection}/>
       }
     }
     function secondRenderChart(){

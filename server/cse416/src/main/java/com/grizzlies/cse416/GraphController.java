@@ -55,4 +55,10 @@ public class GraphController {
         List<EnsembleOpp_Data> ensembleOppData = graphService.getEnsembleOppData(state);
         return new ResponseEntity<>(ensembleOppData, HttpStatus.OK);
     }
+
+    @GetMapping("vote_seat_share_curve/{state}")
+    public ResponseEntity<VoteSeatShare_Data> getVoteSeatShareCurve(@PathVariable String state){
+        VoteSeatShare_Data voteSeatShareData = graphService.getVoteSeatShareData(state);
+        return new ResponseEntity<>(voteSeatShareData, HttpStatus.OK);
+    }
 }
