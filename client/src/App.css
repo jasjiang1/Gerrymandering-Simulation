@@ -8,6 +8,7 @@
 }
 .navbar {
   border-radius: 0;
+  margin-bottom: 0;
 }
 
 
@@ -24,7 +25,7 @@ th,
 td {
   background-color: #222629;
   color: white;
-  border: 1px solid #86C232;
+  border: 1px solid orange;
   border-collapse: collapse;
   padding: 5px;
   font-size: 12px;
@@ -35,14 +36,14 @@ td{
   background-color: #6B6E70;
 }
 #title{
-  background-color: #86C232;
+  background-color: orange;
   color:white;
   font:Times, serif;
   font-size: 30px;
   text-align: center;
 }
 th{
-  background-color: #86C232;
+  background-color: orange;
   color:white;
   font:Times, serif;
   font-size: 12px;
