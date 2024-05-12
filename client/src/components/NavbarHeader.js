@@ -105,7 +105,7 @@ function Header({ mapSelection, setMapSelection, chartSelection, setChartSelecti
                 <Form.Label>Chart Type</Form.Label>
                 <Form.Control as="select" name="selectedChartType" value={chartSelection.selectedChartType} onChange={handleChange}>
                   <option>State Data Summary</option>
-                  <option>Bar Chart</option>
+                  <option>Reps Vs Population Chart</option>
                   <option>Box and Whiskers</option>
                   <option>Gingles Plot</option>
                   <option>Ecological Inference</option>

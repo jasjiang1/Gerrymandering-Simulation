@@ -66,7 +66,7 @@ table {
   font-family: Georgia;
   font-size: 20px;
   color:whitesmoke;
-  background-color: #86C232;
+  background-color: orange;
   border: 2px solid #25274D;
   text-align: center;
   border-radius:5px;
@@ -186,6 +186,7 @@ table {
 }
 .form-label {
   font-size: 20px;
+  margin-top: 30px;
 }
 option {
   font-size: 15px;
@@ -211,6 +212,7 @@ option {
 .right-container {
   flex: 3.5;
   width: 35%;
+  /*margin-top:75px*/
 }
 
 .district-row {
