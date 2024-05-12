@@ -31,9 +31,9 @@ function GinglesTable({ ginglesTableData }) {
                 {ginglesTableData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
                   <TableRow sx={{ color: 'white' }}key={row.precinct}>
                     <TableCell sx={{ color: 'white' }}>{row.precinct}</TableCell>
-                    <TableCell sx={{ color: 'white' }}>{row.minorityPCT}</TableCell>
-                    <TableCell sx={{ color: 'white' }}>{row.republicanPCT}</TableCell>
-                    <TableCell sx={{ color: 'white' }}>{row.democraticPCT}</TableCell>
+                    <TableCell sx={{ color: 'white' }}>{parseFloat(row.minorityPCT).toFixed(2)}</TableCell>
+                    <TableCell sx={{ color: 'white' }}>{parseFloat(row.republicanPCT).toFixed(2)}</TableCell>
+                    <TableCell sx={{ color: 'white' }}>{parseFloat(row.democraticPCT).toFixed(2)}</TableCell>
                     <TableCell sx={{ color: 'white' }}>{row.winner}</TableCell>
                   </TableRow>
                 ))}
