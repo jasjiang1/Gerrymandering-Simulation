@@ -51,6 +51,16 @@ function Graph({ mapSelection, chartSelection }) {
                         borderWidth: 1,
                         borderRadius: 5,
                     }]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            title:{display:true, text:"Racial Groups",font: {weight:'bold'}}
+                        },
+                        y: {
+                            title:{display:true, text:"% of Representatives and Population",font: {weight:'bold'}}
+                        }
+                    }
                 }
             };
             if (chartRef.current) {

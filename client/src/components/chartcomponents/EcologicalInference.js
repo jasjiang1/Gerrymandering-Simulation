@@ -53,11 +53,13 @@ function EIGraph({ mapSelection }) {
                 options: {
                     scales: {
                         x: {
+                            title:{display:true, text:"% Minority",font: {weight:'bold'}},
                             type: 'linear',
                             min: 0,
                             max: 1
                         },
                         y: {
+                            title:{display:true, text:"Probability Density",font: {weight:'bold'}},
                             beginAtZero: true
                         }
                     }

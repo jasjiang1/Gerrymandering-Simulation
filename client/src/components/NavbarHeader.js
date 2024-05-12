@@ -84,8 +84,8 @@ function Header({ mapSelection, setMapSelection, chartSelection, setChartSelecti
                 <Form.Label>Map Type</Form.Label>
                 <Form.Control as="select" name="selectedMapType" value={mapSelection.selectedMapType} onChange={handleChange}>
                   <option>Approved Districting Plan</option>
-                  <option>Precincts</option>
-                  <option>Counties</option>
+                  <option>Approved Districting Plan Heatmap</option>
+                  <option>Precincts Heatmap</option>
                 </Form.Control>
               </Form.Group>
             </Col>
@@ -121,11 +121,6 @@ function Header({ mapSelection, setMapSelection, chartSelection, setChartSelecti
                 <Form.Control ref = {view} as="select" name="selectedAreaType" value={chartSelection.selectedAreaType} onChange={handleChange}>
                   <option>Currently Viewing State</option>
                   <option>State vs State</option>
-                  <option>County 1</option>
-                  <option>County 2</option>
-                  <option>County 3</option>
-                  <option>County 4</option>
-                  <option>County 5</option>
                 </Form.Control>
               </Form.Group>
             </Col>

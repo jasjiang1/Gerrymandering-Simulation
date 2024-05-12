@@ -55,7 +55,7 @@ function Map({ mapSelection,chartSelection,highlightDistrict, setHighlight}) {
         try {
           const stateParam = mapSelection.selectedState.toLowerCase().replace(/\s/g, '');
           let url
-          if(mapSelection.selectedMapType === 'Approved Districting Plan') {
+          if(mapSelection.selectedMapType === 'Approved Districting Plan' || mapSelection.selectedMapType === 'Approved Districting Plan Heatmap') {
             url = `http://localhost:8080/api/geojson/district/${stateParam}`;
           } else {
             url = `http://localhost:8080/api/geojson/precinct/${stateParam}`;
@@ -131,6 +131,37 @@ function Map({ mapSelection,chartSelection,highlightDistrict, setHighlight}) {
           attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
         }).addTo(mapInstance.current);
       }
+      if (mapSelection.selectedMapType !== "Approved Districting Plan") {
+        if (!mapInstance.current.legendControl) {
+          let legend = L.control({ position: 'topright' });
+          legend.onAdd = function (map) {
+            let div = L.DomUtil.create('div', 'info legend');
+            const labels = ["&gt; 30%", "20% - 30%", "10% - 20%", "&lt; 10%"];
+            const opacities = [0.7, 0.6, 0.5, 0.4];
+            div.innerHTML = '<strong>Minority Population %</strong><br>';
+            for (let i = 0; i < opacities.length; i++) {
+              div.innerHTML +=
+                '<i style="background:#1DA1F2; opacity: ' + opacities[i] + '">&nbsp;&nbsp;&nbsp;&nbsp;</i> ' +
+                labels[i] + '<br>';
+            }
+            div.style.backgroundColor = "#f2f3f4";
+            div.style.padding = "6px";
+            div.style.fontSize = "12px";
+            div.style.borderRadius = "5px";
+            div.style.borderColor = "gray";
+            div.style.borderStyle = "solid";
+            div.style.borderWidth = "1px";
+            return div;
+          };
+          legend.addTo(mapInstance.current);
+          mapInstance.current.legendControl = legend;
+        }
+      } else {
+        if (mapInstance.current.legendControl) {
+          mapInstance.current.legendControl.remove();
+          mapInstance.current.legendControl = null;
+        }
+      }
       if (mapSelection.selectedState) {
         const { center, zoom } = mapSelection;
         mapInstance.current.setView(center, zoom);
@@ -153,7 +184,7 @@ function Map({ mapSelection,chartSelection,highlightDistrict, setHighlight}) {
             style: function(feature) {
                 const population = feature.properties.population
                 let minorityPopulation
-                if (mapSelection.selectedMapType === 'Approved Districting Plan') {
+                if (mapSelection.selectedMapType === 'Approved Districting Plan Heatmap') {
                   minorityPopulation = getMinorityPopulationDistrict(feature, mapSelection)
                 } else {
                   minorityPopulation = getMinorityPopulationPrecinct(feature, mapSelection)
