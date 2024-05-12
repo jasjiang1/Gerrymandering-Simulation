@@ -66,7 +66,7 @@ function Header({ mapSelection, setMapSelection, chartSelection, setChartSelecti
     <Navbar bg="secondary" expand="lg" variant="dark" className="py-2">
       <Container fluid>
         <Navbar.Brand href="#" className="d-flex align-items-center flex-column me-2">
-          <img src={logo} alt="logo" width="100" height= "100" className="banner-logo"/>
+          <img src={logo} alt="logo" width="50" height= "50" className="banner-logo"/>
         </Navbar.Brand>
         <Form onSubmit={handleSubmit} className="d-flex align-items-center w-100 gx-2" style={{ marginLeft: '75px' }}>
           <Row className="w-100 gx-2 gy-2">
@@ -126,7 +126,6 @@ function Header({ mapSelection, setMapSelection, chartSelection, setChartSelecti
               </Form.Group>
             </Col>
             <Col xs={6} md="auto" className="d-flex align-items-end pb-2">
-              <Button type="submit" variant="primary" size="lg">Apply</Button>
               <Button variant="danger" size="lg" className="ms-2" onClick={reset}>Reset</Button>
             </Col>
           </Row>
