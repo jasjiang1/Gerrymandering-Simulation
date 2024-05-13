@@ -78,7 +78,7 @@ function App() {
 
   function renderChart(){
       switch(chartSelection.selectedChartType){
-        case 'Bar Chart':
+        case 'Reps Vs Population Chart':
           return <BarChart mapSelection={mapSelection} chartSelection={chartSelection} comparison={statevstate}/>
         case 'State Data Summary':
           return <StateTable mapSelection={mapSelection}/>
@@ -101,7 +101,7 @@ function App() {
     function firstRenderChart(){
 
       switch(firstChartSelection.selectedChartType){
-        case 'Bar Chart':
+        case 'Reps Vs Population Chart':
           return <BarChart mapSelection={firstMapSelection} chartSelection={firstChartSelection} comparison={statevstate}/>
         case 'State Data Summary':
           return <StateTable mapSelection={firstMapSelection}/>
@@ -123,7 +123,7 @@ function App() {
     }
     function secondRenderChart(){
       switch(secondChartSelection.selectedChartType){
-        case 'Bar Chart':
+        case 'Reps Vs Population Chart':
           return <BarChart mapSelection={secondMapSelection} chartSelection={secondChartSelection} comparison={statevstate}/>
         case 'State Data Summary':
           return <StateTable mapSelection={secondMapSelection}/>

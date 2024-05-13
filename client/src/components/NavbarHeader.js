@@ -66,7 +66,7 @@ function Header({ mapSelection, setMapSelection, chartSelection, setChartSelecti
     <Navbar bg="secondary" expand="lg" variant="dark" className="py-2">
       <Container fluid>
         <Navbar.Brand href="#" className="d-flex align-items-center flex-column me-2">
-          <img src={logo} alt="logo" width="30" height= "30" className="d-inline-block align-top mb-1"/>
+          <img src={logo} alt="logo" width="50" height= "50" className="banner-logo"/>
         </Navbar.Brand>
         <Form onSubmit={handleSubmit} className="d-flex align-items-center w-100 gx-2" style={{ marginLeft: '75px' }}>
           <Row className="w-100 gx-2 gy-2">
@@ -105,7 +105,7 @@ function Header({ mapSelection, setMapSelection, chartSelection, setChartSelecti
                 <Form.Label>Chart Type</Form.Label>
                 <Form.Control as="select" name="selectedChartType" value={chartSelection.selectedChartType} onChange={handleChange}>
                   <option>State Data Summary</option>
-                  <option>Bar Chart</option>
+                  <option>Reps Vs Population Chart</option>
                   <option>Box and Whiskers</option>
                   <option>Gingles Plot</option>
                   <option>Ecological Inference</option>
@@ -126,7 +126,6 @@ function Header({ mapSelection, setMapSelection, chartSelection, setChartSelecti
               </Form.Group>
             </Col>
             <Col xs={6} md="auto" className="d-flex align-items-end pb-2">
-              <Button type="submit" variant="primary" size="lg">Apply</Button>
               <Button variant="danger" size="lg" className="ms-2" onClick={reset}>Reset</Button>
             </Col>
           </Row>

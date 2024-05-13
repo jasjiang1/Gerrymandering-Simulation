@@ -158,7 +158,7 @@ function StatevStateHeader({ mapSelection, setMapSelection, chartSelection, setC
                 <Form.Label>First Chart Type</Form.Label>
                 <Form.Control as="select" name="selectedChartType" value={chartSelection.selectedChartType} onChange={handleChange}>
                   <option>State Data Summary</option>
-                  <option>Bar Chart</option>
+                  <option>Reps Vs Population Chart</option>
                   <option>Box and Whiskers</option>
                   <option>Gingles Plot</option>
                   <option>Ecological Inference</option>
@@ -196,7 +196,7 @@ function StatevStateHeader({ mapSelection, setMapSelection, chartSelection, setC
                 <Form.Label>Second Chart Type</Form.Label>
                 <Form.Control as="select" name="secondSelectedChartType" value={secondChartSelection.selectedChartType} onChange={handleChange}>
                   <option>State Data Summary</option>
-                  <option>Bar Chart</option>
+                  <option>Reps Vs Population Chart</option>
                   <option>Box and Whiskers</option>
                   <option>Gingles Plot</option>
                   <option>Ecological Inference</option>

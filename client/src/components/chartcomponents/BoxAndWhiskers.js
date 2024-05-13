@@ -114,7 +114,7 @@ function BWGraph({ mapSelection }) {
     return (
         <div className = "chart-container">
             <div>
-                <div id="charttitle">{mapSelection.selectedState} Box And Whiskers</div>
+                <h1 style={{ textAlign: 'center' }}>{mapSelection.selectedState} Box And Whiskers</h1>
                 <Form>
                     <Form.Group controlId="selectBWEnsembleSize">
                     <Form.Label>Select Ensemble Size</Form.Label>
