@@ -16,9 +16,11 @@
 .value{
   text-align: right;
   font-weight: bold;
+  font-size: 16px;
 }
 #title{
-  font-size: 15px;
+  font-size: 24px;
+  font-weight: bold;
 }
 
 table,
@@ -29,9 +31,9 @@ td {
   border: 1px solid orange;
   border-collapse: collapse;
   padding: 5px;
-  font-size: 14px;
+  font-size: 16px;
   border-radius: 5px;
-
+  font-weight: bold;
 }
 td{
   background-color: #6B6E70;
@@ -47,9 +49,10 @@ th{
   background-color: orange;
   color:white;
   font:Times, serif;
-  font-size: 12px;
+  font-size: 18px;
   text-align: center;
   border-radius: 10px;
+  font-weight: bolder;
 }
 table {
   font-family: Georgia;
