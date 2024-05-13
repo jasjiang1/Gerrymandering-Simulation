@@ -137,8 +137,10 @@ function App() {
           return <BWGraph mapSelection={secondMapSelection} />
         case 'Dem Rep Splits':
           return <DRGraph mapSelection={secondMapSelection}/>
-          case 'Ensemble Opportunity Districts':
-            return <EnsembleOpportunityGraph mapSelection={secondMapSelection} chartSelection={secondChartSelection} comparison={statevstate}></EnsembleOpportunityGraph>
+        case 'Ensemble Opportunity Districts':
+          return <EnsembleOpportunityGraph mapSelection={secondMapSelection} chartSelection={secondChartSelection} comparison={statevstate}></EnsembleOpportunityGraph>
+        case 'Vote Seat Share Curve':
+          return <VoteSeatShare mapSelection={secondMapSelection}/>
       }
     }
 

@@ -38,14 +38,14 @@ function VoteSeatShareGraph({ mapSelection }) {
                         {
                             label: 'Republican Seats',
                             data: voteSeatShareData.voteSeatShareCurve.map(entry => entry.seatsR),
-                            fill: true,
+                            fill: false,
                             backgroundColor: 'rgba(255, 99, 132, 0.2)',
                             borderColor: 'rgba(255, 99, 132, 1)'
                         },
                         {
                             label: 'Democratic Seats',
                             data: voteSeatShareData.voteSeatShareCurve.map(entry => entry.seatsD),
-                            fill: true,
+                            fill: false,
                             backgroundColor: 'rgba(54, 162, 235, 0.2)',
                             borderColor: 'rgba(54, 162, 235, 1)'
                         }
