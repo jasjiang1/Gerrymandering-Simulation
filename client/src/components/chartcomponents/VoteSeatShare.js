@@ -70,7 +70,7 @@ function VoteSeatShareGraph({ mapSelection }) {
     }, [voteSeatShareData]);
 
     return (
-        <div>
+        <div className = "chart-container" style={{ border: '4px solid #000' }}>
             <h1 style={{ textAlign: 'center' }}>Vote-Seat Share Curve for {mapSelection.selectedState}</h1>
             <canvas ref={canvasRef} width="200" height="75"></canvas>
         </div>

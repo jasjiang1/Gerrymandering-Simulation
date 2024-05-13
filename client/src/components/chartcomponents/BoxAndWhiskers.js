@@ -89,7 +89,7 @@ function BWGraph({ mapSelection }) {
                             data: toShow,
                         },
                         {
-                            label: "Actual Plan",
+                            label: "Enacted Plan",
                             backgroundColor:'black', 
                             borderColor:'black',
                             borderWidth:5,
@@ -112,7 +112,7 @@ function BWGraph({ mapSelection }) {
     }
 
     return (
-        <div className = "chart-container">
+        <div className = "chart-container" style={{ border: '4px solid #000' }}>
             <div>
                 <h1 style={{ textAlign: 'center' }}>{mapSelection.selectedState} Box And Whiskers</h1>
                 <h1>Select Ensemble Size</h1>

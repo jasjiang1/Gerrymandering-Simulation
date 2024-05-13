@@ -218,7 +218,7 @@ function Map({ mapSelection,chartSelection,highlightDistrict, setHighlight}) {
         }
       };
     }, []);
-    return <div ref={mapContainerRef} style={{ height: '950px', width: '100%'}} />;
+    return <div ref={mapContainerRef} style={{ height: '950px', width: '100%', border: '4px solid #000'}} />;
 }
 
 export default Map;

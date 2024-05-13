@@ -126,7 +126,7 @@ function EnsembleOpportunityGraph({ mapSelection, chartSelection }) {
     };
 
     return (
-        <div className="chart-container">
+        <div className = "chart-container" style={{ border: '4px solid #000' }}>
             <div>
                 <h1 style={{ textAlign: 'center' }}>5000-Ensemble Opportunity District Bar Chart</h1>
                 <div id = "threshold">
