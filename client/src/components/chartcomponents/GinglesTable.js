@@ -20,21 +20,21 @@ function GinglesTable({ ginglesTableData }) {
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>
-                  <TableCell>Precinct</TableCell>
-                  <TableCell>Minority Percentage</TableCell>
-                  <TableCell>Republican Vote Margin</TableCell>
-                  <TableCell>Democratic Vote Margin</TableCell>
-                  <TableCell>Winner</TableCell>
+                  <TableCell sx ={{fontSize: '1.5rem'}}>Precinct</TableCell>
+                  <TableCell sx ={{fontSize: '1.5rem'}}>Minority Percentage</TableCell>
+                  <TableCell sx ={{fontSize: '1.5rem'}}>Republican Vote Margin</TableCell>
+                  <TableCell sx ={{fontSize: '1.5rem'}}>Democratic Vote Margin</TableCell>
+                  <TableCell sx ={{fontSize: '1.5rem'}}>Winner</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {ginglesTableData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
-                  <TableRow sx={{ color: 'white' }}key={row.precinct}>
-                    <TableCell sx={{ color: 'white' }}>{row.precinct}</TableCell>
-                    <TableCell sx={{ color: 'white' }}>{parseFloat(row.minorityPCT).toFixed(2)}</TableCell>
-                    <TableCell sx={{ color: 'white' }}>{parseFloat(row.republicanPCT).toFixed(2)}</TableCell>
-                    <TableCell sx={{ color: 'white' }}>{parseFloat(row.democraticPCT).toFixed(2)}</TableCell>
-                    <TableCell sx={{ color: 'white' }}>{row.winner}</TableCell>
+                  <TableRow sx={{ color: 'white', fontSize: '1.5rem' }}key={row.precinct}>
+                    <TableCell sx={{ color: 'white', fontSize: '1.5rem' }}>{row.precinct}</TableCell>
+                    <TableCell sx={{ color: 'white', fontSize: '1.5rem' }}>{parseFloat(row.minorityPCT).toFixed(2)}</TableCell>
+                    <TableCell sx={{ color: 'white', fontSize: '1.5rem' }}>{parseFloat(row.republicanPCT).toFixed(2)}</TableCell>
+                    <TableCell sx={{ color: 'white', fontSize: '1.5rem' }}>{parseFloat(row.democraticPCT).toFixed(2)}</TableCell>
+                    <TableCell sx={{ color: 'white', fontSize: '1.5rem' }}>{row.winner}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

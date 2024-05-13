@@ -49,12 +49,12 @@ function StateAssembly({mapSelection, setlayerhighlight}) {
         };
       return (
         <Paper sx={{ width: '100%' }}>
-        <Typography variant="h6" component="div" sx={{ padding: 2, fontFamily: 'Georgia', background: '#86C232', color: 'white', textAlign: 'center' }}>
+        <Typography variant="h6" component="div" sx={{ padding: 2, fontFamily: 'Georgia', background: '#86C232', color: 'white', textAlign: 'center', fontSize: '1.5rem' }}>
             Assembly Representatives
         </Typography>
             <div>
-                <label htmlFor="party-select">Filter by Race:</label>
-                <select id="race-select" onChange={handleRaceChange} value={filterRace}>
+                <label htmlFor="party-select" >Filter by Race:</label>
+                <select id="race-select" style={{ fontSize: '2.4rem' }} onChange={handleRaceChange} value={filterRace}>
                     <option value="">All Races</option>
                     <option value="Hispanic">Hispanic</option>
                     <option value="Asian">Asian</option>
@@ -62,7 +62,7 @@ function StateAssembly({mapSelection, setlayerhighlight}) {
                     <option value="White">White</option>
                 </select>
                 <label htmlFor="party-select">Filter by Party:</label>
-                <select id="party-select" onChange={handlePartyChange} value={filterParty}>
+                <select id="party-select" style={{ fontSize: '2.4rem' }} onChange={handlePartyChange} value={filterParty}>
                     <option value="">All Parties</option>
                     <option value="D">Democratic</option>
                     <option value="R">Republican</option>
@@ -72,21 +72,21 @@ function StateAssembly({mapSelection, setlayerhighlight}) {
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>
-                  <TableCell sx={{fontFamily: 'Georgia', fontSize: '12px'}}>District</TableCell>
-                  <TableCell sx={{fontFamily: 'Georgia', fontSize: '12px'}}>Representative</TableCell>
-                  <TableCell sx={{fontFamily: 'Georgia', fontSize: '12px'}}>Party</TableCell>
-                  <TableCell sx={{fontFamily: 'Georgia', fontSize: '12px'}}>Ethnicity</TableCell>
-                  <TableCell sx={{fontFamily: 'Georgia', fontSize: '12px'}}>% Vote Margin</TableCell>
+                  <TableCell sx={{fontFamily: 'Georgia', fontSize: '1.5rem'}}>District</TableCell>
+                  <TableCell sx={{fontFamily: 'Georgia', fontSize: '1.5rem'}}>Representative</TableCell>
+                  <TableCell sx={{fontFamily: 'Georgia', fontSize: '1.5rem'}}>Party</TableCell>
+                  <TableCell sx={{fontFamily: 'Georgia', fontSize: '1.5rem'}}>Ethnicity</TableCell>
+                  <TableCell sx={{fontFamily: 'Georgia', fontSize: '1.5rem'}}>% Vote Margin</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {filteredReps.map((row) => (
                 <TableRow sx={{ color: 'white' }} onClick={() => setlayerhighlight(row.districtNum)}>
-                    <TableCell sx={{ color: 'white', fontFamily: 'Georgia', fontSize: '12px' }}>{row.districtNum}</TableCell>
-                    <TableCell sx={{ color: 'white', fontFamily: 'Georgia', fontSize: '12px' }}>{row.name}</TableCell>
-                    <TableCell sx={{ color: 'white', fontFamily: 'Georgia', fontSize: '12px' }}>{row.party}</TableCell>
-                    <TableCell sx={{ color: 'white', fontFamily: 'Georgia', fontSize: '12px' }}>{row.ethnicity}</TableCell>
-                    <TableCell sx={{ color: 'white', fontFamily: 'Georgia', fontSize: '12px' }}>{row.voterMargin}</TableCell>
+                    <TableCell sx={{ color: 'white', fontFamily: 'Georgia', fontSize: '1.5rem' }}>{row.districtNum}</TableCell>
+                    <TableCell sx={{ color: 'white', fontFamily: 'Georgia', fontSize: '1.5rem' }}>{row.name}</TableCell>
+                    <TableCell sx={{ color: 'white', fontFamily: 'Georgia', fontSize: '1.5rem' }}>{row.party}</TableCell>
+                    <TableCell sx={{ color: 'white', fontFamily: 'Georgia', fontSize: '1.5rem' }}>{row.ethnicity}</TableCell>
+                    <TableCell sx={{ color: 'white', fontFamily: 'Georgia', fontSize: '1.5rem' }}>{row.voterMargin}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

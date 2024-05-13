@@ -32,7 +32,7 @@ function GinglesGraph({ mapSelection }) {
                     minorityPCT: info[ethnicity] > 0 ? info[ethnicity] : null,  // Ensure there are no zero or negative values
                     republicanPCT: info.republicPCT,
                     democraticPCT: info.democraticPCT
-                })).filter(d => d.minorityPCT !== null);  // Filter out unsuitable entries
+                })).filter(d => d.minorityPCT !== null && d.minorityPCT != 0);  // Filter out unsuitable entries
     
                 const regressionResultD = regression.polynomial(
                     data.map(d => [d.minorityPCT, d.democraticPCT]),

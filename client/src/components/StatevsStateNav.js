@@ -5,8 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function StatevStateHeader({ mapSelection, setMapSelection, chartSelection, setChartSelection, secondMapSelection, setSecondMapSelection, secondChartSelection, setSecondChartSelection, setComparison }){
   const reset = () => {
-    document.getElementById("leftContainer").style.flex = "6.5";
-    document.getElementById("rightContainer").style.flex = "3.5";
+    document.getElementById("leftContainer").style.flex = "3.5";
+    document.getElementById("rightContainer").style.width = "6.5";
     setComparison(false);
   }
   useEffect(() => {

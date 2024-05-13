@@ -83,6 +83,28 @@ function StateTable({mapSelection}) {
               {mapSelection.selectedState=== "Georgia" &&  <td class="value">101</td>}
               {mapSelection.selectedState=== "New Jersey" &&  <td class="value">30</td>}
           </tr>
+          <th colspan ="2">Ensemble Information</th>
+          <tr>
+            <td id = "min_1">Population Threshold Percentages for size 5,000</td>
+              {mapSelection.selectedState=== "Georgia" &&  <td class="value">0.3</td>}
+              {mapSelection.selectedState=== "New Jersey" &&  <td class="value">0.3</td>}
+          </tr>
+          <tr>
+            <td id = "min_1">Population Threshold Percentages for size 250</td>
+              {mapSelection.selectedState=== "Georgia" &&  <td class="value">0.3</td>}
+              {mapSelection.selectedState=== "New Jersey" &&  <td class="value">0.3</td>}
+          </tr>
+          <th colspan ="2">Voter Percentage Estimate</th>
+          <tr>
+            <td id = "min_1">Percentage Democratic Voters</td>
+              {mapSelection.selectedState=== "Georgia" &&  <td class="value">45.9%</td>}
+              {mapSelection.selectedState=== "New Jersey" &&  <td class="value">51.2%</td>}
+          </tr>
+          <tr>
+            <td id = "min_1">Percentage Democratic Voters</td>
+              {mapSelection.selectedState=== "Georgia" &&  <td class="value">53.4%</td>}
+              {mapSelection.selectedState=== "New Jersey" &&  <td class="value">48%</td>}
+          </tr>
         </table>}
       </div>
     );
