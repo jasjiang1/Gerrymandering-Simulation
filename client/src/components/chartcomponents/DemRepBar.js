@@ -94,7 +94,7 @@ function DRGraph({ mapSelection }) {
                 type:"bar",
                 options:{
                     scales:{
-                        y:{title:{display:true, text:"% Split Occurence",font: {weight:'bold'}}},
+                        y:{title:{display:true, text:"Split Frequency",font: {weight:'bold'}}},
                         x:{title:{display:true, text:"Dem/Rep Split",font: {weight:'bold'}}}
                     }
                 },
