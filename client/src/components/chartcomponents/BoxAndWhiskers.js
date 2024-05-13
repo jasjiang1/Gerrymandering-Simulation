@@ -115,9 +115,9 @@ function BWGraph({ mapSelection }) {
         <div className = "chart-container">
             <div>
                 <h1 style={{ textAlign: 'center' }}>{mapSelection.selectedState} Box And Whiskers</h1>
+                <h1>Select Ensemble Size</h1>
                 <Form>
                     <Form.Group controlId="selectBWEnsembleSize">
-                    <Form.Label>Select Ensemble Size</Form.Label>
                     <Form.Control as="select" onChange = {handleChange}>
                         <option value = "250">250</option>
                         <option value = "5000">5000</option>
