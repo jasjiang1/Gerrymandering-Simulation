@@ -29,17 +29,18 @@ function GinglesGraph({ mapSelection }) {
                 const response = await axios.get(url);
                 const data = response.data.map(info => ({
                     ...info,
-                    minorityPCT: info[ethnicity],
+                    minorityPCT: info[ethnicity] > 0 ? info[ethnicity] : null,  // Ensure there are no zero or negative values
                     republicanPCT: info.republicPCT,
                     democraticPCT: info.democraticPCT
-                }));
+                })).filter(d => d.minorityPCT !== null);  // Filter out unsuitable entries
+    
                 const regressionResultD = regression.polynomial(
                     data.map(d => [d.minorityPCT, d.democraticPCT]),
-                    { order: 2, precision: 5 }
+                    { precision: 5 }
                 );
                 const regressionResultR = regression.polynomial(
                     data.map(d => [d.minorityPCT, d.republicanPCT]),
-                    { order: 2, precision: 5 }
+                    { precision: 5 }
                 );
                 const plotData = [
                     data.map(d => d.minorityPCT),
@@ -50,6 +51,7 @@ function GinglesGraph({ mapSelection }) {
                 ];
                 setGinglesData(plotData)
                 setGinglesTableData(data)
+                console.log(regressionResultD)
             } catch (error) {
                 console.error('Failed to fetch data:', error);
             }

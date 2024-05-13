@@ -205,13 +205,11 @@ option {
 }
 
 .left-container {
-  flex: 6.5;
-  width: 65%;
+  width: 35%;
 }
 
 .right-container {
-  flex: 3.5;
-  width: 35%;
+  width: 65%;
   /*margin-top:75px*/
 }
 

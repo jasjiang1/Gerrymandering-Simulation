@@ -124,7 +124,7 @@ function BWGraph({ mapSelection }) {
                     </Form.Control>
                     </Form.Group>
                 </Form>
-                <canvas ref={canvasRef} width="200" height="150"></canvas>
+                <canvas ref={canvasRef} width="200" height="75"></canvas>
             </div>
         </div>
     )

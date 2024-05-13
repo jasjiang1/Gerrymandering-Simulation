@@ -10,7 +10,7 @@ function Map({ mapSelection,chartSelection,highlightDistrict, setHighlight}) {
     const mapInstance = useRef(null);
     const [geoJSONData, setGeoJSONData] = useState(null);
     const [currentHighlight, setHighlighted] = useState(null);
-    const outline = "#FFFFFF";
+    const outline = "#000000";
     const mapColor = "#1DA1F2";
     useEffect(() => {
       const { center, zoom } = mapSelection;
@@ -31,14 +31,14 @@ function Map({ mapSelection,chartSelection,highlightDistrict, setHighlight}) {
               if(currentHighlight != null && (Number(layer.feature.properties.district) == highlightDistrict)){
                 if((highlightDistrict != Number(currentHighlight.feature.properties.district))){
                   currentHighlight.setStyle({ color: outline});
-                  layer.setStyle({color: 'black'});
+                  layer.setStyle({color: 'red'});
                   layer.bringToFront();
                   map.fitBounds(layer.getBounds());
                   setHighlighted(layer);
                 }  
               }
               if(currentHighlight == null && (Number(layer.feature.properties.district) == highlightDistrict)){
-                layer.setStyle({color: 'black', weight:2});
+                layer.setStyle({color: 'red', weight:2});
                 layer.bringToFront();
                 map.fitBounds(layer.getBounds());
                 setHighlighted(layer);
@@ -169,6 +169,9 @@ function Map({ mapSelection,chartSelection,highlightDistrict, setHighlight}) {
       let geoJSONLayer;
       if (geoJSONData && mapInstance.current) {
         const getOpacityByMinority = (totalPop, minorityPop) => {
+          if (mapSelection.selectedMapType == "Approved Districting Plan") {
+            return 0
+          }
           const percentage = minorityPop / totalPop
           if (percentage > 0.3) {
             return 0.7

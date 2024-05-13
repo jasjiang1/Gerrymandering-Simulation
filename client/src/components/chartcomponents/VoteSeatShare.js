@@ -54,7 +54,7 @@ function VoteSeatShareGraph({ mapSelection }) {
                 options: {
                     scales: {
                         x: {
-                            title: { display: true, text: "% Vote Share", font: { weight: 'bold' } },
+                            title: { display: true, text: "Vote Share (%)", font: { weight: 'bold' } },
                             type: 'linear',
                             beginAtZero: true,
                         },
@@ -72,7 +72,7 @@ function VoteSeatShareGraph({ mapSelection }) {
     return (
         <div>
             <h1 style={{ textAlign: 'center' }}>Vote-Seat Share Curve for {mapSelection.selectedState}</h1>
-            <canvas ref={canvasRef} width="600" height="400"></canvas>
+            <canvas ref={canvasRef} width="200" height="75"></canvas>
         </div>
     );
 }

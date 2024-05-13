@@ -95,14 +95,6 @@ function EnsembleOpportunityGraph({ mapSelection, chartSelection }) {
                         borderWidth: 1,
                         borderRadius: 5,
                     }
-                    , {
-                        label: 'White',
-                        data: white,
-                        backgroundColor: ['#2AA10F'],
-                        borderColor: ['#182628'],
-                        borderWidth: 1,
-                        borderRadius: 5,
-                    }
                 ]
                 },
             options: {
@@ -145,7 +137,7 @@ function EnsembleOpportunityGraph({ mapSelection, chartSelection }) {
                         <option value="50%">50%</option>
                     </select>
                 </div>
-                <canvas ref={canvasRef} width="250" height="200"></canvas>
+                <canvas ref={canvasRef} width="200" height="75"></canvas>
             </div>
         </div>
     );

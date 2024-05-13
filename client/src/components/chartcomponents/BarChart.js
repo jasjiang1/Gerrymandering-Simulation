@@ -79,7 +79,7 @@ function Graph({ mapSelection, chartSelection }) {
         <div className="chart-container">
             <div>
                 <h1 style={{ textAlign: 'center' }}>{mapSelection.selectedState} Bar Chart</h1>
-                <canvas ref={canvasRef} width="250" height="200"></canvas>
+                <canvas ref={canvasRef} width="200" height="75"></canvas>
             </div>
         </div>
     );

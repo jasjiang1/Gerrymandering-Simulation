@@ -53,13 +53,13 @@ function EIGraph({ mapSelection }) {
                 options: {
                     scales: {
                         x: {
-                            title:{display:true, text:"% Minority",font: {weight:'bold'}},
+                            title:{display:true, text:"Minority (%)",font: {weight:'bold'}},
                             type: 'linear',
                             min: 0,
                             max: 1
                         },
                         y: {
-                            title:{display:true, text:"Probability Density",font: {weight:'bold'}},
+                            title:{display:true, text:"Probability Density (%)",font: {weight:'bold'}},
                             beginAtZero: true
                         }
                     }
@@ -73,8 +73,8 @@ function EIGraph({ mapSelection }) {
 
     return (
         <div>
-            <h1 style={{textAlign: 'center'}}>Support Among {mapSelection.selectedEthnicity}</h1>
-            <canvas ref={canvasRef} width="600" height="400"></canvas>
+            <h1 style={{textAlign: 'center'}}>Support For Candidates Among {mapSelection.selectedEthnicity} </h1>
+            <canvas ref={canvasRef} width="200" height="75"></canvas>
         </div>
     );
 }
