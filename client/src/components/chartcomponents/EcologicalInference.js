@@ -72,7 +72,7 @@ function EIGraph({ mapSelection }) {
     }, [ecologicalInferenceData]);
 
     return (
-        <div>
+        <div className = "chart-container" style={{ border: '4px solid #000' }}>
             <h1 style={{textAlign: 'center'}}>Support For Candidates Among {mapSelection.selectedEthnicity} </h1>
             <canvas ref={canvasRef} width="200" height="75"></canvas>
         </div>

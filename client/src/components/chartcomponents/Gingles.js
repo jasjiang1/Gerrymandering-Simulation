@@ -123,7 +123,7 @@ function GinglesGraph({ mapSelection }) {
 
     return (
         <>
-        <div>
+        <div className = "chart-container" style={{ border: '4px solid #000' }}>
             <h1 style={{ textAlign: 'center' }}>Governor Election Sorted By Percent {mapSelection.selectedEthnicity} Within Each Precinct</h1>
             <div ref={plotRef} style={{ width: '100%', height: '400px' }}></div>
         </div>

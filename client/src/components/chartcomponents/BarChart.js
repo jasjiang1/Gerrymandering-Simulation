@@ -76,7 +76,7 @@ function Graph({ mapSelection, chartSelection }) {
     }, [barChartData]);
 
     return (
-        <div className="chart-container">
+        <div className = "chart-container" style={{ border: '4px solid #000' }}>
             <div>
                 <h1 style={{ textAlign: 'center' }}>{mapSelection.selectedState} Bar Chart</h1>
                 <canvas ref={canvasRef} width="200" height="75"></canvas>
