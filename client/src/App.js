@@ -164,6 +164,8 @@ function App() {
                 setChartSelection={setChartSelection} 
                 setComparison={setComparison}
                 comparison={statevstate}
+                welcome = {isWelcomePageVisible}
+                setWelcome={setIsWelcomePageVisible}
               />}
               
             {statevstate && <ComparisonNavBar

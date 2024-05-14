@@ -3,7 +3,7 @@ import logo from './grizzliestransparent.png';
 import { Container, Navbar, Form, Row, Col, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function Header({ mapSelection, setMapSelection, chartSelection, setChartSelection,setComparison, comparison}){
+function Header({ mapSelection, setMapSelection, chartSelection, setChartSelection,setComparison, comparison, welcome, setWelcome}){
   
   const view = useRef(null);
 
@@ -61,6 +61,7 @@ function Header({ mapSelection, setMapSelection, chartSelection, setChartSelecti
       ...prevState,
       selectedChartType: "State Data Summary"
     }))
+    setWelcome(!welcome)
   }
   return (
     <Navbar bg="secondary" expand="lg" variant="dark" className="py-2">
