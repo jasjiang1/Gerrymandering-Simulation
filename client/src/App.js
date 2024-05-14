@@ -1,23 +1,23 @@
 import MyNavbar from './components/NavbarHeader';
 import WelcomePage from "./components/WelcomePage.js"
-import React, { useState, useEffect } from 'react';
-import './App.css'
+import React, { useState } from 'react';
+import './App.css';
 import TestMap from "./components/Map/Map.js";
-import StateTable from "./components/chartcomponents/StateTable.js"
+import StateTable from "./components/chartcomponents/StateTable.js";
 import BarChart from "./components/chartcomponents/BarChart.js";
-import DistrictTable from "./components/chartcomponents/DistrictTableWithFilter.js"
-import ComparisonDistrict from "./components/chartcomponents/ComparisonDistrict.js"
-import EcologicalInference from "./components/chartcomponents/EcologicalInference.js"
+import DistrictTable from "./components/chartcomponents/DistrictTableWithFilter.js";
+import ComparisonDistrict from "./components/chartcomponents/ComparisonDistrict.js";
+import EcologicalInference from "./components/chartcomponents/EcologicalInference.js";
 import GinglesGraph from "./components/chartcomponents/Gingles.js";
 import ComparisonNavBar from './components/StatevsStateNav.js';
-import BWGraph from './components/chartcomponents/BoxAndWhiskers.js'
+import BWGraph from './components/chartcomponents/BoxAndWhiskers.js';
 import DRGraph from './components/chartcomponents/DemRepBar.js';
-import EnsembleOpportunityGraph from './components/chartcomponents/Ensemble_Opportunity_Bar.js'
-import VoteSeatShare from './components/chartcomponents/VoteSeatShare.js'
+import EnsembleOpportunityGraph from './components/chartcomponents/Ensemble_Opportunity_Bar.js';
+import VoteSeatShare from './components/chartcomponents/VoteSeatShare.js';
 
 function App() {
   const [isWelcomePageVisible, setIsWelcomePageVisible] = useState(true);
-  const [highlightDistrict,setLayerHighlight] = useState("");
+  const [highlightDistrict, setLayerHighlight] = useState("");
   const [statevstate, setComparison] = useState(false);
   const [mapSelection, setMapSelection] = useState({
     selectedState: "",
@@ -54,6 +54,8 @@ function App() {
     selectedEthnicityTwo: ""
   });
 
+  const [leftContainerWidth, setLeftContainerWidth] = useState(35);
+
   const handleSelectState = (state) => {
     const stateSettings = {
       'Georgia': { center: [32.5, -82.3], zoom: 6.5 },
@@ -76,74 +78,78 @@ function App() {
     setIsWelcomePageVisible(false);
   };
 
-  function renderChart(){
-      switch(chartSelection.selectedChartType){
+  function renderChart() {
+      switch (chartSelection.selectedChartType) {
         case 'Reps Vs Population Chart':
-          return <BarChart mapSelection={mapSelection} chartSelection={chartSelection} comparison={statevstate}/>
+          return <BarChart mapSelection={mapSelection} chartSelection={chartSelection} comparison={statevstate}/>;
         case 'State Data Summary':
-          return <StateTable mapSelection={mapSelection}/>
+          return <StateTable mapSelection={mapSelection}/>;
         case 'State Assembly Table':
-          return <DistrictTable mapSelection={mapSelection} setlayerhighlight = {setLayerHighlight}/>
+          return <DistrictTable mapSelection={mapSelection} setLayerHighlight={setLayerHighlight}/>;
         case 'Ecological Inference':
-          return <EcologicalInference mapSelection={mapSelection} chartSelection={chartSelection}/>
+          return <EcologicalInference mapSelection={mapSelection} chartSelection={chartSelection}/>;
         case 'Gingles Plot':
-          return <GinglesGraph mapSelection={mapSelection}/>
+          return <GinglesGraph mapSelection={mapSelection}/>;
         case 'Box and Whiskers':
-          return <BWGraph mapSelection={mapSelection}/>
+          return <BWGraph mapSelection={mapSelection}/>;
         case 'Dem Rep Splits':
-          return <DRGraph mapSelection={mapSelection}/>
+          return <DRGraph mapSelection={mapSelection}/>;
         case 'Ensemble Opportunity Districts':
-          return <EnsembleOpportunityGraph mapSelection={mapSelection} chartSelection={chartSelection} comparison={statevstate}></EnsembleOpportunityGraph>
+          return <EnsembleOpportunityGraph mapSelection={mapSelection} chartSelection={chartSelection} comparison={statevstate}/>;
         case 'Vote Seat Share Curve':
-          return <VoteSeatShare mapSelection={mapSelection}/>
+          return <VoteSeatShare mapSelection={mapSelection}/>;
       }
-    }
-    function firstRenderChart(){
+  }
 
-      switch(firstChartSelection.selectedChartType){
+  function firstRenderChart() {
+      switch (firstChartSelection.selectedChartType) {
         case 'Reps Vs Population Chart':
-          return <BarChart mapSelection={firstMapSelection} chartSelection={firstChartSelection} comparison={statevstate}/>
+          return <BarChart mapSelection={firstMapSelection} chartSelection={firstChartSelection} comparison={statevstate}/>;
         case 'State Data Summary':
-          return <StateTable mapSelection={firstMapSelection}/>
+          return <StateTable mapSelection={firstMapSelection}/>;
         case 'State Assembly Table':
-          return <DistrictTable mapSelection={firstMapSelection} comparison={statevstate}/>
+          return <DistrictTable mapSelection={firstMapSelection} comparison={statevstate}/>;
         case 'Ecological Inference':
-          return <EcologicalInference mapSelection={firstMapSelection} chartSelection={firstChartSelection} comparison={statevstate}/>
+          return <EcologicalInference mapSelection={firstMapSelection} chartSelection={firstChartSelection} comparison={statevstate}/>;
         case 'Gingles Plot':
-          return <GinglesGraph mapSelection={firstMapSelection}/>
+          return <GinglesGraph mapSelection={firstMapSelection}/>;
         case 'Box and Whiskers':
-          return <BWGraph mapSelection={firstMapSelection}/>
+          return <BWGraph mapSelection={firstMapSelection}/>;
         case 'Dem Rep Splits':
-          return <DRGraph mapSelection={firstMapSelection}/>
+          return <DRGraph mapSelection={firstMapSelection}/>;
         case 'Ensemble Opportunity Districts':
-          return <EnsembleOpportunityGraph mapSelection={firstMapSelection} chartSelection={firstChartSelection} comparison={statevstate}></EnsembleOpportunityGraph>
+          return <EnsembleOpportunityGraph mapSelection={firstMapSelection} chartSelection={firstChartSelection} comparison={statevstate}/>;
         case 'Vote Seat Share Curve':
-          return <VoteSeatShare mapSelection={firstMapSelection}/>
+          return <VoteSeatShare mapSelection={firstMapSelection}/>;
       }
-    }
-    function secondRenderChart(){
-      switch(secondChartSelection.selectedChartType){
-        case 'Reps Vs Population Chart':
-          return <BarChart mapSelection={secondMapSelection} chartSelection={secondChartSelection} comparison={statevstate}/>
-        case 'State Data Summary':
-          return <StateTable mapSelection={secondMapSelection}/>
-        case 'State Assembly Table':
-          return <DistrictTable mapSelection={secondMapSelection} comparison={statevstate}/>
-        case 'Ecological Inference':
-          return <EcologicalInference mapSelection={secondMapSelection} chartSelection={secondChartSelection}/>
-        case 'Gingles Plot':
-          return <GinglesGraph mapSelection={secondMapSelection} />
-        case 'Box and Whiskers':
-          return <BWGraph mapSelection={secondMapSelection} />
-        case 'Dem Rep Splits':
-          return <DRGraph mapSelection={secondMapSelection}/>
-        case 'Ensemble Opportunity Districts':
-          return <EnsembleOpportunityGraph mapSelection={secondMapSelection} chartSelection={secondChartSelection} comparison={statevstate}></EnsembleOpportunityGraph>
-        case 'Vote Seat Share Curve':
-          return <VoteSeatShare mapSelection={secondMapSelection}/>
-      }
-    }
+  }
 
+  function secondRenderChart() {
+      switch (secondChartSelection.selectedChartType) {
+        case 'Reps Vs Population Chart':
+          return <BarChart mapSelection={secondMapSelection} chartSelection={secondChartSelection} comparison={statevstate}/>;
+        case 'State Data Summary':
+          return <StateTable mapSelection={secondMapSelection}/>;
+        case 'State Assembly Table':
+          return <DistrictTable mapSelection={secondMapSelection} comparison={statevstate}/>;
+        case 'Ecological Inference':
+          return <EcologicalInference mapSelection={secondMapSelection} chartSelection={secondChartSelection}/>;
+        case 'Gingles Plot':
+          return <GinglesGraph mapSelection={secondMapSelection}/>;
+        case 'Box and Whiskers':
+          return <BWGraph mapSelection={secondMapSelection}/>;
+        case 'Dem Rep Splits':
+          return <DRGraph mapSelection={secondMapSelection}/>;
+        case 'Ensemble Opportunity Districts':
+          return <EnsembleOpportunityGraph mapSelection={secondMapSelection} chartSelection={secondChartSelection} comparison={statevstate}/>;
+        case 'Vote Seat Share Curve':
+          return <VoteSeatShare Share mapSelection={secondMapSelection}/>;
+      }
+  }
+
+  const handleSliderChange = (event) => {
+    setLeftContainerWidth(event.target.value);
+  };
 
   return (
       <>
@@ -156,32 +162,33 @@ function App() {
                 setMapSelection={setMapSelection} 
                 chartSelection={chartSelection} 
                 setChartSelection={setChartSelection} 
-                setComparison = {setComparison}
+                setComparison={setComparison}
                 comparison={statevstate}
               />}
               
             {statevstate && <ComparisonNavBar
-
                 mapSelection={firstMapSelection} 
                 setMapSelection={setFirstMapSelection} 
                 chartSelection={firstChartSelection} 
                 setChartSelection={setFirstChartSelection} 
-
                 secondMapSelection={secondMapSelection} 
                 setSecondMapSelection={setSecondMapSelection} 
                 secondChartSelection={secondChartSelection} 
                 setSecondChartSelection={setSecondChartSelection} 
-                setComparison = {setComparison}
+                setComparison={setComparison}
               />}
   
           <div className="main-container">
-            <div className="left-container" id ="leftContainer">
-              {!statevstate && <TestMap mapSelection={mapSelection} chartSelection={chartSelection} highlightDistrict = {highlightDistrict} setHighlight ={setLayerHighlight}/>}
+            <div className="left-container" id="leftContainer" style={{ width: `${leftContainerWidth}%` }}>
+              {!statevstate && <TestMap mapSelection={mapSelection} chartSelection={chartSelection} highlightDistrict={highlightDistrict} setHighlight={setLayerHighlight} />}
               {statevstate && firstRenderChart()}
             </div>
-            <div className="right-container" id = "rightContainer">
+            <div className="right-container" id="rightContainer" style={{ width: `${100 - leftContainerWidth}%` }}>
               {!statevstate && renderChart()}
-              {statevstate && secondRenderChart() }
+              {statevstate && secondRenderChart()}
+              <div className="slider-container">
+                <input type="range" min="20" max="80" value={leftContainerWidth} onChange={handleSliderChange} className="slider"/>
+              </div>
             </div>
           </div>
           </div>

@@ -1,31 +1,29 @@
 /* height of the container */
 .leaflet-container {
   height: calc(100vh);
-  width: calc(100%-200px);
+  width: calc(100% - 200px);
   border-radius: 0;
-  /* margin-top: 150px; */
-  width:50%;
+  width: 50%;
 }
+
 .navbar {
   border-radius: 0;
   margin-bottom: 0;
-  height:100px;
+  height: 100px;
 }
 
-
-.value{
+.value {
   text-align: right;
   font-weight: bold;
   font-size: 16px;
 }
-#title{
+
+#title {
   font-size: 24px;
   font-weight: bold;
 }
 
-table,
-th,
-td {
+table, th, td {
   background-color: #222629;
   color: white;
   border: 1px solid orange;
@@ -35,82 +33,75 @@ td {
   border-radius: 5px;
   font-weight: bold;
 }
-td{
+
+td {
   background-color: #6B6E70;
 }
-#title{
+
+#title {
   background-color: orange;
-  color:white;
-  font:Times, serif;
+  color: white;
+  font: Times, serif;
   font-size: 30px;
   text-align: center;
 }
-th{
+
+th {
   background-color: orange;
-  color:white;
-  font:Times, serif;
+  color: white;
+  font: Times, serif;
   font-size: 18px;
   text-align: center;
   border-radius: 10px;
   font-weight: bolder;
 }
+
 table {
   font-family: Georgia;
   background-color: #25274D;
   border-collapse: separate;
   border-radius: 10px;
-  width:100%;
-}
-.assemlbysummarytable {
-  height: 100vh;
-  overflow: auto;
-}
-#charttitle{
-  font-family: Georgia;
-  font-size: 20px;
-  color:whitesmoke;
-  background-color: orange;
-  border: 2px solid #25274D;
-  text-align: center;
-  border-radius:5px;
-}
-.float{
-  float: left;
-}
-.navbar-container {
-  position: fixed;
-  top: 0;
   width: 100%;
-  z-index: 1000;
 }
-.navbar-brand, .sidebar .nav-link {
-  font-family: Arial, sans-serif;
-  font-size: 1rem;
-}
-.sidebar {
-  position: fixed;
-  top: 40px;
-  left: 0;
-  /* width: 200px; */
+
+.main-container {
+  display: flex;
   width: 100%;
-  padding: 1rem 0;
-  /* height: calc(100% - 56px);
-  overflow-y: auto; */
-  z-index: 500;
+  height: auto;
 }
-/* .main-content {
-  margin-left: 190px;
-  margin-top: 56px;
-  height: calc(100vh - 56px);
-  width: 90%;
-  overflow-y: auto;
-} */
-.custom-text {
-  margin-top: -2px;
-  margin-right: -75px;
-  font-weight: bold; 
-  font-size: 18px;
-  color: #f0ad4e;
+
+.left-container {
+  width: 35%;
+}
+
+.right-container {
+  width: 65%;
+}
+
+.slider-container {
+  width: 100%;
+  padding: 10px;
+}
+
+.slider {
+  width: 95%;
+  margin: auto;
+  display: block;
+}
+
+/* Styles for responsive behavior */
+@media (max-width: 768px) {
+  .left-container, .right-container {
+    width: 100%;
+  }
+  .slider {
+    width: 90%;
+  }
+}
+
+/* Additional styling to enhance visuals */
+.navbar-container, .welcome-modal, .button-container, .legend-container, .tooltip-container, .map-and-legend-container, .map-container, .map-legend, .form-label, .form-control, .custom-tooltip {
+  /* Add your styles here if necessary */
 }
 
 /* Welcome Page */
@@ -122,26 +113,31 @@ table {
   height: 100vh; 
   background-color: #f0ad4e;
 }
+
 .welcomelogo {
   max-width: 100%; 
   margin-bottom: 20px;
-  max-height:70vh;
+  max-height: 70vh;
 }
+
 .button-container {
   display: flex;
 }
+
 .welcome-modal button {
-  height:8vh;
-  width:25vh;
+  height: 8vh;
+  width: 25vh;
   padding: 10px 20px; 
   font-size: 16px; 
   cursor: pointer;
-  margin:1vw;
+  margin: 1vw;
 }
+
 .welcome-modal button:hover {
   background-color: black;
-  color:white;
+  color: white;
 }
+
 .state-name-tooltip {
   background-color: white;
   color: black;
@@ -149,32 +145,38 @@ table {
   padding: 6px;
   border-radius: 3px;
 }
+
 .legend-container {
   text-align: center;
   margin-bottom: 5px;
 }
+
 .tooltip-container {
   margin-top: 300px; 
 }
+
 .legend-text {
   display: block;
   font-weight: bold;
   font-size: 15px;
   margin-bottom: 5px;
 }
+
 .map-and-legend-container {
   display: flex;
   align-items: start;
-  justify-content:  flex-start;
+  justify-content: flex-start;
   margin-top: -10px;
   position: relative;
   height: calc(100vh - 62px);
-  overflow:hidden;
+  overflow: hidden;
 }
+
 .map-container {
   flex-grow: 1;
   height: 100%;
 }
+
 .map-legend {
   max-width: 75%;
   height: auto;
@@ -185,50 +187,41 @@ table {
 /* Navbar */
 .ms-2custom-text {
   font-size: 30px;
-  color:orange
+  color: orange;
 }
+
 .form-label {
   font-size: 20px;
   margin-top: 30px;
 }
+
 option {
   font-size: 15px;
 }
+
 .form-control {
   font-size: 15px;
 }
+
 .custom-tooltip {
   font-size: 1.25rem !important;
   padding: 10px !important;
 }
-.main-container {
-  display: flex;  /* Enables Flexbox */
-  width: 100%;  /* Full width of the container */
-  height: auto;  /* Adjust height based on content */
-}
 
-.left-container {
-  width: 35%;
-}
-
-.right-container {
-  width: 65%;
-  /*margin-top:75px*/
-}
-
+/* Specific district row styles */
 .district-row {
-  color: 'white';
+  color: white;
   font-family: Georgia;
-  font-size: '12px';
+  font-size: 12px;
 }
-#threshold{
+
+#threshold, #labelthresh {
   font-size: 15px;
   text-align: center;
-  font:Times, serif;
+  font: Times, serif;
+  color: black;
 }
+
 form, input, label, p {
   color: white !important;
-}
-#labelthresh{
-  color: black !important;
 }
