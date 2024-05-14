@@ -126,10 +126,10 @@ function DRGraph({ mapSelection }) {
     return (
         <div className = "chart-container" style={{ border: '4px solid #000' }}>
             <div>
-                <h1 style={{ textAlign: 'center' }}>{mapSelection.selectedState} Dem Rep Splits</h1> 
+                <h1 style={{ textAlign: 'center' }}>{mapSelection.selectedState} Democratic Republic Splits</h1> 
+                <h1>Select Ensemble Size</h1>
                 <Form>
                     <Form.Group controlId="selectBWEnsembleSize">
-                    <Form.Label>Select Ensemble Size</Form.Label>
                     <Form.Control as="select" onChange = {handleChange}>
                         <option value = "250">250</option>
                         <option value = "5000">5000</option>

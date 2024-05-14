@@ -174,13 +174,13 @@ function Map({ mapSelection,chartSelection,highlightDistrict, setHighlight}) {
           }
           const percentage = minorityPop / totalPop
           if (percentage > 0.3) {
-            return 0.7
+            return 0.8
           } else if (percentage > 0.2) {
             return 0.6
           } else if (percentage > 0.1) {
-            return 0.5
-          } else {
             return 0.4
+          } else {
+            return 0.2
           }
         };
         geoJSONLayer = L.geoJSON(geoJSONData, {

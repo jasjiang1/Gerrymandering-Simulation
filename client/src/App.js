@@ -85,7 +85,7 @@ function App() {
         case 'State Data Summary':
           return <StateTable mapSelection={mapSelection}/>;
         case 'State Assembly Table':
-          return <DistrictTable mapSelection={mapSelection} setLayerHighlight={setLayerHighlight}/>;
+          return <DistrictTable mapSelection={mapSelection} setlayerhighlight={setLayerHighlight}/>;
         case 'Ecological Inference':
           return <EcologicalInference mapSelection={mapSelection} chartSelection={chartSelection}/>;
         case 'Gingles Plot':

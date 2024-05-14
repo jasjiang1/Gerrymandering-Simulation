@@ -49,7 +49,7 @@ function StateAssembly({mapSelection, setlayerhighlight}) {
         };
       return (
         <Paper sx={{ width: '100%' }}>
-        <Typography variant="h6" component="div" sx={{ padding: 2, fontFamily: 'Georgia', background: '#86C232', color: 'white', textAlign: 'center', fontSize: '1.5rem' }}>
+        <Typography variant="h6" component="div" sx={{ padding: 2, fontFamily: 'Georgia', background: 'orange', color: 'black', textAlign: 'center', fontSize: '2.4rem' }}>
             Assembly Representatives
         </Typography>
             <div>
