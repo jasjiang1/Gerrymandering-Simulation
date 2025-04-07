@@ -35,7 +35,7 @@ function Graph({ mapSelection, chartSelection }) {
             const config = {
                 type: "bar",
                 data: {
-                    labels: ['White', 'African American', 'Asian American', 'Latino', 'Other'],
+                    labels: ['White', 'African American', 'Asian', 'Hispanic', 'Other'],
                     datasets: [{
                         label: 'Number of District Representatives',
                         data: barChartData.districtRepresentativesPercentages,

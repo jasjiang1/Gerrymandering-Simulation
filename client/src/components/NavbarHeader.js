@@ -12,8 +12,8 @@ function Header({ mapSelection, setMapSelection, chartSelection, setChartSelecti
       view.current.value = "Currently Viewing State";
       const event = new Event('change', { bubbles: true });
       view.current.dispatchEvent(event);
-  }
-  },[comparison]);
+  }},[comparison]);
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     if(value == "State vs State"){
@@ -47,6 +47,7 @@ function Header({ mapSelection, setMapSelection, chartSelection, setChartSelecti
       }));
     }
   };
+
   const handleSubmit = (event) =>{
     event.preventDefault();
   }
@@ -63,6 +64,7 @@ function Header({ mapSelection, setMapSelection, chartSelection, setChartSelecti
     }))
     setWelcome(!welcome)
   }
+  
   return (
     <Navbar bg="secondary" expand="lg" variant="dark" className="py-2">
       <Container fluid>
